@@ -1,23 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
-
+import logo from "./logo.svg";
+import "./App.css";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import ErrorBoundry from "./components/ErrorBoundry";
+import Landing from "./components/Loading";
+import Header from "./components/Header";
+import StepOne from "./routes/Register/StepOne";
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <ErrorBoundry>
+        <BrowserRouter>
+          <Header isLoggedIn={true} />
+          <Routes>
+            <Route path="/" element={<Landing />} />
+            <Route path="/step-one" element={<StepOne />} />
+            {/* <Route path="/todo-detail/:id/:userId" element={<TodoDetail />} /> */}
+          </Routes>
+        </BrowserRouter>
+      </ErrorBoundry>
     </div>
   );
 }
