@@ -4,7 +4,11 @@ header {
   justify-content: space-between;
   padding: 1rem;
   align-items: center;
-  height: 25px;
+  height: 60px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
 }
 
 header h5 {
@@ -62,4 +66,11 @@ button {
   button {
     margin-left: 0;
   }
+}
+
+.modal-footer {
+  border-top: 0 none;
+}
+.modal-header {
+  border-bottom: 0 none;
 }

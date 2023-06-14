@@ -2,7 +2,7 @@ import logo from "./logo.svg";
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ErrorBoundry from "./components/ErrorBoundry";
-import Landing from "./components/Loading";
+import Landing from "./routes/Landing";
 import Header from "./components/Header";
 import StepOne from "./routes/Register/StepOne";
 function App() {

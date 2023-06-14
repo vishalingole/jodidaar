@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./index.css";
+import Login from "../Login";
 
 const Header = ({ isLoggedIn }) => {
   const [linkOptions, setLinkOptions] = useState([
@@ -17,6 +18,10 @@ const Header = ({ isLoggedIn }) => {
     },
   ]);
 
+  const handleLogout = () => {
+    console.log("handleLogout");
+  };
+
   const handleLogin = () => {
     // TODO: Implement login logic
   };
@@ -30,9 +35,13 @@ const Header = ({ isLoggedIn }) => {
             <a href={option.href}>{option.label}</a>
           </li>
         ))}
-        {!isLoggedIn && (
+        {!isLoggedIn ? (
           <li>
             <button onClick={handleLogin}>Login</button>
+          </li>
+        ) : (
+          <li>
+            <Login />
           </li>
         )}
       </ul>

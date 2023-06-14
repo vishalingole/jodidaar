@@ -1,0 +1,14 @@
+.top-section {
+  background-image: url("../../../public/rain.jpg");
+  height: 300px;
+  background-position: center;
+}
+.jodidaar-logo {
+  color: white;
+  position: fixed;
+  left: 50%;
+  /* right: 50%; */
+  top: 4%;
+  transform: translateX(-50%);
+  background-image: url("../../logo.svg");
+}
