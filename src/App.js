@@ -5,7 +5,14 @@ import ErrorBoundry from "./components/ErrorBoundry";
 import Landing from "./routes/Landing";
 import Header from "./components/Header";
 import StepOne from "./routes/Register/StepOne";
+import { useTranslation } from "react-i18next";
+import { useSearchParams } from "react-router-dom";
+import getUserLocation from "./utils/location";
+
 function App() {
+  const { i18n, t } = useTranslation();
+  getUserLocation();
+
   return (
     <div className="App">
       <ErrorBoundry>
