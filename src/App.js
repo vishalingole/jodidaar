@@ -8,6 +8,7 @@ import StepOne from "./routes/Register/StepOne";
 import { useTranslation } from "react-i18next";
 import { useSearchParams } from "react-router-dom";
 import getUserLocation from "./utils/location";
+import Footer from "./components/Footer";
 
 function App() {
   const { i18n, t } = useTranslation();
@@ -23,6 +24,7 @@ function App() {
             <Route path="/step-one" element={<StepOne />} />
             {/* <Route path="/todo-detail/:id/:userId" element={<TodoDetail />} /> */}
           </Routes>
+          <Footer />
         </BrowserRouter>
       </ErrorBoundry>
     </div>

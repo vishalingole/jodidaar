@@ -4,6 +4,18 @@ import Button from "react-bootstrap/Button";
 
 const Register = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [createProfileFor, setCreateProfileFor] = useState("");
+
+  let options = [
+    "Daughter",
+    "Son",
+    "Brother",
+    "Sister",
+    "Sister-in-law",
+    "Brother-in-law",
+    "nephew",
+    "niece",
+  ];
 
   const handleOpen = () => {
     setIsModalOpen(true);
@@ -11,6 +23,11 @@ const Register = () => {
 
   const handleClose = () => {
     setIsModalOpen(false);
+  };
+
+  const handleProfileSelection = (val) => {
+    console.log("+++", val);
+    setCreateProfileFor(val);
   };
 
   return (
@@ -22,7 +39,23 @@ const Register = () => {
             <Modal.Title>Login</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <p>This is the modal body.</p>
+            <p>Creating profile for.</p>
+
+            {options.map((item) => {
+              return (
+                <>
+                  <Button
+                    variant={
+                      createProfileFor == item ? "success" : "outline-primary"
+                    }
+                    size="xs"
+                    onClick={() => handleProfileSelection(item)}
+                  >
+                    {item}
+                  </Button>
+                </>
+              );
+            })}
           </Modal.Body>
           <Modal.Footer>
             <Button variant="primary">Login</Button>
