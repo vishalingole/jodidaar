@@ -24,7 +24,7 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-    <title>React App</title>
+    <title>Jodidaar</title>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
@@ -39,5 +39,18 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
+    <script>
+      if ("serviceWorker" in navigator) {
+        // Register service worker
+        navigator.serviceWorker
+          .register("service-worker.js")
+          .then(function (reg) {
+            console.log("SW registration succeeded. Scope is " + reg.scope);
+          })
+          .catch(function (err) {
+            console.error("SW registration failed with error " + err);
+          });
+      }
+    </script>
   </body>
 </html>
