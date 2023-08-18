@@ -1,117 +1,282 @@
-import React from "react";
-import List from "../../component/List";
+import React, { useState } from "react";
 import "./index.css";
-import _ from "lodash";
-import Error from "../../component/Error";
-import Loading from "../../component/Loading";
+import Input from "../../components/Input";
+import Result from "./Result";
+import Button from "react-bootstrap/Button";
+import SelectDropdown from "../../components/SelectDropdown";
+import { getSerchResult } from "../../utils/webRequest";
 
-class Search extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      todoList: [],
-      error: null,
-      filterList: [],
-      query: "",
-      loading: false,
-    };
-  }
+const Search = (props) => {
+  let initialState = {};
+  const [formData, setFormData] = useState(initialState);
 
-  getTodoList = () => {
-    try {
-      this.setState({ loading: true });
-      fetch("https://jsonplaceholder.typicode.com/todos/")
-        .then((resp) => {
-          return resp.json();
-        })
-        .then((data) => {
-          this.setState({ todoList: data, filterList: data, loading: false });
-        });
-    } catch (err) {
-      this.setState({ error: err, loading: false });
-    }
-  };
-
-  componentWillMount() {
-    this.getTodoList();
-  }
-
-  getList = () => {
-    const { todoList, filterList, query } = this.state;
-    const listData = query !== "" ? filterList : todoList;
-
-    return (
-      <>
-        {listData.length > 0 &&
-          listData.map((item) => {
-            const { id, completed } = item;
-            let bckgColor =
-              completed && completed === true ? "green" : "crimson";
-            return <List key={id} data={item} bckgColor={bckgColor} />;
-          })}
-
-        {listData.length == 0 && (
-          <div className="error-message">No search result Found!</div>
-        )}
-      </>
-    );
-  };
-
-  getSearchResult = (searchKeyword) => {
-    
-    const { todoList } = this.state;
-
-    const searchList = todoList.filter((item) => {
-      return (
-        item.title.toLowerCase().indexOf(searchKeyword.toLowerCase()) !== -1
-      );
+  const handleInputChange = (e) => {
+    console.log(e.target.name);
+    console.log(e.target.value);
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
     });
-    this.setState({ filterList: searchList });
   };
 
-  handleChange = (event) => {
-    const { value, name } = event.target;
-    console.log(name)
-    if (value !== "") {
-      this.setState({ [name] : value }, console.log(this.state));
-      this.getSearchResult(value);
-    } else {
-      this.setState({ filterList: this.state.todoList });
-    }
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    console.log("handleSubmit", formData);
+    getSerchResult(formData);
   };
 
-  getContent = () => {
-    const { error } = this.state;
-    return (
-      <>
-        {error ? (
-          <Error message={error} />
-        ) : (
-          <div className="card-widget">{this.getList()}</div>
-        )}
-      </>
-    );
+  const handleClear = () => {
+    console.log("----");
+    setFormData(initialState);
   };
 
-  render() {
-    const { loading, query } = this.state;
-    return (
-      <>
-        <div style={{ marginBottom: "10px", marginTop: "20px" }}>
-          Search By title includes :
-          <span style={{marginLeft: '10px'}}>
-            <input
+  const heightRangeColumn = [
+    {
+      lable: "Select Height",
+      value: "",
+    },
+    {
+      lable: "4 Ft",
+      value: "4",
+    },
+    {
+      lable: "5 Ft",
+      value: "5",
+    },
+    ,
+    {
+      lable: "6 Ft",
+      value: "6",
+    },
+    ,
+    {
+      lable: "7 Ft",
+      value: "7",
+    },
+    ,
+    {
+      lable: "8 Ft",
+      value: "8",
+    },
+    ,
+    {
+      lable: "9 Ft",
+      value: "9",
+    },
+    ,
+    {
+      lable: "10 Ft",
+      value: "10",
+    },
+  ];
+
+  return (
+    <>
+      <div className="widget">
+        <div className="search-container">
+          <div className="search-container-child">
+            <select
+              className="form-select form-select-sm"
+              aria-label=".form-select-sm example"
+              name="occupation"
+              onChange={handleInputChange}
+            >
+              <option value="label" selected={formData?.occupation == "lable"}>
+                Occupation Type
+              </option>
+              <option
+                value="private"
+                selected={formData?.occupation == "private"}
+              >
+                Private Service
+              </option>
+              <option
+                value="goverment"
+                selected={formData?.occupation == "goverment"}
+              >
+                Goverment Service
+              </option>
+              <option
+                value="buisnessman"
+                selected={formData?.occupation == "buisnessman"}
+              >
+                Buisnessman
+              </option>
+              <option
+                value="farming"
+                selected={formData?.occupation == "farming"}
+              >
+                Farming
+              </option>
+              <option
+                value="noService"
+                selected={formData?.occupation == "noService"}
+              >
+                No Service
+              </option>
+            </select>
+          </div>
+          <div className="search-container-child">
+            <select
+              className="form-select form-select-sm"
+              aria-label=".form-select-sm example"
+              name="educationArea"
+              onChange={handleInputChange}
+            >
+              <option selected={formData?.educationArea == "label"}>
+                Education Area
+              </option>
+              <option value="ssc" selected={formData?.educationArea == "ssc"}>
+                SSC
+              </option>
+              <option value="hsc" selected={formData?.educationArea == "hsc"}>
+                HSC
+              </option>
+              <option
+                value="graduate"
+                selected={formData?.educationArea == "graduate"}
+              >
+                Graduate
+              </option>
+              <option
+                value="postGraduate"
+                selected={formData?.educationArea == "postGraduate"}
+              >
+                Post-Graduate
+              </option>
+            </select>
+          </div>
+          <div className="search-container-child">
+            <Input
               type="text"
-              name="query"
-              defaultValue={query}
-              onChange={_.debounce(this.handleChange, 500)}
+              className="form-control form-control-sm"
+              variant="sm"
+              name="nativeDistrict"
+              placeholder="Native District"
+              onChange={handleInputChange}
+              value={formData?.nativeDistrict || ""}
             />
-          </span  >
+          </div>
+          <div className="search-container-child">
+            <Input
+              type="text"
+              className="form-control form-control-sm"
+              variant="sm"
+              name="occupationPlace"
+              placeholder="Occupation Place"
+              onChange={handleInputChange}
+              value={formData?.occupationPlace || ""}
+            />
+          </div>
+          <div className="search-container-child">
+            <select
+              className="form-select form-select-sm"
+              aria-label=".form-select-sm example"
+              name="ageRange"
+              onChange={handleInputChange}
+            >
+              <option value="label" selected={formData?.occupation == "lable"}>
+                Age Range
+              </option>
+              <option
+                value="private"
+                selected={formData?.occupation == "private"}
+              >
+                Private Service
+              </option>
+              <option
+                value="goverment"
+                selected={formData?.occupation == "goverment"}
+              >
+                Goverment Service
+              </option>
+              <option
+                value="buisnessman"
+                selected={formData?.occupation == "buisnessman"}
+              >
+                Buisnessman
+              </option>
+              <option
+                value="farming"
+                selected={formData?.occupation == "farming"}
+              >
+                Farming
+              </option>
+              <option
+                value="noService"
+                selected={formData?.occupation == "noService"}
+              >
+                No Service
+              </option>
+            </select>
+          </div>
+          <div className="search-container-child">
+            <SelectDropdown
+              data={heightRangeColumn}
+              name="heightRange"
+              onChange={handleInputChange}
+              value={formData?.heightRange || ""}
+            />
+          </div>
+          <div className="search-container-child option-selection">
+            <strong>Maritial Status :</strong>
+            <input
+              onChange={handleInputChange}
+              type="radio"
+              name="maritialStatus"
+              value="married"
+            />
+            Married
+            <input
+              onChange={handleInputChange}
+              type="radio"
+              name="maritialStatus"
+              value="unmarried"
+            />
+            Unmarried
+          </div>
+          <div className="search-container-child option-selection">
+            <strong>Gender :</strong>
+            <input
+              onChange={handleInputChange}
+              type="radio"
+              name="gender"
+              value="male"
+            />
+            Male
+            <input
+              onChange={handleInputChange}
+              type="radio"
+              name="gender"
+              value="female"
+            />
+            Female
+          </div>
         </div>
-        {loading ? <Loading /> : this.getContent()}
-      </>
-    );
-  }
-}
+        <div className="search-buttons">
+          <Button
+            variant="primary"
+            size="sm"
+            className="next-btn"
+            type="submit"
+            onClick={handleClear}
+          >
+            Clear
+          </Button>
+          <Button
+            variant="primary"
+            size="sm"
+            className="next-btn"
+            onClick={handleFormSubmit}
+          >
+            Search
+          </Button>
+        </div>
+      </div>
+      <Result />
+    </>
+  );
+};
 
 export default Search;

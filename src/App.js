@@ -9,6 +9,8 @@ import { useTranslation } from "react-i18next";
 import { useSearchParams } from "react-router-dom";
 import getUserLocation from "./utils/location";
 import Footer from "./components/Footer";
+import Search from "./routes/Search/index";
+import ProfileDetail from "./routes/Search/ProfileDetail";
 
 function App() {
   const { i18n, t } = useTranslation();
@@ -20,9 +22,15 @@ function App() {
         <BrowserRouter>
           <Header isLoggedIn={true} />
           <Routes>
-            <Route path="/" element={<Landing />} />
+            <Route exact path="/" element={<Landing />} />
             <Route path="/step-one" element={<StepOne />} />
             {/* <Route path="/todo-detail/:id/:userId" element={<TodoDetail />} /> */}
+            <Route exact path="/search" element={<Search />} />
+            <Route
+              exact
+              path="/search/profile-detail/:profileId"
+              element={<ProfileDetail />}
+            />
           </Routes>
           <Footer />
         </BrowserRouter>

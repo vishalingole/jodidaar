@@ -10,6 +10,7 @@ import FamilyBackground from "./FamilyBackground";
 import Address from "./Address";
 import HoroscopeDetails from "./HoroscopeDetails";
 import Expectations from "./Expectation";
+import { Stepper, Step } from "react-form-stepper";
 
 const Register = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -42,9 +43,57 @@ const Register = () => {
       {isModalOpen && (
         <Modal show={isModalOpen} onHide={handleClose} backdrop={false}>
           <Modal.Header closeButton>
-            <Modal.Title>Registration</Modal.Title>
+            {/* <Modal.Title>Registration</Modal.Title> */}
+            <div>Registration</div>
           </Modal.Header>
           <Modal.Body>
+            <Stepper
+              activeStep={step - 1}
+              connectorStateColors={true}
+              connectorStyleConfig={{
+                size: 2,
+                completedColor: "green",
+                activeColor: "orange",
+                // style: "dotted",
+              }}
+              styleConfig={{
+                activeBgColor: "orange",
+                completedBgColor: "green",
+                labelFontSize: "12px",
+                // completedTextColor: "white",
+              }}
+            >
+              <Step
+                active={step - 1 == 0}
+                completed={step - 1 > 0}
+                label="Personal"
+              />
+              <Step
+                active={step - 1 == 1}
+                completed={step - 1 > 1}
+                label="Education"
+              />
+              <Step
+                active={step - 1 == 2}
+                completed={step - 1 > 2}
+                label="Family"
+              />
+              <Step
+                active={step - 1 == 3}
+                completed={step - 1 > 3}
+                label="Address"
+              />
+              <Step
+                active={step - 1 == 4}
+                completed={step - 1 > 4}
+                label="Horoscope"
+              />
+              <Step
+                active={step - 1 == 5}
+                completed={step - 1 > 5}
+                label="Expectation"
+              />
+            </Stepper>
             {/* <p>Creating profile for.</p>
 
             {options.map((item) => {
@@ -62,34 +111,34 @@ const Register = () => {
                 </>
               );
             })} */}
-            {step && step == 1 && <PersonalDetails />}
+            {step && step == 1 && <PersonalDetails setStep={setStep} />}
             {step && step == 2 && (
               <>
-                <EducationDetails />
+                <EducationDetails setStep={setStep} />
               </>
             )}
             {step && step == 3 && (
               <>
-                <FamilyBackground />
+                <FamilyBackground setStep={setStep} />
               </>
             )}
             {step && step == 4 && (
               <>
-                <Address />
+                <Address setStep={setStep} />
               </>
             )}
             {step && step == 5 && (
               <>
-                <HoroscopeDetails />
+                <HoroscopeDetails setStep={setStep} />
               </>
             )}
             {step && step == 6 && (
               <>
-                <Expectations />
+                <Expectations setStep={setStep} />
               </>
             )}
           </Modal.Body>
-          <Modal.Footer>
+          {/* <Modal.Footer>
             {step != 1 && (
               <Button variant="primary" onClick={() => setStep(step - 1)}>
                 Back
@@ -107,7 +156,7 @@ const Register = () => {
             <Button variant="secondary" onClick={handleClose}>
               Close
             </Button>
-          </Modal.Footer>
+          </Modal.Footer> */}
         </Modal>
       )}
     </>

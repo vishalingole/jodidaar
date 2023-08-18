@@ -1,75 +1,198 @@
-import React from "react";
+import React, { useState } from "react";
+import Input from "../../components/Input";
+import Button from "react-bootstrap/Button";
 
-const EducationDetails = () => {
+const EducationDetails = (props) => {
+  const { setStep } = props;
+
+  let initialState = {};
+
+  const [formData, setFormData] = useState(initialState);
+
+  const handleInputChange = (e) => {
+    console.log(e.target.value);
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    console.log("handleSubmit", formData);
+    setStep(3);
+  };
+
+  const handleClear = () => {
+    console.log("----");
+    setFormData(initialState);
+  };
+
   return (
     <>
       <div className="form-heading">Education/Professional Details</div>
-      <div className="form-container">
-        <div className="form-item-left">
-          <select
-            class="form-select form-select-sm"
-            aria-label=".form-select-sm example"
-            name="educationArea"
-          >
-            <option selected>Education Area</option>
-            <option value="ssc">SSC</option>
-            <option value="hsc">HSC</option>
-            <option value="graduate">Graduate</option>
-            <option value="postGraduate">Post-Graduate</option>
-          </select>
-        </div>
-        <div className="form-item-right">
-          <input
-            type="text"
-            className="form-control form-control-sm"
-            name="education"
-            placeholder="Education"
-          />
-        </div>
+      <form onSubmit={handleFormSubmit}>
+        <div className="form-container">
+          <div className="form-item-left">
+            <select
+              className="form-select form-select-sm"
+              aria-label=".form-select-sm example"
+              name="educationArea"
+              onChange={handleInputChange}
+            >
+              <option selected={formData?.educationArea == "label"}>
+                Education Area
+              </option>
+              <option value="ssc" selected={formData?.educationArea == "ssc"}>
+                SSC
+              </option>
+              <option value="hsc" selected={formData?.educationArea == "hsc"}>
+                HSC
+              </option>
+              <option
+                value="graduate"
+                selected={formData?.educationArea == "graduate"}
+              >
+                Graduate
+              </option>
+              <option
+                value="postGraduate"
+                selected={formData?.educationArea == "postGraduate"}
+              >
+                Post-Graduate
+              </option>
+            </select>
+          </div>
+          <div className="form-item-right">
+            <Input
+              type="text"
+              className="form-control form-control-sm"
+              variant="sm"
+              name="education"
+              placeholder="Education"
+              onChange={handleInputChange}
+              value={formData?.education || ""}
+            />
+          </div>
 
-        <div className="form-item-left">
-          <select
-            class="form-select form-select-sm"
-            aria-label=".form-select-sm example"
-            name="occupation"
+          <div className="form-item-left">
+            <select
+              className="form-select form-select-sm"
+              aria-label=".form-select-sm example"
+              name="occupation"
+              onChange={handleInputChange}
+            >
+              <option value="label" selected={formData?.occupation == "lable"}>
+                Occupation Type
+              </option>
+              <option
+                value="private"
+                selected={formData?.occupation == "private"}
+              >
+                Private Service
+              </option>
+              <option
+                value="goverment"
+                selected={formData?.occupation == "goverment"}
+              >
+                Goverment Service
+              </option>
+              <option
+                value="buisnessman"
+                selected={formData?.occupation == "buisnessman"}
+              >
+                Buisnessman
+              </option>
+              <option
+                value="farming"
+                selected={formData?.occupation == "farming"}
+              >
+                Farming
+              </option>
+              <option
+                value="noService"
+                selected={formData?.occupation == "noService"}
+              >
+                No Service
+              </option>
+            </select>
+          </div>
+          <div className="form-item-right">
+            <Input
+              type="text"
+              className="form-control form-control-sm"
+              variant="sm"
+              name="occupationDetail"
+              placeholder="Occupation Detail"
+              onChange={handleInputChange}
+              value={formData?.occupationDetail || ""}
+            />
+          </div>
+          <div className="form-item-left">
+            <Input
+              type="text"
+              className="form-control form-control-sm"
+              variant="sm"
+              name="income"
+              placeholder="Income"
+              onChange={handleInputChange}
+              value={formData?.income || ""}
+            />
+          </div>
+          <div className="form-item-right">
+            <select
+              className="form-select form-select-sm"
+              aria-label=".form-select-sm example"
+              name="incomeType"
+              onChange={handleInputChange}
+            >
+              <option selected={formData?.incomeType == "lable"}>
+                Income Type
+              </option>
+              <option
+                value="annual"
+                selected={formData?.incomeType == "annual"}
+              >
+                Annual
+              </option>
+              <option
+                value="monthly"
+                selected={formData?.incomeType == "monthly"}
+              >
+                Monthly
+              </option>
+            </select>
+          </div>
+          <div className="form-item-right"></div>
+        </div>
+        <div className="footer-buttons">
+          <Button
+            variant="primary"
+            size="sm"
+            className="next-btn"
+            type="submit"
           >
-            <option selected>Occupation Type</option>
-            <option value="private">Private Service</option>
-            <option value="goverment">Goverment Service</option>
-            <option value="buisnessman">Buisnessman</option>
-            <option value="farming">Farming</option>
-            <option value="farming">No Service</option>
-          </select>
-        </div>
-        <div className="form-item-right">
-          <input
-            type="text"
-            className="form-control form-control-sm"
-            name="occupationDetail"
-            placeholder="Occupation Detail"
-          />
-        </div>
-        <div className="form-item-left">
-          <input
-            type="text"
-            className="form-control form-control-sm"
-            name="income"
-            placeholder="Income"
-          />
-        </div>
-        <div className="form-item-right">
-          <select
-            class="form-select form-select-sm"
-            aria-label=".form-select-sm example"
-            name="incomeType"
+            Next
+          </Button>
+          <Button
+            variant="primary"
+            size="sm"
+            className="next-btn"
+            onClick={() => setStep(1)}
           >
-            <option selected>Income Type</option>
-            <option value="Annual">Annual</option>
-            <option value="monthly">Monthly</option>
-          </select>
+            Back
+          </Button>
+          <Button
+            variant="primary"
+            size="sm"
+            className="next-btn"
+            onClick={handleClear}
+          >
+            Clear
+          </Button>
         </div>
-        <div className="form-item-right"></div>
-      </div>
+      </form>
     </>
   );
 };

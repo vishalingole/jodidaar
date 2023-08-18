@@ -2,11 +2,12 @@ import { MOCK_DATA } from "../environment";
 import { getRequest } from "./request";
 import axios from "axios";
 function buildQueryForFilters(filters) {
-  const q = [];
-  Object.keys(filters).forEach((f) => {
-    q.push(`${f}=${filters[f]}`);
-  });
-  return q;
+  return new URLSearchParams(filters).toString();
+  // const q = [];
+  // Object.keys(filters).forEach((f) => {
+  //   q.push(`${f}=${filters[f]}`);
+  // });
+  // return q;
 }
 
 function getResponse(res) {
@@ -40,4 +41,18 @@ export const stepOneRegistration = (filters) => {
     .post("http://localhost:5000/api/register/step-one", filters)
     .then((data) => console.log(data))
     .catch((error) => console.log(error));
+};
+
+export const getSerchResult = (filters) => {
+  if (MOCK_DATA.search) {
+    return { accessToken: "test", refreshToken: "sss" };
+  }
+
+  axios
+    .get(
+      `http://localhost:5000/api/profile/search?${buildQueryForFilters(
+        filters
+      )}`
+    )
+    .then((data) => console.log(data));
 };

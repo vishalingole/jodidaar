@@ -15,7 +15,9 @@ const Login = () => {
 
   return (
     <>
-      <Button onClick={handleOpen}>Login</Button>
+      <a style={{ color: "white" }} onClick={handleOpen}>
+        Login
+      </a>
       {isModalOpen && (
         <Modal show={isModalOpen} onHide={handleClose}>
           <Modal.Header closeButton>

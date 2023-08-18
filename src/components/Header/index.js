@@ -13,6 +13,10 @@ const Header = ({ isLoggedIn }) => {
       href: "/about",
     },
     {
+      label: "Search",
+      href: "/search",
+    },
+    {
       label: "Contact",
       href: "/contact",
     },
@@ -37,7 +41,7 @@ const Header = ({ isLoggedIn }) => {
         ))}
         {!isLoggedIn ? (
           <li>
-            <button onClick={handleLogin}>Login</button>
+            <a onClick={handleLogin}>Login</a>
           </li>
         ) : (
           <li>
