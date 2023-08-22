@@ -48,11 +48,87 @@ export const getSerchResult = (filters) => {
     return { accessToken: "test", refreshToken: "sss" };
   }
 
-  axios
-    .get(
-      `http://localhost:5000/api/profile/search?${buildQueryForFilters(
-        filters
-      )}`
+  return axios
+    .get(`http://localhost:5000/api/search?${buildQueryForFilters(filters)}`)
+    .then((data) => data);
+};
+
+export const register = (filters) => {
+  if (MOCK_DATA.register) {
+    return { accessToken: "test", refreshToken: "sss" };
+  }
+
+  return axios
+    .post(`http://localhost:5000/api/register/user/personal-detail`, filters)
+    .then((response) => response.data)
+    .catch((error) => console.log(error));
+};
+
+export const educationDetail = (filters) => {
+  return axios
+    .post(`http://localhost:5000/api/register/user/education-detail`, filters)
+    .then((response) => response.data)
+    .catch((error) => console.log(error));
+};
+
+export const familyBackground = (filters) => {
+  return axios
+    .post(`http://localhost:5000/api/register/user/family-background`, filters)
+    .then((response) => response.data)
+    .catch((error) => console.log(error));
+};
+
+export const address = (filters) => {
+  return axios
+    .post(`http://localhost:5000/api/register/user/address`, filters)
+    .then((response) => response.data)
+    .catch((error) => console.log(error));
+};
+
+export const horoscopeDetail = (filters) => {
+  return axios
+    .post(
+      `http://localhost:5000/api/register/user/horoscope-detail
+    `,
+      filters
     )
-    .then((data) => console.log(data));
+    .then((response) => response.data)
+    .catch((error) => console.log(error));
+};
+
+export const verifyOTP = (filters) => {
+  return axios
+    .post(
+      `http://localhost:5000/api/user/verify-otp
+    `,
+      filters
+    )
+    .then((response) => response.data)
+    .catch((error) => console.log(error));
+};
+
+export const expectations = (filters) => {
+  return axios
+    .post(
+      `http://localhost:5000/api/register/user/expectations
+    `,
+      filters
+    )
+    .then((response) => response.data)
+    .catch((error) => console.log(error));
+};
+
+export const login = (filters) => {
+  if (MOCK_DATA.login) {
+    return { accessToken: "test", refreshToken: "sss" };
+  }
+
+  return axios
+    .post(
+      `http://localhost:5000/api/user/login
+    `,
+      filters
+    )
+    .then((response) => response.data)
+    .catch((error) => console.log(error));
 };

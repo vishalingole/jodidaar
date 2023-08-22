@@ -1,0 +1,11 @@
+.otp-message {
+  text-align: center;
+  font-size: 12px;
+  margin-top: 12px;
+}
+.otp-error-message {
+  text-align: center;
+  font-size: 12px;
+  margin-top: 12px;
+  color: red;
+}

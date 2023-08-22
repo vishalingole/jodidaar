@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import Input from "../../components/Input";
 import Button from "react-bootstrap/Button";
+import { register } from "../../utils/webRequest";
+import "./index.css";
 
 const PersonalDetails = (props) => {
   const { setStep } = props;
@@ -19,7 +21,13 @@ const PersonalDetails = (props) => {
   const handleFormSubmit = (e) => {
     e.preventDefault();
     console.log("handleSubmit", formData);
-    setStep(2);
+    register(formData).then((data) => {
+      console.log(data);
+      if (data) {
+        localStorage.setItem("user", JSON.stringify(data));
+        setStep(2);
+      }
+    });
   };
 
   const handleClear = () => {
@@ -64,6 +72,28 @@ const PersonalDetails = (props) => {
               placeholder="Last Name"
               onChange={handleInputChange}
               value={formData?.lastName}
+            />
+          </div>
+          <div className="form-item-right">
+            <Input
+              type="text"
+              className="form-control form-control-sm"
+              variant="sm"
+              name="mobile"
+              placeholder="Mobile"
+              onChange={handleInputChange}
+              value={formData?.mobile || ""}
+            />
+          </div>
+          <div className="form-item-left">
+            <Input
+              type="text"
+              className="form-control form-control-sm"
+              variant="sm"
+              name="email"
+              placeholder="Email"
+              onChange={handleInputChange}
+              value={formData?.email || ""}
             />
           </div>
           <div className="form-item-right">
@@ -127,7 +157,7 @@ const PersonalDetails = (props) => {
               onChange={handleInputChange}
             >
               <option selected>Maritial Status</option>
-              <option value="umnarried">Unmarried</option>
+              <option value="unmarried">Unmarried</option>
               <option value="divorcee">Divorcee</option>
               <option value="widower">Widower</option>
               <option value="widow">Widow</option>
@@ -171,7 +201,25 @@ const PersonalDetails = (props) => {
               value={formData?.weight}
             />
           </div>
-          <div className="form-item-right"></div>
+          <div className="form-item-right register-option-selection">
+            <strong>Gender :</strong>
+            <input
+              onChange={handleInputChange}
+              type="radio"
+              name="gender"
+              value="Male"
+              checked={formData.gender == "Male" ? true : false}
+            />
+            Male
+            <input
+              onChange={handleInputChange}
+              type="radio"
+              name="gender"
+              value="Female"
+              checked={formData.gender == "Female" ? true : false}
+            />
+            Female
+          </div>
         </div>
         <div className="footer-buttons">
           <Button

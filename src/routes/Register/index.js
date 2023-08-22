@@ -37,6 +37,12 @@ const Register = () => {
     setError({ email: "please enter email" });
   };
 
+  const handleFinish = () => {
+    setError([]);
+    setIsModalOpen(false);
+    setStep(1);
+  };
+
   return (
     <>
       <Button onClick={handleOpen}>Register</Button>
@@ -134,7 +140,7 @@ const Register = () => {
             )}
             {step && step == 6 && (
               <>
-                <Expectations setStep={setStep} />
+                <Expectations setStep={setStep} handleClose={handleFinish} />
               </>
             )}
           </Modal.Body>

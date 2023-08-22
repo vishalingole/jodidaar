@@ -5,10 +5,13 @@ import Result from "./Result";
 import Button from "react-bootstrap/Button";
 import SelectDropdown from "../../components/SelectDropdown";
 import { getSerchResult } from "../../utils/webRequest";
+import { occupationTypeColumn } from "./column";
 
 const Search = (props) => {
   let initialState = {};
   const [formData, setFormData] = useState(initialState);
+  const [result, setResult] = useState([]);
+  const [showResult, setShowResult] = useState(false);
 
   const handleInputChange = (e) => {
     console.log(e.target.name);
@@ -23,7 +26,10 @@ const Search = (props) => {
   const handleFormSubmit = (e) => {
     e.preventDefault();
     console.log("handleSubmit", formData);
-    getSerchResult(formData);
+    getSerchResult(formData).then((response) => {
+      setShowResult(true);
+      setResult(response);
+    });
   };
 
   const handleClear = () => {
@@ -76,46 +82,12 @@ const Search = (props) => {
       <div className="widget">
         <div className="search-container">
           <div className="search-container-child">
-            <select
-              className="form-select form-select-sm"
-              aria-label=".form-select-sm example"
-              name="occupation"
+            <SelectDropdown
+              data={occupationTypeColumn}
+              name="occupationType"
               onChange={handleInputChange}
-            >
-              <option value="label" selected={formData?.occupation == "lable"}>
-                Occupation Type
-              </option>
-              <option
-                value="private"
-                selected={formData?.occupation == "private"}
-              >
-                Private Service
-              </option>
-              <option
-                value="goverment"
-                selected={formData?.occupation == "goverment"}
-              >
-                Goverment Service
-              </option>
-              <option
-                value="buisnessman"
-                selected={formData?.occupation == "buisnessman"}
-              >
-                Buisnessman
-              </option>
-              <option
-                value="farming"
-                selected={formData?.occupation == "farming"}
-              >
-                Farming
-              </option>
-              <option
-                value="noService"
-                selected={formData?.occupation == "noService"}
-              >
-                No Service
-              </option>
-            </select>
+              value={formData?.occupationType || ""}
+            />
           </div>
           <div className="search-container-child">
             <select
@@ -225,16 +197,16 @@ const Search = (props) => {
               onChange={handleInputChange}
               type="radio"
               name="maritialStatus"
-              value="married"
+              value="unmarried"
             />
-            Married
+            Unmarried
             <input
               onChange={handleInputChange}
               type="radio"
               name="maritialStatus"
-              value="unmarried"
+              value="divorcee"
             />
-            Unmarried
+            Divorcee
           </div>
           <div className="search-container-child option-selection">
             <strong>Gender :</strong>
@@ -274,7 +246,7 @@ const Search = (props) => {
           </Button>
         </div>
       </div>
-      <Result />
+      {showResult && <Result searchResult={result} />}
     </>
   );
 };

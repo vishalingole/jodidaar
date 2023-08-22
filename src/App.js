@@ -20,7 +20,7 @@ function App() {
     <div className="App">
       <ErrorBoundry>
         <BrowserRouter>
-          <Header isLoggedIn={true} />
+          <Header isLoggedIn={false} />
           <Routes>
             <Route exact path="/" element={<Landing />} />
             <Route path="/step-one" element={<StepOne />} />

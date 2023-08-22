@@ -8,6 +8,9 @@ const API_BASE_URL = "https://jsonplaceholder.typicode.com";
 const MOCK_DATA = {
   requestList: false,
   stepOne: false,
+  register: false,
+  search: false,
+  login: false,
 };
 
 export { MOCK_DATA, API_BASE_URL, API_CONTEXT, BASENAME, CA_WEBAGENT_PROTOCAL };

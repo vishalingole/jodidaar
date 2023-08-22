@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Input from "../../components/Input";
 import Button from "react-bootstrap/Button";
+import { familyBackground } from "../../utils/webRequest";
 
 const FamilyBackground = (props) => {
   const { setStep } = props;
@@ -19,6 +20,16 @@ const FamilyBackground = (props) => {
   const handleFormSubmit = (e) => {
     e.preventDefault();
     console.log("handleSubmit", formData);
+    const user = localStorage.getItem("user");
+    const userObj = user ? JSON.parse(user) : {};
+    const userId = userObj?.id || "";
+    if (userId) {
+      familyBackground({ id: userId, ...formData })
+        .then((data) => {
+          setStep(4);
+        })
+        .catch((error) => console.log(error));
+    }
     setStep(4);
   };
 
@@ -81,10 +92,10 @@ const FamilyBackground = (props) => {
               type="text"
               className="form-control form-control-sm"
               variant="sm"
-              name="parentFullname"
+              name="parentsFullname"
               placeholder="Parent's Fullname"
               onChange={handleInputChange}
-              value={formData?.parentFullname || ""}
+              value={formData?.parentsFullname || ""}
             />
           </div>
           <div className="form-item-right">
@@ -92,10 +103,10 @@ const FamilyBackground = (props) => {
               type="text"
               className="form-control form-control-sm"
               variant="sm"
-              name="parentOccupation"
+              name="parentsOccupation"
               placeholder="Parent's Occupation"
               onChange={handleInputChange}
-              value={formData?.parentOccupation || ""}
+              value={formData?.parentsOccupation || ""}
             />
           </div>
           <div className="form-item-left">
@@ -103,10 +114,10 @@ const FamilyBackground = (props) => {
               type="text"
               className="form-control form-control-sm"
               variant="sm"
-              name="parentResidanceAddress"
+              name="parentsResidanceAddress"
               placeholder="Parent's Residance Address"
               onChange={handleInputChange}
-              value={formData?.parentResidanceAddress || ""}
+              value={formData?.parentsResidanceAddress || ""}
             />
           </div>
           <div className="form-item-right">
@@ -123,7 +134,7 @@ const FamilyBackground = (props) => {
 
           <div className="form-item-left">
             <select
-              class="form-select form-select-sm"
+              className="form-select form-select-sm"
               aria-label=".form-select-sm example"
               name="father"
               onChange={handleInputChange}
@@ -139,7 +150,7 @@ const FamilyBackground = (props) => {
           </div>
           <div className="form-item-right">
             <select
-              class="form-select form-select-sm"
+              className="form-select form-select-sm"
               aria-label=".form-select-sm example"
               name="mother"
               onChange={handleInputChange}
@@ -157,7 +168,7 @@ const FamilyBackground = (props) => {
           </div>
           <div className="form-item-left">
             <select
-              class="form-select form-select-sm"
+              className="form-select form-select-sm"
               aria-label=".form-select-sm example"
               name="brother"
               onChange={handleInputChange}
@@ -175,7 +186,7 @@ const FamilyBackground = (props) => {
           </div>
           <div className="form-item-right">
             <select
-              class="form-select form-select-sm"
+              className="form-select form-select-sm"
               aria-label=".form-select-sm example"
               name="sister"
               onChange={handleInputChange}

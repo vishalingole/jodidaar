@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Input from "../../components/Input";
 import Button from "react-bootstrap/Button";
+import { horoscopeDetail } from "../../utils/webRequest";
 
 const HoroscopeDetails = (props) => {
   const { setStep } = props;
@@ -19,6 +20,16 @@ const HoroscopeDetails = (props) => {
   const handleFormSubmit = (e) => {
     e.preventDefault();
     console.log("handleSubmit", formData);
+    const user = localStorage.getItem("user");
+    const userObj = user ? JSON.parse(user) : {};
+    const userId = userObj?.id || "";
+    if (userId) {
+      horoscopeDetail({ id: userId, ...formData })
+        .then((data) => {
+          setStep(6);
+        })
+        .catch((error) => console.log(error));
+    }
     setStep(6);
   };
 
@@ -349,6 +360,17 @@ const HoroscopeDetails = (props) => {
               placeholder="Devak"
               onChange={handleInputChange}
               value={formData?.devak || ""}
+            />
+          </div>
+          <div className="form-item-right">
+            <Input
+              type="text"
+              className="form-control form-control-sm"
+              variant="sm"
+              name="birthDistrict"
+              placeholder="Birth District"
+              onChange={handleInputChange}
+              value={formData?.birthDistrict || ""}
             />
           </div>
         </div>

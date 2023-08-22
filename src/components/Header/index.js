@@ -41,11 +41,11 @@ const Header = ({ isLoggedIn }) => {
         ))}
         {!isLoggedIn ? (
           <li>
-            <a onClick={handleLogin}>Login</a>
+            <Login />
           </li>
         ) : (
           <li>
-            <Login />
+            <a onClick={handleLogin}>Logout</a>
           </li>
         )}
       </ul>

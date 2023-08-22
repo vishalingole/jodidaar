@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Input from "../../components/Input";
 import Button from "react-bootstrap/Button";
+import { address } from "../../utils/webRequest";
 
 const Address = (props) => {
   const { setStep } = props;
@@ -19,6 +20,16 @@ const Address = (props) => {
   const handleFormSubmit = (e) => {
     e.preventDefault();
     console.log("handleSubmit", formData);
+    const user = localStorage.getItem("user");
+    const userObj = user ? JSON.parse(user) : {};
+    const userId = userObj?.id || "";
+    if (userId) {
+      address({ id: userId, ...formData })
+        .then((data) => {
+          setStep(5);
+        })
+        .catch((error) => console.log(error));
+    }
     setStep(5);
   };
 

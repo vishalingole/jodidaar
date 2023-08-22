@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Input from "../../components/Input";
 import Button from "react-bootstrap/Button";
+import { educationDetail } from "../../utils/webRequest";
 
 const EducationDetails = (props) => {
   const { setStep } = props;
@@ -21,6 +22,16 @@ const EducationDetails = (props) => {
   const handleFormSubmit = (e) => {
     e.preventDefault();
     console.log("handleSubmit", formData);
+    const user = localStorage.getItem("user");
+    const userObj = user ? JSON.parse(user) : {};
+    const userId = userObj?.id || "";
+    if (userId) {
+      educationDetail({ id: userId, ...formData })
+        .then((data) => {
+          setStep(3);
+        })
+        .catch((error) => console.log(error));
+    }
     setStep(3);
   };
 
@@ -80,39 +91,42 @@ const EducationDetails = (props) => {
             <select
               className="form-select form-select-sm"
               aria-label=".form-select-sm example"
-              name="occupation"
+              name="occupationType"
               onChange={handleInputChange}
             >
-              <option value="label" selected={formData?.occupation == "lable"}>
+              <option
+                value="label"
+                selected={formData?.occupationType == "lable"}
+              >
                 Occupation Type
               </option>
               <option
                 value="private"
-                selected={formData?.occupation == "private"}
+                selected={formData?.occupationType == "private"}
               >
                 Private Service
               </option>
               <option
                 value="goverment"
-                selected={formData?.occupation == "goverment"}
+                selected={formData?.occupationType == "goverment"}
               >
                 Goverment Service
               </option>
               <option
                 value="buisnessman"
-                selected={formData?.occupation == "buisnessman"}
+                selected={formData?.occupationType == "buisnessman"}
               >
                 Buisnessman
               </option>
               <option
                 value="farming"
-                selected={formData?.occupation == "farming"}
+                selected={formData?.occupationType == "farming"}
               >
                 Farming
               </option>
               <option
                 value="noService"
-                selected={formData?.occupation == "noService"}
+                selected={formData?.occupationType == "noService"}
               >
                 No Service
               </option>

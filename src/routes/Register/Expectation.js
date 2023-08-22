@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Input from "../../components/Input";
 import Button from "react-bootstrap/Button";
+import { expectations } from "../../utils/webRequest";
 
 const Expectations = (props) => {
   const { setStep } = props;
@@ -18,6 +19,17 @@ const Expectations = (props) => {
   const handleFormSubmit = (e) => {
     e.preventDefault();
     console.log("handleSubmit", formData);
+    const user = localStorage.getItem("user");
+    const userObj = user ? JSON.parse(user) : {};
+    const userId = userObj?.id || "";
+    if (userId) {
+      expectations({ id: userId, ...formData })
+        .then((data) => {
+          console.log("registration completed.");
+          props.handleClose();
+        })
+        .catch((error) => console.log(error));
+    }
   };
 
   const handleClear = () => {
@@ -32,35 +44,47 @@ const Expectations = (props) => {
             <select
               class="form-select form-select-sm"
               aria-label=".form-select-sm example"
-              name="caste"
+              name="expectedCaste"
               onChange={handleInputChange}
             >
-              <option selected={formData?.caste == "label"} value="label">
+              <option
+                selected={formData?.expectedCaste == "label"}
+                value="label"
+              >
                 Caste
               </option>
-              <option selected={formData?.caste == "deshmukh"} value="deshmukh">
+              <option
+                selected={formData?.expectedCaste == "deshmukh"}
+                value="deshmukh"
+              >
                 Deshmukh
               </option>
-              <option selected={formData?.caste == "96Kuli"} value="96Kuli">
+              <option
+                selected={formData?.expectedCaste == "96Kuli"}
+                value="96Kuli"
+              >
                 96 Kuli
               </option>
-              <option selected={formData?.caste == "kunbi"} value="kunbi">
+              <option
+                selected={formData?.expectedCaste == "kunbi"}
+                value="kunbi"
+              >
                 kunbi
               </option>
               <option
-                selected={formData?.caste == "deshmukhMaratha"}
+                selected={formData?.expectedCaste == "deshmukhMaratha"}
                 value="deshmukhMaratha"
               >
                 Deshmukh Maratha
               </option>
               <option
-                selected={formData?.caste == "96KuliMaratha"}
+                selected={formData?.expectedCaste == "96KuliMaratha"}
                 value="96KuliMaratha"
               >
                 96 Kuli Maratha
               </option>
               <option
-                selected={formData?.caste == "tiralekunbi"}
+                selected={formData?.expectedCaste == "tiralekunbi"}
                 value="tiralekunbi"
               >
                 Tirale kunbi
@@ -102,10 +126,10 @@ const Expectations = (props) => {
               type="text"
               className="form-control form-control-sm"
               variant="sm"
-              name="ageDifference"
+              name="maxAgeDifference"
               placeholder="Age Difference"
               onChange={handleInputChange}
-              value={formData?.ageDifference || ""}
+              value={formData?.maxAgeDifference || ""}
             />
           </div>
           <div className="form-item-left">
@@ -113,10 +137,10 @@ const Expectations = (props) => {
               type="text"
               className="form-control form-control-sm"
               variant="sm"
-              name="annualIncome"
+              name="expetedAnnualIncome"
               placeholder="Annual Income"
               onChange={handleInputChange}
-              value={formData?.annualIncome || ""}
+              value={formData?.expetedAnnualIncome || ""}
             />
           </div>
           <div className="form-item-right">

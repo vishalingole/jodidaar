@@ -1,6 +1,7 @@
 import { API_BASE_URL } from "../environment";
 import axios from "axios";
 import { axiosInstance } from "../config/https";
+
 export const getRequest = (
   endpoint,
   params = {},
