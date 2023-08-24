@@ -142,6 +142,10 @@ const Search = (props) => {
             />
           </div>
           <div className="search-container-child">
+            {Array.apply(null, { length: 100 }).map((value, index) =>
+              console.log(index + 1)
+            )}
+
             <select
               className="form-select form-select-sm"
               aria-label=".form-select-sm example"

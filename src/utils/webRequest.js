@@ -132,3 +132,15 @@ export const login = (filters) => {
     .then((response) => response.data)
     .catch((error) => console.log(error));
 };
+
+export const getProfileDetail = (filters) => {
+  if (MOCK_DATA.requestList) {
+    return "abc";
+  }
+  // axios
+  //   .get("http://localhost:5000/api/user/profile-detail")
+  //   .then((data) => console.log(data.data))
+  //   .catch((error) => console.log(error));
+
+  return getRequest("user/profile-detail", filters);
+};

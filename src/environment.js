@@ -4,7 +4,9 @@ const CA_WEBAGENT_PROTOCAL = "https";
 // const API_BASE_URL =
 //   window.location.hostname === "localhost" ? "http://localhost:8888" : "";
 
-const API_BASE_URL = "https://jsonplaceholder.typicode.com";
+// const API_BASE_URL = "https://jsonplaceholder.typicode.com";
+const API_BASE_URL = "http://localhost:5000/api";
+
 const MOCK_DATA = {
   requestList: false,
   stepOne: false,
