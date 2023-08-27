@@ -35,21 +35,24 @@ const Result = (props) => {
                   />
                 </div>
                 <div>
-                  <div className="profile-id">{item?.displayId || ""}</div>
+                  <div className="profile-id">
+                    {item && item.displayId ? item.displayId : ""}
+                  </div>
                   <div className="primary-detail">
                     <div>
                       <strong>Surname : </strong>
-                      {item?.lastName || "Not Provided"}
+                      {item && item.lastName ? item.lastName : "Not Provided"}
                     </div>
                     <div>
-                      <strong>Gender :</strong> {item?.gender || "Not Provided"}
+                      <strong>Gender :</strong>{" "}
+                      {item && item.gender ? item.gender : "Not Provided"}
                     </div>
                     <div>
                       <strong>Residance :</strong> 28/01/1990
                     </div>
                     <div>
                       <strong>Birth Date : </strong>
-                      {item?.dob || "Not Provided"}
+                      {item && item.dob ? item.dob : "Not Provided"}
                     </div>
                   </div>
                   <div>

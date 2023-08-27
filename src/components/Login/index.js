@@ -89,7 +89,7 @@ const Login = () => {
                 className="form-control"
                 placeholder="Mobile"
                 onChange={handleInputChange}
-                value={formData?.mobile || ""}
+                value={formData && formData.mobile ? formData.mobile : ""}
               />
             ) : (
               <input
@@ -98,7 +98,7 @@ const Login = () => {
                 className="form-control"
                 placeholder="OTP"
                 onChange={handleInputChange}
-                value={formData?.otp || ""}
+                value={formData && formData.otp ? formData.otp : ""}
               />
             )}
             {error && <div className="otp-error-message">{error}</div>}

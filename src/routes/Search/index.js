@@ -5,7 +5,7 @@ import Result from "./Result";
 import Button from "react-bootstrap/Button";
 import SelectDropdown from "../../components/SelectDropdown";
 import { getSerchResult } from "../../utils/webRequest";
-import { occupationTypeColumn } from "./column";
+import { educationAreaColumn, occupationTypeColumn } from "./column";
 
 const Search = (props) => {
   let initialState = {};
@@ -86,11 +86,24 @@ const Search = (props) => {
               data={occupationTypeColumn}
               name="occupationType"
               onChange={handleInputChange}
-              value={formData?.occupationType || ""}
+              value={
+                formData && formData.occupationType
+                  ? formData.occupationType
+                  : ""
+              }
             />
           </div>
           <div className="search-container-child">
-            <select
+            <SelectDropdown
+              data={educationAreaColumn}
+              name="educationArea"
+              onChange={handleInputChange}
+              value={
+                formData && formData.educationArea ? formData.educationArea : ""
+              }
+            />
+
+            {/* <select
               className="form-select form-select-sm"
               aria-label=".form-select-sm example"
               name="educationArea"
@@ -117,7 +130,7 @@ const Search = (props) => {
               >
                 Post-Graduate
               </option>
-            </select>
+            </select> */}
           </div>
           <div className="search-container-child">
             <Input
@@ -127,7 +140,11 @@ const Search = (props) => {
               name="nativeDistrict"
               placeholder="Native District"
               onChange={handleInputChange}
-              value={formData?.nativeDistrict || ""}
+              value={
+                formData && formData.nativeDistrict
+                  ? formData.nativeDistrict
+                  : ""
+              }
             />
           </div>
           <div className="search-container-child">
@@ -138,7 +155,11 @@ const Search = (props) => {
               name="occupationPlace"
               placeholder="Occupation Place"
               onChange={handleInputChange}
-              value={formData?.occupationPlace || ""}
+              value={
+                formData && formData.occupationPlace
+                  ? formData.occupationPlace
+                  : ""
+              }
             />
           </div>
           <div className="search-container-child">
@@ -152,7 +173,7 @@ const Search = (props) => {
               name="ageRange"
               onChange={handleInputChange}
             >
-              <option value="label" selected={formData?.occupation == "lable"}>
+              {/* <option value="label" selected={formData?.occupation == "lable"}>
                 Age Range
               </option>
               <option
@@ -184,7 +205,7 @@ const Search = (props) => {
                 selected={formData?.occupation == "noService"}
               >
                 No Service
-              </option>
+              </option> */}
             </select>
           </div>
           <div className="search-container-child">
@@ -192,7 +213,9 @@ const Search = (props) => {
               data={heightRangeColumn}
               name="heightRange"
               onChange={handleInputChange}
-              value={formData?.heightRange || ""}
+              value={
+                formData && formData.heightRange ? formData.heightRange : ""
+              }
             />
           </div>
           <div className="search-container-child option-selection">

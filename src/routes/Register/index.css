@@ -8,3 +8,7 @@
   margin-left: 5px;
   margin-right: 5px;
 }
+
+.ant-picker-dropdown {
+  z-index: 1056 !important;
+}

@@ -11,6 +11,7 @@ import Address from "./Address";
 import HoroscopeDetails from "./HoroscopeDetails";
 import Expectations from "./Expectation";
 import { Stepper, Step } from "react-form-stepper";
+import ProfileImageUpload from "./ProfileImageUpload";
 
 const Register = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -99,6 +100,11 @@ const Register = () => {
                 completed={step - 1 > 5}
                 label="Expectation"
               />
+              <Step
+                active={step - 1 == 6}
+                completed={step - 1 > 6}
+                label="Profile Image"
+              />
             </Stepper>
             {/* <p>Creating profile for.</p>
 
@@ -117,7 +123,14 @@ const Register = () => {
                 </>
               );
             })} */}
-            {step && step == 1 && <PersonalDetails setStep={setStep} />}
+            {step && step == 1 && (
+              <ProfileImageUpload
+                setStep={setStep}
+                handleClose={handleFinish}
+              />
+            )
+            // <PersonalDetails setStep={setStep} />
+            }
             {step && step == 2 && (
               <>
                 <EducationDetails setStep={setStep} />
@@ -141,6 +154,14 @@ const Register = () => {
             {step && step == 6 && (
               <>
                 <Expectations setStep={setStep} handleClose={handleFinish} />
+              </>
+            )}
+            {step && step == 7 && (
+              <>
+                <ProfileImageUpload
+                  setStep={setStep}
+                  handleClose={handleFinish}
+                />
               </>
             )}
           </Modal.Body>

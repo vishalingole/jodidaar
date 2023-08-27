@@ -1,4 +1,4 @@
-import logo from "./logo.svg";
+import React from "react";
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ErrorBoundry from "./components/ErrorBoundry";
@@ -11,6 +11,7 @@ import getUserLocation from "./utils/location";
 import Footer from "./components/Footer";
 import Search from "./routes/Search/index";
 import ProfileDetail from "./routes/Search/ProfileDetail";
+import SignUp from "./routes/SignUp";
 
 function App() {
   const { i18n, t } = useTranslation();
@@ -31,6 +32,7 @@ function App() {
               path="/search/profile-detail/:profileId"
               element={<ProfileDetail />}
             />
+            <Route exact path="/signUp" element={<SignUp />} />
           </Routes>
           <Footer />
         </BrowserRouter>

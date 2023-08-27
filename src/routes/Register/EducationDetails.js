@@ -24,7 +24,7 @@ const EducationDetails = (props) => {
     console.log("handleSubmit", formData);
     const user = localStorage.getItem("user");
     const userObj = user ? JSON.parse(user) : {};
-    const userId = userObj?.id || "";
+    const userId = userObj && userObj.id ? userObj.id : "";
     if (userId) {
       educationDetail({ id: userId, ...formData })
         .then((data) => {
@@ -52,24 +52,24 @@ const EducationDetails = (props) => {
               name="educationArea"
               onChange={handleInputChange}
             >
-              <option selected={formData?.educationArea == "label"}>
+              <option selected={formData.educationArea == "label"}>
                 Education Area
               </option>
-              <option value="ssc" selected={formData?.educationArea == "ssc"}>
+              <option value="ssc" selected={formData.educationArea == "ssc"}>
                 SSC
               </option>
-              <option value="hsc" selected={formData?.educationArea == "hsc"}>
+              <option value="hsc" selected={formData.educationArea == "hsc"}>
                 HSC
               </option>
               <option
                 value="graduate"
-                selected={formData?.educationArea == "graduate"}
+                selected={formData.educationArea == "graduate"}
               >
                 Graduate
               </option>
               <option
                 value="postGraduate"
-                selected={formData?.educationArea == "postGraduate"}
+                selected={formData.educationArea == "postGraduate"}
               >
                 Post-Graduate
               </option>
@@ -83,7 +83,7 @@ const EducationDetails = (props) => {
               name="education"
               placeholder="Education"
               onChange={handleInputChange}
-              value={formData?.education || ""}
+              value={formData.education || ""}
             />
           </div>
 
@@ -96,37 +96,37 @@ const EducationDetails = (props) => {
             >
               <option
                 value="label"
-                selected={formData?.occupationType == "lable"}
+                selected={formData.occupationType == "lable"}
               >
                 Occupation Type
               </option>
               <option
                 value="private"
-                selected={formData?.occupationType == "private"}
+                selected={formData.occupationType == "private"}
               >
                 Private Service
               </option>
               <option
                 value="goverment"
-                selected={formData?.occupationType == "goverment"}
+                selected={formData.occupationType == "goverment"}
               >
                 Goverment Service
               </option>
               <option
                 value="buisnessman"
-                selected={formData?.occupationType == "buisnessman"}
+                selected={formData.occupationType == "buisnessman"}
               >
                 Buisnessman
               </option>
               <option
                 value="farming"
-                selected={formData?.occupationType == "farming"}
+                selected={formData.occupationType == "farming"}
               >
                 Farming
               </option>
               <option
                 value="noService"
-                selected={formData?.occupationType == "noService"}
+                selected={formData.occupationType == "noService"}
               >
                 No Service
               </option>
@@ -140,7 +140,7 @@ const EducationDetails = (props) => {
               name="occupationDetail"
               placeholder="Occupation Detail"
               onChange={handleInputChange}
-              value={formData?.occupationDetail || ""}
+              value={formData.occupationDetail || ""}
             />
           </div>
           <div className="form-item-left">
@@ -151,7 +151,7 @@ const EducationDetails = (props) => {
               name="income"
               placeholder="Income"
               onChange={handleInputChange}
-              value={formData?.income || ""}
+              value={formData.income || ""}
             />
           </div>
           <div className="form-item-right">
@@ -161,18 +161,15 @@ const EducationDetails = (props) => {
               name="incomeType"
               onChange={handleInputChange}
             >
-              <option selected={formData?.incomeType == "lable"}>
+              <option selected={formData.incomeType == "lable"}>
                 Income Type
               </option>
-              <option
-                value="annual"
-                selected={formData?.incomeType == "annual"}
-              >
+              <option value="annual" selected={formData.incomeType == "annual"}>
                 Annual
               </option>
               <option
                 value="monthly"
-                selected={formData?.incomeType == "monthly"}
+                selected={formData.incomeType == "monthly"}
               >
                 Monthly
               </option>

@@ -22,7 +22,7 @@ const HoroscopeDetails = (props) => {
     console.log("handleSubmit", formData);
     const user = localStorage.getItem("user");
     const userObj = user ? JSON.parse(user) : {};
-    const userId = userObj?.id || "";
+    const userId = userObj && userObj.id ? userObj.id : "";
     if (userId) {
       horoscopeDetail({ id: userId, ...formData })
         .then((data) => {
@@ -50,19 +50,19 @@ const HoroscopeDetails = (props) => {
               name="mangal"
               onChange={handleInputChange}
             >
-              <option selected={formData?.mangal == "lable"} value="lable">
+              <option selected={formData.mangal == "lable"} value="lable">
                 Mangal
               </option>
-              <option selected={formData?.mangal == "yes"} value="yes">
+              <option selected={formData.mangal == "yes"} value="yes">
                 Yes
               </option>
-              <option selected={formData?.mangal == "no"} value="no">
+              <option selected={formData.mangal == "no"} value="no">
                 No
               </option>
-              <option selected={formData?.mangal == "saumya"} value="saumya">
+              <option selected={formData.mangal == "saumya"} value="saumya">
                 Saumya
               </option>
-              <option selected={formData?.mangal == "nirdosh"} value="nirdosh">
+              <option selected={formData.mangal == "nirdosh"} value="nirdosh">
                 Nirdosh
               </option>
             </select>
@@ -74,16 +74,16 @@ const HoroscopeDetails = (props) => {
               name="nadi"
               onChange={handleInputChange}
             >
-              <option selected={formData?.nadi == "lable"} value="lable">
+              <option selected={formData.nadi == "lable"} value="lable">
                 Nadi
               </option>
-              <option selected={formData?.nadi == "adhya"} value="adhya">
+              <option selected={formData.nadi == "adhya"} value="adhya">
                 Adhya
               </option>
-              <option selected={formData?.nadi == "madhya"} value="madhya">
+              <option selected={formData.nadi == "madhya"} value="madhya">
                 Madhya
               </option>
-              <option selected={formData?.nadi == "antya"} value="antya">
+              <option selected={formData.nadi == "antya"} value="antya">
                 Antya
               </option>
             </select>
@@ -96,142 +96,142 @@ const HoroscopeDetails = (props) => {
               name="nakshatra"
               onChange={handleInputChange}
             >
-              <option selected={formData?.nakshatra == "lable"} value="lable">
+              <option selected={formData.nakshatra == "lable"} value="lable">
                 Nakshatra
               </option>
               <option
-                selected={formData?.nakshatra == "ashwini"}
+                selected={formData.nakshatra == "ashwini"}
                 value="ashwini"
               >
                 Ashwini
               </option>
               <option
-                selected={formData?.nakshatra == "bharani"}
+                selected={formData.nakshatra == "bharani"}
                 value="bharani"
               >
                 Bharani
               </option>
               <option
-                selected={formData?.nakshatra == "krittika"}
+                selected={formData.nakshatra == "krittika"}
                 value="krittika"
               >
                 Krittika
               </option>
-              <option selected={formData?.nakshatra == "rohini"} value="rohini">
+              <option selected={formData.nakshatra == "rohini"} value="rohini">
                 Rohini
               </option>
               <option
-                selected={formData?.nakshatra == "mrigashira"}
+                selected={formData.nakshatra == "mrigashira"}
                 value="mrigashira"
               >
                 Mrigashira
               </option>
-              <option selected={formData?.nakshatra == "ardra"} value="ardra">
+              <option selected={formData.nakshatra == "ardra"} value="ardra">
                 Ardra
               </option>
               <option
-                selected={formData?.nakshatra == "punarvasu"}
+                selected={formData.nakshatra == "punarvasu"}
                 value="punarvasu"
               >
                 Punarvasu
               </option>
-              <option selected={formData?.nakshatra == "pushya"} value="pushya">
+              <option selected={formData.nakshatra == "pushya"} value="pushya">
                 Pushya
               </option>
               <option
-                selected={formData?.nakshatra == "ashlesha"}
+                selected={formData.nakshatra == "ashlesha"}
                 value="ashlesha"
               >
                 Ashlesha
               </option>
-              <option selected={formData?.nakshatra == "magha"} value="magha">
+              <option selected={formData.nakshatra == "magha"} value="magha">
                 Magha
               </option>
               <option
-                selected={formData?.nakshatra == "purvaPhalguni"}
+                selected={formData.nakshatra == "purvaPhalguni"}
                 value="purvaPhalguni"
               >
                 Purva Phalguni
               </option>
               <option
-                selected={formData?.nakshatra == "uttaraPhalguni"}
+                selected={formData.nakshatra == "uttaraPhalguni"}
                 value="uttaraPhalguni"
               >
                 Uttara Phalguni
               </option>
-              <option selected={formData?.nakshatra == "hasta"} value="hasta">
+              <option selected={formData.nakshatra == "hasta"} value="hasta">
                 Hasta
               </option>
-              <option selected={formData?.nakshatra == "chitra"} value="chitra">
+              <option selected={formData.nakshatra == "chitra"} value="chitra">
                 Chitra
               </option>
-              <option selected={formData?.nakshatra == "Swati"} value="swati">
+              <option selected={formData.nakshatra == "Swati"} value="swati">
                 Swati
               </option>
               <option
-                selected={formData?.nakshatra == "vishakha"}
+                selected={formData.nakshatra == "vishakha"}
                 value="vishakha"
               >
                 Vishakha
               </option>
               <option
-                selected={formData?.nakshatra == "anuradha"}
+                selected={formData.nakshatra == "anuradha"}
                 value="anuradha"
               >
                 Anuradha
               </option>
               <option
-                selected={formData?.nakshatra == "jyeshtha"}
+                selected={formData.nakshatra == "jyeshtha"}
                 value="jyeshtha"
               >
                 Jyeshtha
               </option>
-              <option selected={formData?.nakshatra == "moola"} value="moola">
+              <option selected={formData.nakshatra == "moola"} value="moola">
                 Moola
               </option>
               <option
-                selected={formData?.nakshatra == "purvaAshadha"}
+                selected={formData.nakshatra == "purvaAshadha"}
                 value="purvaAshadha"
               >
                 Purva Ashadha
               </option>
               <option
-                selected={formData?.nakshatra == "uttaraAshadha"}
+                selected={formData.nakshatra == "uttaraAshadha"}
                 value="uttaraAshadha"
               >
                 Uttara Ashadha
               </option>
               <option
-                selected={formData?.nakshatra == "shravana"}
+                selected={formData.nakshatra == "shravana"}
                 value="shravana"
               >
                 Shravana
               </option>
               <option
-                selected={formData?.nakshatra == "dhanishta"}
+                selected={formData.nakshatra == "dhanishta"}
                 value="dhanishta"
               >
                 Dhanishta
               </option>
               <option
-                selected={formData?.nakshatra == "shatabhisha"}
+                selected={formData.nakshatra == "shatabhisha"}
                 value="shatabhisha"
               >
                 Shatabhisha
               </option>
               <option
-                selected={formData?.nakshatra == "purvaBhadrapada"}
+                selected={formData.nakshatra == "purvaBhadrapada"}
                 value="purvaBhadrapada"
               >
                 Purva Bhadrapada
               </option>
               <option
-                selected={formData?.nakshatra == "uttaraBhadrapada"}
+                selected={formData.nakshatra == "uttaraBhadrapada"}
                 value="uttaraBhadrapada"
               >
                 Uttara Bhadrapada
               </option>
-              <option selected={formData?.nakshatra == "revati"} value="revati">
+              <option selected={formData.nakshatra == "revati"} value="revati">
                 Revati
               </option>
             </select>
@@ -243,16 +243,16 @@ const HoroscopeDetails = (props) => {
               name="gan"
               onChange={handleInputChange}
             >
-              <option selected={formData?.gan == "lable"} value="lable">
+              <option selected={formData.gan == "lable"} value="lable">
                 Gan
               </option>
-              <option selected={formData?.gan == "dev"} value="dev">
+              <option selected={formData.gan == "dev"} value="dev">
                 Dev
               </option>
-              <option selected={formData?.gan == "manushya"} value="manushya">
+              <option selected={formData.gan == "manushya"} value="manushya">
                 Manushya
               </option>
-              <option selected={formData?.gan == "rakshas"} value="rakshas">
+              <option selected={formData.gan == "rakshas"} value="rakshas">
                 Rakshas
               </option>
             </select>
@@ -264,19 +264,19 @@ const HoroscopeDetails = (props) => {
               name="charan"
               onChange={handleInputChange}
             >
-              <option selected={formData?.charan == "lable"} value="lable">
+              <option selected={formData.charan == "lable"} value="lable">
                 Charan
               </option>
-              <option selected={formData?.charan == "1"} value="1">
+              <option selected={formData.charan == "1"} value="1">
                 1
               </option>
-              <option selected={formData?.charan == "2"} value="2">
+              <option selected={formData.charan == "2"} value="2">
                 2
               </option>
-              <option selected={formData?.charan == "3"} value="3">
+              <option selected={formData.charan == "3"} value="3">
                 3
               </option>
-              <option selected={formData?.charan == "4"} value="4">
+              <option selected={formData.charan == "4"} value="4">
                 4
               </option>
             </select>
@@ -288,43 +288,43 @@ const HoroscopeDetails = (props) => {
               name="rashi"
               onChange={handleInputChange}
             >
-              <option selected={formData?.rashi == "lable"} value="lable">
+              <option selected={formData.rashi == "lable"} value="lable">
                 Rashi
               </option>
-              <option selected={formData?.rashi == "mesh"} value="mesh">
+              <option selected={formData.rashi == "mesh"} value="mesh">
                 Mesh
               </option>
-              <option selected={formData?.rashi == "vrushabh"} value="vrushabh">
+              <option selected={formData.rashi == "vrushabh"} value="vrushabh">
                 Vrushabh
               </option>
-              <option selected={formData?.rashi == "mithun"} value="mithun">
+              <option selected={formData.rashi == "mithun"} value="mithun">
                 Mithun
               </option>
-              <option selected={formData?.rashi == "kark"} value="kark">
+              <option selected={formData.rashi == "kark"} value="kark">
                 Kark
               </option>
-              <option selected={formData?.rashi == "sinha"} value="sinha">
+              <option selected={formData.rashi == "sinha"} value="sinha">
                 Sinha
               </option>
-              <option selected={formData?.rashi == "kanya"} value="kanya">
+              <option selected={formData.rashi == "kanya"} value="kanya">
                 Kanya
               </option>
-              <option selected={formData?.rashi == "tula"} value="tula">
+              <option selected={formData.rashi == "tula"} value="tula">
                 Tula
               </option>
-              <option selected={formData?.rashi == "vrischik"} value="vrischik">
+              <option selected={formData.rashi == "vrischik"} value="vrischik">
                 Vrischik
               </option>
-              <option selected={formData?.rashi == "dhanu"} value="dhanu">
+              <option selected={formData.rashi == "dhanu"} value="dhanu">
                 Dhanu
               </option>
-              <option selected={formData?.rashi == "makar"} value="makar">
+              <option selected={formData.rashi == "makar"} value="makar">
                 Makar
               </option>
-              <option selected={formData?.rashi == "kumbh"} value="kumbh">
+              <option selected={formData.rashi == "kumbh"} value="kumbh">
                 Kumbh
               </option>
-              <option selected={formData?.rashi == "meen"} value="meen">
+              <option selected={formData.rashi == "meen"} value="meen">
                 Meen
               </option>
             </select>
@@ -337,7 +337,7 @@ const HoroscopeDetails = (props) => {
               name="birthTime"
               placeholder="Birth Time"
               onChange={handleInputChange}
-              value={formData?.birthTime || ""}
+              value={formData.birthTime || ""}
             />
           </div>
           <div className="form-item-right">
@@ -348,7 +348,7 @@ const HoroscopeDetails = (props) => {
               name="birthPlace"
               placeholder="Birth Place"
               onChange={handleInputChange}
-              value={formData?.birthPlace || ""}
+              value={formData.birthPlace || ""}
             />
           </div>
           <div className="form-item-left">
@@ -359,7 +359,7 @@ const HoroscopeDetails = (props) => {
               name="devak"
               placeholder="Devak"
               onChange={handleInputChange}
-              value={formData?.devak || ""}
+              value={formData.devak || ""}
             />
           </div>
           <div className="form-item-right">
@@ -370,7 +370,7 @@ const HoroscopeDetails = (props) => {
               name="birthDistrict"
               placeholder="Birth District"
               onChange={handleInputChange}
-              value={formData?.birthDistrict || ""}
+              value={formData.birthDistrict || ""}
             />
           </div>
         </div>

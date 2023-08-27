@@ -22,7 +22,7 @@ const Address = (props) => {
     console.log("handleSubmit", formData);
     const user = localStorage.getItem("user");
     const userObj = user ? JSON.parse(user) : {};
-    const userId = userObj?.id || "";
+    const userId = userObj && userObj.id ? userObj.id : "";
     if (userId) {
       address({ id: userId, ...formData })
         .then((data) => {
@@ -50,19 +50,16 @@ const Address = (props) => {
               name="idType"
               onChange={handleInputChange}
             >
-              <option selected={formData?.idType == "label"} value="label">
+              <option selected={formData.idType == "label"} value="label">
                 Id Proof
               </option>
-              <option
-                selected={formData?.idType == "passport"}
-                value="passport"
-              >
+              <option selected={formData.idType == "passport"} value="passport">
                 Passport
               </option>
-              <option selected={formData?.idType == "aadhar"} value="aadhar">
+              <option selected={formData.idType == "aadhar"} value="aadhar">
                 Aadhar
               </option>
-              <option selected={formData?.idType == "pan"} value="pan">
+              <option selected={formData.idType == "pan"} value="pan">
                 PAN
               </option>
             </select>
@@ -75,7 +72,7 @@ const Address = (props) => {
               name="idDetails"
               placeholder="Id Detail"
               onChange={handleInputChange}
-              value={formData?.idDetails || ""}
+              value={formData && formData.idDetails ? formData.idDetails : ""}
             />
           </div>
 
@@ -87,7 +84,11 @@ const Address = (props) => {
               name="alternateEmail"
               placeholder="Alternate Email"
               onChange={handleInputChange}
-              value={formData?.alternateEmail || ""}
+              value={
+                formData && formData.alternateEmail
+                  ? formData.alternateEmail
+                  : ""
+              }
             />
           </div>
           <div className="form-item-right">
@@ -98,7 +99,11 @@ const Address = (props) => {
               name="alternateMobile"
               placeholder="Alternate Mobile"
               onChange={handleInputChange}
-              value={formData?.alternateMobile || ""}
+              value={
+                formData && formData.alternateMobile
+                  ? formData.alternateMobile
+                  : ""
+              }
             />
           </div>
           <div className="form-item-left">
@@ -107,7 +112,11 @@ const Address = (props) => {
               name="residenceAddress"
               placeholder="Residence Address"
               onChange={handleInputChange}
-              value={formData?.residenceAddress || ""}
+              value={
+                formData && formData.residenceAddress
+                  ? formData.residenceAddress
+                  : ""
+              }
             />
           </div>
         </div>

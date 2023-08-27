@@ -3,6 +3,8 @@ import Input from "../../components/Input";
 import Button from "react-bootstrap/Button";
 import { register } from "../../utils/webRequest";
 import "./index.css";
+import { DatePicker, TimePicker } from "antd";
+import dayjs from "dayjs";
 
 const PersonalDetails = (props) => {
   const { setStep } = props;
@@ -35,6 +37,10 @@ const PersonalDetails = (props) => {
     setFormData({});
   };
 
+  const handleDateChange = (date, dateString) => {
+    console.log(date, dateString);
+  };
+
   return (
     <>
       <div className="form-heading">Personal Details</div>
@@ -48,7 +54,7 @@ const PersonalDetails = (props) => {
               name="firstName"
               placeholder="First Name"
               onChange={handleInputChange}
-              value={formData?.firstName}
+              value={formData && formData.firstName ? formData.firstName : ""}
             />
           </div>
           <div className="form-item-right">
@@ -59,7 +65,7 @@ const PersonalDetails = (props) => {
               name="middleName"
               placeholder="Middle Name"
               onChange={handleInputChange}
-              value={formData?.middleName}
+              value={formData && formData.middleName ? formData.middleName : ""}
             />
           </div>
 
@@ -71,7 +77,7 @@ const PersonalDetails = (props) => {
               name="lastName"
               placeholder="Last Name"
               onChange={handleInputChange}
-              value={formData?.lastName}
+              value={formData && formData.lastName ? formData.lastName : ""}
             />
           </div>
           <div className="form-item-right">
@@ -82,7 +88,7 @@ const PersonalDetails = (props) => {
               name="mobile"
               placeholder="Mobile"
               onChange={handleInputChange}
-              value={formData?.mobile || ""}
+              value={formData && formData.mobile ? formData.mobile : ""}
             />
           </div>
           <div className="form-item-left">
@@ -93,7 +99,7 @@ const PersonalDetails = (props) => {
               name="email"
               placeholder="Email"
               onChange={handleInputChange}
-              value={formData?.email || ""}
+              value={formData && formData.email ? formData.email : ""}
             />
           </div>
           <div className="form-item-right">
@@ -116,7 +122,7 @@ const PersonalDetails = (props) => {
               name="height"
               placeholder="Height"
               onChange={handleInputChange}
-              value={formData?.height}
+              value={formData && formData.height ? formData.height : ""}
             />
           </div>
           <div className="form-item-right">
@@ -187,7 +193,9 @@ const PersonalDetails = (props) => {
               name="personality"
               placeholder="Personality"
               onChange={handleInputChange}
-              value={formData?.personality}
+              value={
+                formData && formData.personality ? formData.personality : ""
+              }
             />
           </div>
           <div className="form-item-left">
@@ -198,7 +206,7 @@ const PersonalDetails = (props) => {
               name="weight"
               placeholder="Weight"
               onChange={handleInputChange}
-              value={formData?.weight}
+              value={formData && formData.weight ? formData.weight : ""}
             />
           </div>
           <div className="form-item-right register-option-selection">
@@ -219,6 +227,15 @@ const PersonalDetails = (props) => {
               checked={formData.gender == "Female" ? true : false}
             />
             Female
+          </div>
+          <div className="form-item-left">
+            <DatePicker onChange={handleDateChange} />
+          </div>
+          <div className="form-item-right">
+            <TimePicker
+              onChange={handleDateChange}
+              defaultOpenValue={dayjs("00:00:00", "HH:mm:ss")}
+            />
           </div>
         </div>
         <div className="footer-buttons">

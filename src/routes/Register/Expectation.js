@@ -21,7 +21,8 @@ const Expectations = (props) => {
     console.log("handleSubmit", formData);
     const user = localStorage.getItem("user");
     const userObj = user ? JSON.parse(user) : {};
-    const userId = userObj?.id || "";
+    console.log(userObj);
+    const userId = userObj && userObj.id ? userObj.id : "";
     if (userId) {
       expectations({ id: userId, ...formData })
         .then((data) => {
@@ -48,43 +49,43 @@ const Expectations = (props) => {
               onChange={handleInputChange}
             >
               <option
-                selected={formData?.expectedCaste == "label"}
+                selected={formData.expectedCaste == "label"}
                 value="label"
               >
                 Caste
               </option>
               <option
-                selected={formData?.expectedCaste == "deshmukh"}
+                selected={formData.expectedCaste == "deshmukh"}
                 value="deshmukh"
               >
                 Deshmukh
               </option>
               <option
-                selected={formData?.expectedCaste == "96Kuli"}
+                selected={formData.expectedCaste == "96Kuli"}
                 value="96Kuli"
               >
                 96 Kuli
               </option>
               <option
-                selected={formData?.expectedCaste == "kunbi"}
+                selected={formData.expectedCaste == "kunbi"}
                 value="kunbi"
               >
                 kunbi
               </option>
               <option
-                selected={formData?.expectedCaste == "deshmukhMaratha"}
+                selected={formData.expectedCaste == "deshmukhMaratha"}
                 value="deshmukhMaratha"
               >
                 Deshmukh Maratha
               </option>
               <option
-                selected={formData?.expectedCaste == "96KuliMaratha"}
+                selected={formData.expectedCaste == "96KuliMaratha"}
                 value="96KuliMaratha"
               >
                 96 Kuli Maratha
               </option>
               <option
-                selected={formData?.expectedCaste == "tiralekunbi"}
+                selected={formData.expectedCaste == "tiralekunbi"}
                 value="tiralekunbi"
               >
                 Tirale kunbi
@@ -99,7 +100,11 @@ const Expectations = (props) => {
               name="preferredCities"
               placeholder="Preferred Cities"
               onChange={handleInputChange}
-              value={formData?.preferredCities || ""}
+              value={
+                formData && formData.preferredCities
+                  ? formData.preferredCities
+                  : ""
+              }
             />
           </div>
 
@@ -110,13 +115,13 @@ const Expectations = (props) => {
               name="divorcee"
               onChange={handleInputChange}
             >
-              <option selected={formData?.divorcee == "label"} value="label">
+              <option selected={formData.divorcee == "label"} value="label">
                 Divorcee
               </option>
-              <option selected={formData?.divorcee == "1"} value="1">
+              <option selected={formData.divorcee == "1"} value="1">
                 Yes
               </option>
-              <option selected={formData?.divorcee == "0"} value="0">
+              <option selected={formData.divorcee == "0"} value="0">
                 No
               </option>
             </select>
@@ -129,7 +134,11 @@ const Expectations = (props) => {
               name="maxAgeDifference"
               placeholder="Age Difference"
               onChange={handleInputChange}
-              value={formData?.maxAgeDifference || ""}
+              value={
+                formData && formData.maxAgeDifference
+                  ? formData.maxAgeDifference
+                  : ""
+              }
             />
           </div>
           <div className="form-item-left">
@@ -140,7 +149,11 @@ const Expectations = (props) => {
               name="expetedAnnualIncome"
               placeholder="Annual Income"
               onChange={handleInputChange}
-              value={formData?.expetedAnnualIncome || ""}
+              value={
+                formData && formData.expetedAnnualIncome
+                  ? formData.expetedAnnualIncome
+                  : ""
+              }
             />
           </div>
           <div className="form-item-right">
@@ -151,7 +164,11 @@ const Expectations = (props) => {
               name="expectedHeight"
               placeholder="Expected Height"
               onChange={handleInputChange}
-              value={formData?.expectedHeight || ""}
+              value={
+                formData && formData.expectedHeight
+                  ? formData.expectedHeight
+                  : ""
+              }
             />
           </div>
           <div className="form-item-left">
@@ -160,7 +177,11 @@ const Expectations = (props) => {
               name="expectedEducation"
               placeholder="Education"
               onChange={handleInputChange}
-              value={formData?.expectedEducation || ""}
+              value={
+                formData && formData.expectedEducation
+                  ? formData.expectedEducation
+                  : ""
+              }
             />
           </div>
           <div className="form-item-right">
@@ -169,7 +190,11 @@ const Expectations = (props) => {
               name="expectedOccupation"
               placeholder="Occupation"
               onChange={handleInputChange}
-              value={formData?.expectedOccupation || ""}
+              value={
+                formData && formData.expectedOccupation
+                  ? formData.expectedOccupation
+                  : ""
+              }
             />
           </div>
         </div>

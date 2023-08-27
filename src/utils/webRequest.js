@@ -144,3 +144,14 @@ export const getProfileDetail = (filters) => {
 
   return getRequest("user/profile-detail", filters);
 };
+
+export const uploadProfileImage = (filters) => {
+  return axios({
+    method: "post",
+    url: "http://localhost:5000/api/register/profileimage",
+    data: filters,
+    headers: { "Content-Type": "multipart/form-data" },
+  }).catch((error) => {
+    console.log(error);
+  });
+};
