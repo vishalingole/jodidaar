@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./index.css";
 import Input from "../../components/Input";
 import Result from "./Result";
 import Button from "react-bootstrap/Button";
 import SelectDropdown from "../../components/SelectDropdown";
-import { getSerchResult } from "../../utils/webRequest";
+import { getProfileImage, getSerchResult } from "../../utils/webRequest";
 import { educationAreaColumn, occupationTypeColumn } from "./column";
 
 const Search = (props) => {
@@ -12,6 +12,7 @@ const Search = (props) => {
   const [formData, setFormData] = useState(initialState);
   const [result, setResult] = useState([]);
   const [showResult, setShowResult] = useState(false);
+  const [image, setImage] = useState("");
 
   const handleInputChange = (e) => {
     console.log(e.target.name);
@@ -211,11 +212,9 @@ const Search = (props) => {
           <div className="search-container-child">
             <SelectDropdown
               data={heightRangeColumn}
-              name="heightRange"
+              name="height"
               onChange={handleInputChange}
-              value={
-                formData && formData.heightRange ? formData.heightRange : ""
-              }
+              value={formData && formData.height ? formData.height : ""}
             />
           </div>
           <div className="search-container-child option-selection">
@@ -273,6 +272,7 @@ const Search = (props) => {
           </Button>
         </div>
       </div>
+
       {showResult && <Result searchResult={result} />}
     </>
   );

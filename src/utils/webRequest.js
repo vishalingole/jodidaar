@@ -155,3 +155,7 @@ export const uploadProfileImage = (filters) => {
     console.log(error);
   });
 };
+
+export const getProfileImage = (filters) => {
+  return getRequest("user/get-profile-image", filters);
+};

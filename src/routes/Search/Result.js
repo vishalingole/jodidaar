@@ -1,16 +1,34 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import { getProfileImage } from "../../utils/webRequest";
 
 const Result = (props) => {
   const navigate = useNavigate();
   const { searchResult = [] } = props;
   const { data } = searchResult;
+  const [imagePath, setImagePath] = useState("");
   console.log(data.totalItems);
 
   const getImageUrl = (item) => {
-    if (item.gender == "Male") return process.env.PUBLIC_URL + "/dummy-man.png";
+    if (item.file) {
+      return `data:image/jpeg;base64,` + item.file;
+    } else if (item.gender == "Male")
+      return process.env.PUBLIC_URL + "/dummy-man.png";
     else return process.env.PUBLIC_URL + "/dummy-woman.png";
+  };
+
+  const getImage = async (item) => {
+    const path = await getProfileImage({ id: 1 }).then((response) => {
+      // console.log(response.data);
+      // setImagePath(response.data);
+      return response.data;
+    });
+    let x = `data:image/jpeg;base64,${btoa(
+      String.fromCharCode(...new Uint8Array(path))
+    )}`;
+    console.log("x", x);
+    return x;
   };
 
   return (
@@ -19,6 +37,7 @@ const Result = (props) => {
         <div>No Result Found.</div>
       ) : (
         data.items.map((item) => {
+          console.log(item);
           return (
             <div className="search-result-widget">
               <div className="search-result">

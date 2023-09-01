@@ -175,7 +175,17 @@ const EducationDetails = (props) => {
               </option>
             </select>
           </div>
-          <div className="form-item-right"></div>
+          <div className="form-item-right">
+            <Input
+              type="text"
+              className="form-control form-control-sm"
+              variant="sm"
+              name="occupationPlace"
+              placeholder="Occupation Place"
+              onChange={handleInputChange}
+              value={formData.occupationPlace || ""}
+            />
+          </div>
         </div>
         <div className="footer-buttons">
           <Button
