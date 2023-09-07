@@ -12,3 +12,12 @@
 .ant-picker-dropdown {
   z-index: 1056 !important;
 }
+
+.register-btn {
+  background-color: #f54c1e !important;
+  border-radius: 0px !important;
+  border: none;
+  margin-left: 0px;
+  margin-top: 10px;
+  width: 150px;
+}

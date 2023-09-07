@@ -9,15 +9,15 @@ const Header = ({ isLoggedIn }) => {
       href: "/",
     },
     {
-      label: "About",
+      label: "About Us",
       href: "/about",
     },
     {
-      label: "Search",
+      label: "Advance Search",
       href: "/search",
     },
     {
-      label: "Contact",
+      label: "Contact Us",
       href: "/contact",
     },
   ]);
@@ -32,23 +32,21 @@ const Header = ({ isLoggedIn }) => {
 
   return (
     <header>
-      <h5>JodiDaar</h5>
-      <ul>
-        {linkOptions.map((option) => (
-          <li key={option.label}>
-            <a href={option.href}>{option.label}</a>
-          </li>
-        ))}
-        {!isLoggedIn ? (
-          <li>
-            <Login />
-          </li>
-        ) : (
-          <li>
-            <a onClick={handleLogin}>Logout</a>
-          </li>
-        )}
-      </ul>
+      <div>
+        <h5>JodiDaar</h5>
+      </div>
+      <div>
+        <ul className="navigation-links">
+          {linkOptions.map((option) => (
+            <li key={option.label}>
+              <a href={option.href}>{option.label}</a>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div className="login-btn-container">
+        {!isLoggedIn ? <Login /> : <a onClick={handleLogin}>Logout</a>}
+      </div>
     </header>
   );
 };

@@ -1,3 +1,5 @@
+import { siteVisits } from "./webRequest";
+
 const getUserLocation = () => {
   navigator.geolocation.getCurrentPosition(success, error, {
     enableHighAccuracy: true,
@@ -13,6 +15,7 @@ const getUserLocation = () => {
       "location",
       JSON.stringify({ latitude: latitude, longitude: longitude })
     );
+    siteVisits({ latitude: latitude, longitude: longitude });
   }
 
   function error(error) {

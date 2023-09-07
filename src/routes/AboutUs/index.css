@@ -1,0 +1,51 @@
+.about-us-section {
+  display: flex;
+  margin-top: 40px;
+}
+
+.about-us-section .about-us-left-section {
+  width: 50%;
+  margin: 40px;
+}
+
+.about-us-section .about-us-right-section {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+}
+
+.about-us-image {
+  background-image: url("/about-us.jpeg");
+  height: 500px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 30px;
+  background-position: initial;
+}
+
+.about-us-details {
+  color: #818181;
+}
+.about-us-sub-heading {
+  font-size: 48px;
+}
+
+.about-us-heading {
+  font-size: 20px;
+  color: #f54c1e;
+}
+
+.contact-btn {
+  display: flex;
+  height: 57px;
+  padding: 14px 17px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  background: #f54c1e;
+  border: none;
+  border-radius: 0px;
+  margin: 0px;
+}

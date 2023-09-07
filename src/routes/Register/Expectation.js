@@ -27,10 +27,12 @@ const Expectations = (props) => {
       expectations({ id: userId, ...formData })
         .then((data) => {
           console.log("registration completed.");
-          props.handleClose();
+          setStep(7);
+          // props.handleClose();
         })
         .catch((error) => console.log(error));
     }
+    setStep(7);
   };
 
   const handleClear = () => {
@@ -205,7 +207,7 @@ const Expectations = (props) => {
             className="next-btn"
             type="submit"
           >
-            Finish
+            Next
           </Button>
           <Button
             variant="primary"

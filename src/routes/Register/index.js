@@ -46,7 +46,9 @@ const Register = () => {
 
   return (
     <>
-      <Button onClick={handleOpen}>Register</Button>
+      <Button onClick={handleOpen} className="register-btn">
+        Register
+      </Button>
       {isModalOpen && (
         <Modal show={isModalOpen} onHide={handleClose} backdrop={false}>
           <Modal.Header closeButton>
@@ -124,13 +126,13 @@ const Register = () => {
               );
             })} */}
             {step && step == 1 && (
-              <ProfileImageUpload
-                setStep={setStep}
-                handleClose={handleFinish}
-              />
-            )
-            // <PersonalDetails setStep={setStep} />
-            }
+              // <ProfileImageUpload
+              //   setStep={setStep}
+              //   handleClose={handleFinish}
+              // />
+
+              <PersonalDetails setStep={setStep} />
+            )}
             {step && step == 2 && (
               <>
                 <EducationDetails setStep={setStep} />

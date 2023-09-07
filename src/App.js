@@ -15,7 +15,6 @@ import SignUp from "./routes/SignUp";
 
 function App() {
   const { i18n, t } = useTranslation();
-  getUserLocation();
 
   return (
     <div className="App">

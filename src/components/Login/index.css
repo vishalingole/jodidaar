@@ -9,3 +9,12 @@
   margin-top: 12px;
   color: red;
 }
+
+.login-modal .modal-dialog {
+  opacity: 0.9;
+  max-width: 350px;
+}
+.modal-body {
+  padding-left: 30px;
+  padding-right: 30px;
+}

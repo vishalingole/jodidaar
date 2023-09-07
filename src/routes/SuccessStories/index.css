@@ -1,0 +1,27 @@
+.success-stories-section {
+  background: #031333;
+  color: white;
+  width: 100%;
+  padding: 50px;
+}
+.success-stories-heading {
+  font-size: 20px;
+  text-align: center;
+  color: #f54c1e;
+}
+
+.success-stories-sub-heading {
+  font-size: 48px;
+  text-align: center;
+}
+
+.success-stories-cards-container {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  padding: 20px;
+}
+
+.success-stories-cards-container div {
+  /* background: linear-gradient(1deg, #fd5c30 0.53%, rgba(0, 0, 0, 0) 101.68%); */
+}

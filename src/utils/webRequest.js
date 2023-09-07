@@ -159,3 +159,13 @@ export const uploadProfileImage = (filters) => {
 export const getProfileImage = (filters) => {
   return getRequest("user/get-profile-image", filters);
 };
+
+export const siteVisits = (filters) => {
+  return axios({
+    method: "post",
+    url: "http://localhost:5000/api/visits",
+    data: filters,
+  }).catch((error) => {
+    console.log(error);
+  });
+};

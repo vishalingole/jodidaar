@@ -73,15 +73,17 @@ const Login = () => {
 
   return (
     <>
-      <a style={{ color: "white" }} onClick={handleOpen}>
+      {/* <a style={{ color: "white" }} onClick={handleOpen}>
         Login
-      </a>
+      </a> */}
+      <Button className="login-btn" variant="primary" onClick={handleOpen}>
+        Login
+      </Button>
       {isModalOpen && (
-        <Modal show={isModalOpen} onHide={handleClose}>
-          <Modal.Header closeButton>
-            <Modal.Title>Login</Modal.Title>
-          </Modal.Header>
+        <Modal className="login-modal" show={isModalOpen} onHide={handleClose}>
+          <Modal.Header closeButton={false}></Modal.Header>
           <Modal.Body>
+            <div>Login</div>
             {!otp ? (
               <input
                 type="text"
@@ -110,17 +112,21 @@ const Login = () => {
           </Modal.Body>
           <Modal.Footer>
             {!otp ? (
-              <Button variant="primary" onClick={handleLogin}>
-                Login
-              </Button>
+              <div>
+                <Button variant="primary" onClick={handleLogin}>
+                  Login
+                </Button>
+              </div>
             ) : (
               <Button variant="primary" onClick={handleOtp}>
                 Verify OTP
               </Button>
             )}
-            <Button variant="secondary" onClick={handleClose}>
-              Close
-            </Button>
+            <div>
+              <Button variant="secondary" onClick={handleClose}>
+                Close
+              </Button>
+            </div>
           </Modal.Footer>
         </Modal>
       )}
