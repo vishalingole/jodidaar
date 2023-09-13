@@ -13,7 +13,7 @@ import Expectations from "./Expectation";
 import { Stepper, Step } from "react-form-stepper";
 import ProfileImageUpload from "./ProfileImageUpload";
 
-const Register = () => {
+const Register = ({ name = "Register" }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [createProfileFor, setCreateProfileFor] = useState("");
   const [error, setError] = useState([]);
@@ -47,7 +47,7 @@ const Register = () => {
   return (
     <>
       <Button onClick={handleOpen} className="register-btn">
-        Register
+        {name}
       </Button>
       {isModalOpen && (
         <Modal show={isModalOpen} onHide={handleClose} backdrop={false}>

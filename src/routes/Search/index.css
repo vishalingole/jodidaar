@@ -30,14 +30,33 @@
   margin: 20px 40px 20px 40px;
   border: 1px solid #ccc;
   padding: 10px;
+  border-radius: 16px;
+  border: 2px solid rgba(217, 217, 217, 0.5);
+  background: #fff;
+  box-shadow: 0px 4px 30px 0px rgba(0, 0, 0, 0.1);
 }
 
 .search-result {
   padding: 10px;
-  display: grid;
-  grid-template-columns: 10% 80% 10%;
   font-size: 14px;
   align-items: center;
+  display: flex;
+}
+
+.search-result .profile-section-left {
+  width: 20%;
+}
+
+.search-result .profile-middle-section {
+  width: 65%;
+  display: flex;
+  flex-direction: column;
+}
+
+.search-result .profile-right-section {
+  width: 15%;
+  justify-content: center;
+  display: flex;
 }
 
 .search-container {
@@ -46,6 +65,8 @@
   /* grid-gap: 10px; */
   grid-row-gap: 5px;
   font-size: 14px;
+  margin-top: 20px;
+  color: #fff;
 }
 
 .search-container-child {
@@ -57,15 +78,41 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-top: 20px;
+}
+
+.search-buttons button:first-child {
+  border-radius: 0px;
+  width: 200px;
+  background-color: #1c2a47;
+  border: 0px;
+  height: 40px;
+}
+.search-buttons button:nth-child(2) {
+  border-radius: 0px;
+  background-color: #f54c1e;
+  border: none;
+  width: 200px;
+  height: 40px;
 }
 
 .primary-detail {
-  display: grid;
-  grid-template-columns: auto auto auto auto;
+  /* display: grid;
+  grid-template-columns: auto auto auto auto; */
+  display: flex;
+  margin-top: 10px;
+}
+.primary-detail .content-key {
+  width: 20%;
+}
+
+.primary-detail .content-value {
+  width: 30%;
 }
 
 .profile-id {
   font-weight: bold;
+  color: #f54c1e;
 }
 
 .profile-id a {
@@ -80,4 +127,108 @@
 .option-selection {
   display: flex;
   align-items: center;
+}
+
+.profile-detail-section-header {
+  margin-top: 60px;
+  background: #031333;
+  padding: 40px;
+}
+
+.profile-detail-section {
+  display: flex;
+  border: 1px solid olive;
+  padding: 20px;
+}
+
+.profile-detail-section .profile-detail-left-section {
+  width: 30%;
+}
+
+.profile-detail-section .profile-detail-right-section {
+  width: 70%;
+}
+
+.profile-id-section {
+  margin-top: 20px;
+  text-align: center;
+  color: #f54c1e;
+  font-weight: 500;
+  width: 80%;
+}
+
+.profile-name-section {
+  font-weight: 500;
+  text-align: center;
+  width: 80%;
+}
+
+.section-heading {
+  width: 100% !important;
+  margin-bottom: 20px;
+}
+
+.detail-section-content {
+  display: flex;
+  margin-top: 10px;
+}
+
+.detail-section-content div {
+  /* width: 25%; */
+}
+.content-key {
+  color: rgba(0, 0, 0, 0.5);
+  font-size: 14px;
+  font-weight: 500;
+  width: 20%;
+}
+.content-value {
+  font-size: 14px;
+  font-weight: 500;
+  color: #000;
+  width: 30%;
+}
+.detail-section-widget {
+  margin-top: 20px;
+  padding: 20px;
+}
+
+.get-detail-section {
+  margin-top: 10px;
+  text-align: center;
+  width: 80%;
+}
+
+.get-detail-section button {
+  border-radius: 0px;
+  background: #f54c1e;
+  border: none;
+}
+
+.advance-search {
+  margin-top: 60px;
+  background: #031333;
+  padding: 40px;
+}
+
+.advance-search-heading {
+  text-align: center;
+  color: #f54c1e;
+  font-weight: 500;
+}
+
+.advance-search-subheading {
+  text-align: center;
+  color: #fff;
+  font-weight: 500;
+  font-size: 42px;
+  margin-top: 10px;
+}
+.profile-section-left {
+  padding: 5px;
+}
+.profile-right-section button {
+  border: 0px;
+  background: #f54c1e;
+  border-radius: 0px;
 }

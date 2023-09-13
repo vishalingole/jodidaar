@@ -22,6 +22,15 @@
   padding: 20px;
 }
 
-.success-stories-cards-container div {
-  /* background: linear-gradient(1deg, #fd5c30 0.53%, rgba(0, 0, 0, 0) 101.68%); */
+.success-stories-content-wrapper {
+  position: relative;
+}
+
+.success-stories-content {
+  background: linear-gradient(1deg, #fd5c30 0.53%, rgba(0, 0, 0, 0) 101.68%);
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
 }

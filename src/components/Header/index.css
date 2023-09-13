@@ -84,7 +84,7 @@ button {
 .login-btn {
   background: #f54c1e;
   border: none;
-  border-radius: 5px;
+  border-radius: 0px;
 }
 
 .login-btn-container {

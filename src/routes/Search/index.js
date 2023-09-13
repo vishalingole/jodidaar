@@ -2,12 +2,21 @@ import React, { useEffect, useState } from "react";
 import "./index.css";
 import Input from "../../components/Input";
 import Result from "./Result";
-import Button from "react-bootstrap/Button";
+import { Button, Container } from "react-bootstrap";
 import SelectDropdown from "../../components/SelectDropdown";
 import { getProfileImage, getSerchResult } from "../../utils/webRequest";
-import { educationAreaColumn, occupationTypeColumn } from "./column";
+import {
+  educationAreaColumn,
+  occupationTypeColumn,
+  heightRangeColumn,
+} from "./column";
+import { useLocation } from "react-router-dom";
 
 const Search = (props) => {
+  const location = useLocation();
+
+  console.log("---", location);
+
   let initialState = {};
   const [formData, setFormData] = useState(initialState);
   const [result, setResult] = useState([]);
@@ -38,73 +47,40 @@ const Search = (props) => {
     setFormData(initialState);
   };
 
-  const heightRangeColumn = [
-    {
-      lable: "Select Height",
-      value: "",
-    },
-    {
-      lable: "4 Ft",
-      value: "4",
-    },
-    {
-      lable: "5 Ft",
-      value: "5",
-    },
-    ,
-    {
-      lable: "6 Ft",
-      value: "6",
-    },
-    ,
-    {
-      lable: "7 Ft",
-      value: "7",
-    },
-    ,
-    {
-      lable: "8 Ft",
-      value: "8",
-    },
-    ,
-    {
-      lable: "9 Ft",
-      value: "9",
-    },
-    ,
-    {
-      lable: "10 Ft",
-      value: "10",
-    },
-  ];
-
   return (
     <>
-      <div className="widget">
-        <div className="search-container">
-          <div className="search-container-child">
-            <SelectDropdown
-              data={occupationTypeColumn}
-              name="occupationType"
-              onChange={handleInputChange}
-              value={
-                formData && formData.occupationType
-                  ? formData.occupationType
-                  : ""
-              }
-            />
+      <div className="advance-search">
+        <Container>
+          <div className="advance-search-heading">ADVANCE SEARCH</div>
+          <div>
+            <h5 className="advance-search-subheading">Find Your Special One</h5>
           </div>
-          <div className="search-container-child">
-            <SelectDropdown
-              data={educationAreaColumn}
-              name="educationArea"
-              onChange={handleInputChange}
-              value={
-                formData && formData.educationArea ? formData.educationArea : ""
-              }
-            />
+          <div className="search-container">
+            <div className="search-container-child">
+              <SelectDropdown
+                data={occupationTypeColumn}
+                name="occupationType"
+                onChange={handleInputChange}
+                value={
+                  formData && formData.occupationType
+                    ? formData.occupationType
+                    : ""
+                }
+              />
+            </div>
+            <div className="search-container-child">
+              <SelectDropdown
+                data={educationAreaColumn}
+                name="educationArea"
+                onChange={handleInputChange}
+                value={
+                  formData && formData.educationArea
+                    ? formData.educationArea
+                    : ""
+                }
+              />
 
-            {/* <select
+              {/* <select
               className="form-select form-select-sm"
               aria-label=".form-select-sm example"
               name="educationArea"
@@ -132,49 +108,49 @@ const Search = (props) => {
                 Post-Graduate
               </option>
             </select> */}
-          </div>
-          <div className="search-container-child">
-            <Input
-              type="text"
-              className="form-control form-control-sm"
-              variant="sm"
-              name="nativeDistrict"
-              placeholder="Native District"
-              onChange={handleInputChange}
-              value={
-                formData && formData.nativeDistrict
-                  ? formData.nativeDistrict
-                  : ""
-              }
-            />
-          </div>
-          <div className="search-container-child">
-            <Input
-              type="text"
-              className="form-control form-control-sm"
-              variant="sm"
-              name="occupationPlace"
-              placeholder="Occupation Place"
-              onChange={handleInputChange}
-              value={
-                formData && formData.occupationPlace
-                  ? formData.occupationPlace
-                  : ""
-              }
-            />
-          </div>
-          <div className="search-container-child">
-            {Array.apply(null, { length: 100 }).map((value, index) =>
-              console.log(index + 1)
-            )}
+            </div>
+            <div className="search-container-child">
+              <Input
+                type="text"
+                className="form-control form-control-sm"
+                variant="sm"
+                name="nativeDistrict"
+                placeholder="Native District"
+                onChange={handleInputChange}
+                value={
+                  formData && formData.nativeDistrict
+                    ? formData.nativeDistrict
+                    : ""
+                }
+              />
+            </div>
+            <div className="search-container-child">
+              <Input
+                type="text"
+                className="form-control form-control-sm"
+                variant="sm"
+                name="occupationPlace"
+                placeholder="Occupation Place"
+                onChange={handleInputChange}
+                value={
+                  formData && formData.occupationPlace
+                    ? formData.occupationPlace
+                    : ""
+                }
+              />
+            </div>
+            <div className="search-container-child">
+              {Array.apply(null, { length: 100 }).map((value, index) =>
+                console.log(index + 1)
+              )}
 
-            <select
-              className="form-select form-select-sm"
-              aria-label=".form-select-sm example"
-              name="ageRange"
-              onChange={handleInputChange}
-            >
-              {/* <option value="label" selected={formData?.occupation == "lable"}>
+              <select
+                className="form-select form-select-sm"
+                aria-label=".form-select-sm example"
+                name="weight"
+                onChange={handleInputChange}
+              >
+                {/* <option value="label" selected={formData?.occupation == "lable"}>
                 Age Range
               </option>
               <option
@@ -207,70 +183,71 @@ const Search = (props) => {
               >
                 No Service
               </option> */}
-            </select>
+              </select>
+            </div>
+            <div className="search-container-child">
+              <SelectDropdown
+                data={heightRangeColumn}
+                name="height"
+                onChange={handleInputChange}
+                value={formData && formData.height ? formData.height : ""}
+              />
+            </div>
+            <div className="search-container-child option-selection">
+              <strong>Maritial Status :</strong>
+              <input
+                onChange={handleInputChange}
+                type="radio"
+                name="maritialStatus"
+                value="unmarried"
+              />
+              Unmarried
+              <input
+                onChange={handleInputChange}
+                type="radio"
+                name="maritialStatus"
+                value="divorcee"
+              />
+              Divorcee
+            </div>
+            <div className="search-container-child option-selection">
+              <strong>Gender :</strong>
+              <input
+                onChange={handleInputChange}
+                type="radio"
+                name="gender"
+                value="male"
+              />
+              Male
+              <input
+                onChange={handleInputChange}
+                type="radio"
+                name="gender"
+                value="female"
+              />
+              Female
+            </div>
           </div>
-          <div className="search-container-child">
-            <SelectDropdown
-              data={heightRangeColumn}
-              name="height"
-              onChange={handleInputChange}
-              value={formData && formData.height ? formData.height : ""}
-            />
+          <div className="search-buttons">
+            <Button
+              variant="primary"
+              size="sm"
+              className="next-btn"
+              type="submit"
+              onClick={handleClear}
+            >
+              Clear
+            </Button>
+            <Button
+              variant="primary"
+              size="sm"
+              className="next-btn"
+              onClick={handleFormSubmit}
+            >
+              Search
+            </Button>
           </div>
-          <div className="search-container-child option-selection">
-            <strong>Maritial Status :</strong>
-            <input
-              onChange={handleInputChange}
-              type="radio"
-              name="maritialStatus"
-              value="unmarried"
-            />
-            Unmarried
-            <input
-              onChange={handleInputChange}
-              type="radio"
-              name="maritialStatus"
-              value="divorcee"
-            />
-            Divorcee
-          </div>
-          <div className="search-container-child option-selection">
-            <strong>Gender :</strong>
-            <input
-              onChange={handleInputChange}
-              type="radio"
-              name="gender"
-              value="male"
-            />
-            Male
-            <input
-              onChange={handleInputChange}
-              type="radio"
-              name="gender"
-              value="female"
-            />
-            Female
-          </div>
-        </div>
-        <div className="search-buttons">
-          <Button
-            variant="primary"
-            size="sm"
-            className="next-btn"
-            type="submit"
-            onClick={handleClear}
-          >
-            Clear
-          </Button>
-          <Button
-            variant="primary"
-            size="sm"
-            className="next-btn"
-            onClick={handleFormSubmit}
-          >
-            Search
-          </Button>
-        </div>
+        </Container>
       </div>
 
       {showResult && <Result searchResult={result} />}

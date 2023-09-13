@@ -12,7 +12,8 @@ const SuccessStories = () => {
         </h3>
 
         <div className="success-stories-cards-container">
-          <div>
+          <div className="success-stories-content-wrapper">
+            <div className="success-stories-content"></div>
             <img
               style={{
                 height: "344px",
@@ -24,19 +25,22 @@ const SuccessStories = () => {
               src="/success-stories.jpeg"
             ></img>
           </div>
-          <div>
+          <div className="success-stories-content-wrapper">
+            <div className="success-stories-content"></div>
             <img
               style={{ height: "344px", width: "246px", borderRadius: "10px" }}
               src="/success-stories.jpeg"
             />
           </div>
-          <div>
+          <div className="success-stories-content-wrapper">
+            <div className="success-stories-content"></div>
             <img
               style={{ height: "344px", width: "246px", borderRadius: "10px" }}
               src="/success-stories.jpeg"
             />
           </div>
-          <div>
+          <div className="success-stories-content-wrapper">
+            <div className="success-stories-content"></div>
             <img
               style={{ height: "344px", width: "246px", borderRadius: "10px" }}
               src="/success-stories.jpeg"

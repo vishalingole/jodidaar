@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button } from "react-bootstrap";
+import { Button, Container } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { getProfileImage } from "../../utils/webRequest";
 
@@ -31,6 +31,27 @@ const Result = (props) => {
     return x;
   };
 
+  const capital = (val) => {
+    return val.toUpperCase();
+  };
+
+  const formatIncome = (price) => {
+    return new Intl.NumberFormat().format(price);
+  };
+
+  const handleViewProfile = (item) => {
+    // console.log("clear");
+    const user = localStorage.getItem("user");
+    console.log("++", user);
+    const userObj = JSON.parse(user);
+    if (userObj.accessToken && userObj.id) {
+      navigate(`/search/profile-detail/${item.uuid}`);
+    } else {
+      alert("Please register yourself.");
+      return false;
+    }
+  };
+
   return (
     <>
       {data && data.totalItems && data.totalItems == 0 ? (
@@ -39,62 +60,118 @@ const Result = (props) => {
         data.items.map((item) => {
           console.log(item);
           return (
-            <div className="search-result-widget">
-              <div className="search-result">
-                {/* {JSON.stringify(item)} */}
-                <div>
-                  <img
-                    style={{
-                      width: "100px",
-                      height: "100px",
-                      border: "1px solid #ccc",
-                      padding: "2px",
-                    }}
-                    src={getImageUrl(item)}
-                  />
-                </div>
-                <div>
-                  <div className="profile-id">
-                    {item && item.displayId ? item.displayId : ""}
+            <Container>
+              <div className="search-result-widget">
+                <div className="search-result">
+                  {/* {JSON.stringify(item)} */}
+                  <div className="profile-section-left">
+                    <img
+                      style={{
+                        width: "150px",
+                        height: "150px",
+                        padding: "2px",
+                        borderRadius: "10px",
+                      }}
+                      src={getImageUrl(item)}
+                    />
                   </div>
-                  <div className="primary-detail">
-                    <div>
-                      <strong>Surname : </strong>
-                      {item && item.lastName ? item.lastName : "Not Provided"}
+                  <div className="profile-middle-section">
+                    <div className="profile-id">
+                      {item && item.PersonalDetails.displayId
+                        ? capital(item.PersonalDetails.displayId)
+                        : ""}
                     </div>
                     <div>
-                      <strong>Gender :</strong>{" "}
-                      {item && item.gender ? item.gender : "Not Provided"}
-                    </div>
-                    <div>
-                      <strong>Residance :</strong> 28/01/1990
-                    </div>
-                    <div>
-                      <strong>Birth Date : </strong>
-                      {item && item.dob ? item.dob : "Not Provided"}
+                      <div className="primary-detail">
+                        <div className="content-key">SURNAME : </div>
+                        <div className="content-value">
+                          {item &&
+                          item.PersonalDetails &&
+                          item.PersonalDetails.lastName
+                            ? capital(item.PersonalDetails.lastName)
+                            : "Not Provided"}
+                        </div>
+                        <div className="content-key">GENDER</div>
+                        <div className="content-value">
+                          {item &&
+                          item.PersonalDetails &&
+                          item.PersonalDetails.gender
+                            ? capital(item.PersonalDetails.gender)
+                            : "Not Provided"}
+                        </div>
+                      </div>
+                      <div className="primary-detail">
+                        <div className="content-key">NATIVE DISTRICT:</div>
+                        <div className="content-value">
+                          {item &&
+                          item.FamilyBackground &&
+                          item.FamilyBackground.nativeDistrict
+                            ? capital(item.FamilyBackground.nativeDistrict)
+                            : "Not Provided"}
+                        </div>
+                        <div className="content-key">HEIGHT :</div>
+                        <div className="content-value">
+                          {item &&
+                          item.PersonalDetails &&
+                          item.PersonalDetails.height
+                            ? item.PersonalDetails.height + " FEET"
+                            : "Not Provided"}
+                        </div>
+                      </div>
+                      <div className="primary-detail">
+                        <div className="content-key">INCOME:</div>
+                        <div className="content-value">
+                          {item &&
+                          item.EducationDetails &&
+                          item.EducationDetails.income
+                            ? formatIncome(item.EducationDetails.income) +
+                              " / " +
+                              item.EducationDetails.incomeType
+                            : "Not Provided"}
+                        </div>
+                        <div className="content-key">BIRTH DATE :</div>
+                        <div className="content-value">
+                          {item &&
+                          item.PersonalDetails &&
+                          item.PersonalDetails.dob
+                            ? item.PersonalDetails.dob
+                            : "Not Provided"}
+                        </div>
+                      </div>
+                      <div className="primary-detail">
+                        <div className="content-key">EDUCATION:</div>
+                        <div className="content-value">
+                          {item &&
+                          item.EducationDetails &&
+                          item.EducationDetails.education
+                            ? capital(item.EducationDetails.education)
+                            : "Not Provided"}
+                        </div>
+                        <div className="content-key">OCCUPATION :</div>
+                        <div className="content-value">
+                          {item &&
+                          item.EducationDetails &&
+                          item.EducationDetails.occupationDetail
+                            ? capital(item.EducationDetails.occupationDetail)
+                            : "Not Provided"}
+                        </div>
+                      </div>
                     </div>
                   </div>
-                  <div>
-                    <strong>Occupation : </strong> CENTRAL RAILWAY SR. ASSISTANT
-                    LOCO PILOT SANGLI/8,00,000 PA
+                  <div className="profile-right-section">
+                    <Button
+                      variant="primary"
+                      size="sm"
+                      className="next-btn"
+                      type="submit"
+                      onClick={() => handleViewProfile(item)}
+                    >
+                      View Profile
+                    </Button>
                   </div>
-                </div>
-                <div>
-                  <Button
-                    variant="primary"
-                    size="sm"
-                    className="next-btn"
-                    type="submit"
-                    onClick={() => {
-                      // console.log("clear");
-                      navigate(`/search/profile-detail/${item.userId}`);
-                    }}
-                  >
-                    View Profile
-                  </Button>
                 </div>
               </div>
-            </div>
+            </Container>
           );
         })
       )}

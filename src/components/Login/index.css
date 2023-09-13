@@ -14,7 +14,41 @@
   opacity: 0.9;
   max-width: 350px;
 }
-.modal-body {
-  padding-left: 30px;
-  padding-right: 30px;
+.modal-body,
+.modal-footer {
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+.login-logo {
+  text-align: center;
+}
+.login-logo img {
+  height: 100px;
+  width: 100px;
+}
+
+.login-text {
+  margin-top: 20px;
+  text-align: center;
+  color: #f54c1e;
+}
+.login-form,
+.login-button-container {
+  margin-top: 10px;
+}
+
+.popup-login-btn button {
+  width: 100%;
+  margin: 0px;
+  border-radius: 0px;
+  background: #f54c1e;
+  border: none;
+}
+
+.popup-close-btn button {
+  width: 100%;
+  margin: 0px;
+  border-radius: 0px;
+  margin-top: 10px;
 }

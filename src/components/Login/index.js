@@ -83,51 +83,61 @@ const Login = () => {
         <Modal className="login-modal" show={isModalOpen} onHide={handleClose}>
           <Modal.Header closeButton={false}></Modal.Header>
           <Modal.Body>
-            <div>Login</div>
-            {!otp ? (
-              <input
-                type="text"
-                name="mobile"
-                className="form-control"
-                placeholder="Mobile"
-                onChange={handleInputChange}
-                value={formData && formData.mobile ? formData.mobile : ""}
-              />
-            ) : (
-              <input
-                type="text"
-                name="otp"
-                className="form-control"
-                placeholder="OTP"
-                onChange={handleInputChange}
-                value={formData && formData.otp ? formData.otp : ""}
-              />
-            )}
-            {error && <div className="otp-error-message">{error}</div>}
-            {otp && (
-              <div className="otp-message">
-                Please enter OTP sent on mobile or registered email id.
-              </div>
-            )}
-          </Modal.Body>
-          <Modal.Footer>
-            {!otp ? (
-              <div>
-                <Button variant="primary" onClick={handleLogin}>
-                  Login
+            <div className="login-logo">
+              <img src="/logo192.png" />
+            </div>
+            <div className="login-text">
+              <h5>Log In</h5>
+            </div>
+            <div className="login-form">
+              {!otp ? (
+                <input
+                  type="text"
+                  name="mobile"
+                  className="form-control"
+                  placeholder="Mobile"
+                  onChange={handleInputChange}
+                  value={formData && formData.mobile ? formData.mobile : ""}
+                />
+              ) : (
+                <input
+                  type="text"
+                  name="otp"
+                  className="form-control"
+                  placeholder="OTP"
+                  onChange={handleInputChange}
+                  value={formData && formData.otp ? formData.otp : ""}
+                />
+              )}
+              {error && <div className="otp-error-message">{error}</div>}
+              {otp && (
+                <div className="otp-message">
+                  Please enter OTP sent on mobile or registered email id.
+                </div>
+              )}
+            </div>
+            <div className="login-button-container">
+              {!otp ? (
+                <div className="popup-login-btn">
+                  <Button variant="primary" onClick={handleLogin}>
+                    Login
+                  </Button>
+                </div>
+              ) : (
+                <div className="popup-login-btn">
+                  <Button variant="primary" onClick={handleOtp}>
+                    Verify OTP
+                  </Button>
+                </div>
+              )}
+              <div className="popup-close-btn">
+                <Button variant="secondary" onClick={handleClose}>
+                  Close
                 </Button>
               </div>
-            ) : (
-              <Button variant="primary" onClick={handleOtp}>
-                Verify OTP
-              </Button>
-            )}
-            <div>
-              <Button variant="secondary" onClick={handleClose}>
-                Close
-              </Button>
             </div>
-          </Modal.Footer>
+          </Modal.Body>
+          <Modal.Footer></Modal.Footer>
         </Modal>
       )}
     </>

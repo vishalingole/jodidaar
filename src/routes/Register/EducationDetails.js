@@ -124,12 +124,6 @@ const EducationDetails = (props) => {
               >
                 Farming
               </option>
-              <option
-                value="noService"
-                selected={formData.occupationType == "noService"}
-              >
-                No Service
-              </option>
             </select>
           </div>
           <div className="form-item-right">

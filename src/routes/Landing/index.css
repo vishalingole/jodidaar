@@ -31,6 +31,8 @@
 }
 .top-section-right-content {
   width: 50%;
+  display: flex;
+  justify-content: right;
 }
 
 .top-section-left-content div:first-child {
@@ -42,9 +44,38 @@
 }
 
 .modal-dialog {
-  top: 20%;
+  top: 10%;
 }
 
 .common-heading {
   color: #f54c1e;
+}
+
+.shivaji-maharaj-logo {
+  left: 50%;
+  top: 50%;
+  top: 460px;
+  position: absolute;
+  transform: translateX(-50%);
+}
+
+.quick-search {
+  border-radius: 16px;
+  background: rgba(3, 19, 51, 0.5);
+  box-shadow: 0px 4px 16px 0px rgba(0, 0, 0, 0.1);
+  width: 300px;
+  height: 250px;
+  flex-shrink: 0;
+  display: flex;
+  gap: 20px;
+  flex-direction: column;
+  padding: 40px;
+}
+
+.quick-search button {
+  width: 100%;
+  margin: 0px;
+  border-radius: 0px;
+  background: #f54c1e;
+  border: none;
 }

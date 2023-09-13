@@ -169,3 +169,11 @@ export const siteVisits = (filters) => {
     console.log(error);
   });
 };
+
+export const getLatestProfiles = () => {
+  return getRequest("user/latest-profile");
+};
+
+export const getDisticts = () => {
+  return getRequest("location/get-district-list");
+};

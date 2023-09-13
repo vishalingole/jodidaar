@@ -1,0 +1,22 @@
+.uptodate-section {
+  display: flex;
+  background-color: #f3f3f3;
+  padding: 40px;
+  align-items: center;
+  text-align: center;
+}
+
+.uptodate-section div:first-child {
+  border-right: 1px solid;
+  padding-left: 40px;
+  text-align: left;
+}
+
+.uptodate-section div {
+  width: 50%;
+}
+
+.uptodate-text h3 {
+  font-size: 32px;
+  font-weight: 700;
+}

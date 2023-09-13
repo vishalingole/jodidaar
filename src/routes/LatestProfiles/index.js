@@ -1,56 +1,91 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
 import "./index.css";
+import { getLatestProfiles } from "../../utils/webRequest";
+
+const getImageUrl = (item) => {
+  if (item.file) {
+    return `data:image/jpeg;base64,` + item.file;
+  } else if (item.gender == "Male")
+    return process.env.PUBLIC_URL + "/dummy-man.png";
+  else return process.env.PUBLIC_URL + "/dummy-woman.png";
+};
+
 const LatestProfiles = () => {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    getLatestProfiles().then((response) => setData(response.data));
+  }, []);
+
+  const getCard = () => {
+    console.log(data.rows);
+    return (
+      data &&
+      data.rows &&
+      data.rows.map((item) => {
+        return (
+          <>
+            <div className="latest-profile-card">
+              <div className="profile-img-section">
+                <div>
+                  <img
+                    style={{
+                      width: "100px",
+                      height: "100px",
+                      padding: "2px",
+                      border: "1px solid #ccc",
+                      borderRadius: "50px",
+                    }}
+                    src={getImageUrl(item)}
+                  />
+                </div>
+                <div>
+                  <div>{item.PersonalDetails.displayId}</div>
+                  <div>{item.PersonalDetails.lastName}</div>
+                </div>
+              </div>
+              <div className="detail-section">
+                <div>DATE OF BIRTH : </div>
+                <div> {item.PersonalDetails.dob}</div>
+              </div>
+              <div className="detail-section">
+                <div>HEIGHT : </div>
+                <div> 5.4 ft</div>
+              </div>
+              <div className="detail-section">
+                <div>EDUCATION: </div>
+                <div>{item.EducationDetails.education}</div>
+              </div>
+              <div className="detail-section">
+                <div>OCCUPATION : </div>
+                <div>{item.EducationDetails.occupationDetail}</div>
+              </div>
+              <div className="detail-section">
+                <div>INCOME : </div>
+                <div>
+                  {item.EducationDetails.income +
+                    " " +
+                    item.EducationDetails.incomeType}
+                </div>
+              </div>
+              <div className="detail-section">
+                <div>NATIVE DISTRICT : </div>
+                <div>{item.FamilyBackground.nativeDistrict}</div>
+              </div>
+            </div>
+          </>
+        );
+      })
+    );
+  };
+
   return (
     <>
       <Container>
         <h5 className="success-stories-heading">Latest Profiles</h5>
         <h3 className="success-stories-sub-heading">Look For Your Match</h3>
-        <div className="latest-profile-container">
-          <div className="latest-profile-card">
-            <div className="profile-img-section">
-              <div>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="80"
-                  height="80"
-                  viewBox="0 0 80 80"
-                  fill="none"
-                >
-                  <circle cx="40" cy="40" r="40" fill="#D9D9D9" />
-                </svg>
-              </div>
-              <div>
-                <div>MG1234</div>
-                <div>Ingole</div>
-              </div>
-            </div>
-            <div className="dob-section">
-              <div>Date of Birth : </div>
-              <div> 28/011990</div>
-            </div>
-            <div className="height-section">
-              <div>Height : </div>
-              <div> 5.4 ft</div>
-            </div>
-            <div className="height-section">
-              <div>Occupation : </div>
-              <div>Software Engineer</div>
-            </div>
-            <div className="height-section">
-              <div>Native Place : </div>
-              <div>Washim</div>
-            </div>
-            <div className="height-section">
-              <div>Education : </div>
-              <div>Washim</div>
-            </div>
-          </div>
-          <div className="latest-profile-card">Two</div>
-          <div className="latest-profile-card">Three</div>
-          <div className="latest-profile-card">Four</div>
-        </div>
+        <div className="latest-profile-container">{getCard()}</div>
       </Container>
     </>
   );
