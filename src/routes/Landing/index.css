@@ -51,12 +51,17 @@
   color: #f54c1e;
 }
 
-.shivaji-maharaj-logo {
+.shivaji-maharaj-logo-container {
   left: 50%;
   top: 50%;
   top: 460px;
   position: absolute;
   transform: translateX(-50%);
+}
+
+.shivaji-maharaj-logo {
+  height: 180px;
+  width: 180px;
 }
 
 .quick-search {
@@ -72,10 +77,78 @@
   padding: 40px;
 }
 
-.quick-search button {
+.quick-search-button {
   width: 100%;
   margin: 0px;
   border-radius: 0px;
   background: #f54c1e;
   border: none;
+}
+
+.services-header-section {
+  text-align: center;
+  margin-top: 90px;
+}
+
+@media only screen and (max-width: 550px) {
+  .top-section-content {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    color: white;
+    text-align: center;
+    flex-direction: column;
+  }
+
+  .top-section-left-content {
+    width: 100%;
+    padding: 40px;
+  }
+
+  .top-section-right-content {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .quick-search select {
+    width: 200px;
+  }
+  .quick-search-button {
+    width: 200px;
+  }
+  .quick-search {
+    border-radius: 16px;
+    background: rgba(3, 19, 51, 0.5);
+    box-shadow: 0px 4px 16px 0px rgba(0, 0, 0, 0.1);
+    /* width: 100%; */
+    height: 190px;
+    flex-shrink: 0;
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+    padding: 20px;
+    align-items: center;
+  }
+
+  .shivaji-maharaj-logo-container {
+    left: 50%;
+    top: 50%;
+    top: 525px;
+    position: absolute;
+    transform: translateX(-50%);
+  }
+
+  .shivaji-maharaj-logo {
+    height: 80px;
+    width: 80px;
+  }
+
+  .services-header-section {
+    margin-top: 60px;
+  }
+
+  .services-header-section h2 {
+    padding: 20px;
+  }
 }

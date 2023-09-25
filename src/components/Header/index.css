@@ -91,3 +91,8 @@ button {
   display: flex;
   align-items: center;
 }
+
+.active-link {
+  color: #f54c1e;
+  font-weight: 500;
+}

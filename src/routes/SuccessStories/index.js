@@ -15,36 +15,30 @@ const SuccessStories = () => {
           <div className="success-stories-content-wrapper">
             <div className="success-stories-content"></div>
             <img
-              style={{
-                height: "344px",
-                width: "246px",
-                borderRadius: "10px",
-                background:
-                  "linear-gradient(1deg, #FD5C30 0.53%, rgba(0, 0, 0, 0.00) 101.68%)",
-              }}
+              className="success-stories-image"
               src="/success-stories.jpeg"
             ></img>
           </div>
           <div className="success-stories-content-wrapper">
             <div className="success-stories-content"></div>
             <img
-              style={{ height: "344px", width: "246px", borderRadius: "10px" }}
+              className="success-stories-image"
               src="/success-stories.jpeg"
-            />
+            ></img>
           </div>
           <div className="success-stories-content-wrapper">
             <div className="success-stories-content"></div>
             <img
-              style={{ height: "344px", width: "246px", borderRadius: "10px" }}
+              className="success-stories-image"
               src="/success-stories.jpeg"
-            />
+            ></img>
           </div>
           <div className="success-stories-content-wrapper">
             <div className="success-stories-content"></div>
             <img
-              style={{ height: "344px", width: "246px", borderRadius: "10px" }}
+              className="success-stories-image"
               src="/success-stories.jpeg"
-            />
+            ></img>
           </div>
         </div>
       </div>

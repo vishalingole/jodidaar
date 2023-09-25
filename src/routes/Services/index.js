@@ -8,11 +8,10 @@ import Card from "react-bootstrap/Card";
 const Services = () => {
   return (
     <>
-      <div style={{ textAlign: "center", marginTop: "80px" }}>
+      <div className="services-header-section">
         <h5 className="common-heading">WE PROVIDE</h5>
         <h2>Special Features which we provides</h2>
       </div>
-
       <Container>
         <Row className="services-card">
           <Col>

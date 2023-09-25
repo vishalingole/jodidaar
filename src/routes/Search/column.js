@@ -267,3 +267,11 @@ export const lookingForColumns = [
     value: "divorceeBride",
   },
 ];
+
+export const subCasteColumns = [
+  { lable: "Sub Caste", value: "" },
+  { lable: "Tirale kunbi", value: "tiralekunbi" },
+  { lable: "96 Kuli Maratha", value: "96KuliMaratha" },
+  { lable: "Deshmukh Maratha", value: "deshmukhMaratha" },
+  { lable: "Kunbi", value: "kunbi" },
+];

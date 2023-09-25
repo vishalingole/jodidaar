@@ -20,3 +20,25 @@
   font-size: 32px;
   font-weight: 700;
 }
+
+@media only screen and (max-width: 550px) {
+  .uptodate-section {
+    flex-direction: column;
+    margin-bottom: 20px;
+  }
+  .uptodate-section div {
+    width: 100%;
+  }
+  .uptodate-section div:first-child {
+    border-right: 0px;
+    text-align: center;
+    padding: 0px;
+  }
+  .uptodate-text h3 {
+    font-size: 22px;
+    font-weight: 700;
+  }
+  .get-started button {
+    width: 100%;
+  }
+}

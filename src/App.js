@@ -12,6 +12,7 @@ import Footer from "./components/Footer";
 import Search from "./routes/Search/index";
 import ProfileDetail from "./routes/Search/ProfileDetail";
 import SignUp from "./routes/SignUp";
+import MyProfile from "./routes/MyProfile";
 
 function App() {
   const { i18n, t } = useTranslation();
@@ -20,7 +21,7 @@ function App() {
     <div className="App">
       <ErrorBoundry>
         <BrowserRouter>
-          <Header isLoggedIn={false} />
+          <Header />
           <Routes>
             <Route exact path="/" element={<Landing />} />
             <Route path="/step-one" element={<StepOne />} />
@@ -32,6 +33,7 @@ function App() {
               element={<ProfileDetail />}
             />
             <Route exact path="/signUp" element={<SignUp />} />
+            <Route exact path="/myprofile/:profileId" element={<MyProfile />} />
           </Routes>
           <Footer />
         </BrowserRouter>

@@ -4,24 +4,42 @@ import Input from "../../components/Input";
 import Result from "./Result";
 import { Button, Container } from "react-bootstrap";
 import SelectDropdown from "../../components/SelectDropdown";
-import { getProfileImage, getSerchResult } from "../../utils/webRequest";
+import {
+  getProfileImage,
+  getSerchResult,
+  getDisticts,
+} from "../../utils/webRequest";
 import {
   educationAreaColumn,
   occupationTypeColumn,
   heightRangeColumn,
+  lookingForColumns,
 } from "./column";
 import { useLocation } from "react-router-dom";
 
 const Search = (props) => {
   const location = useLocation();
-
-  console.log("---", location);
-
+  const [districtList, setDistrictList] = useState([]);
   let initialState = {};
   const [formData, setFormData] = useState(initialState);
   const [result, setResult] = useState([]);
   const [showResult, setShowResult] = useState(false);
   const [image, setImage] = useState("");
+
+  useEffect(async () => {
+    await getDistictsList();
+    if (location && location.state) {
+      setFormData({ ...location.state });
+      getSerchResult({ ...location.state }).then((response) => {
+        setShowResult(true);
+        setResult(response);
+      });
+    }
+  }, []);
+
+  const getDistictsList = () => {
+    getDisticts().then((response) => setDistrictList(response.data));
+  };
 
   const handleInputChange = (e) => {
     console.log(e.target.name);
@@ -110,12 +128,22 @@ const Search = (props) => {
             </select> */}
             </div>
             <div className="search-container-child">
-              <Input
+              {/* <Input
                 type="text"
                 className="form-control form-control-sm"
                 variant="sm"
                 name="nativeDistrict"
                 placeholder="Native District"
+                onChange={handleInputChange}
+                value={
+                  formData && formData.nativeDistrict
+                    ? formData.nativeDistrict
+                    : ""
+                }
+              /> */}
+              <SelectDropdown
+                data={districtList}
+                name="nativeDistrict"
                 onChange={handleInputChange}
                 value={
                   formData && formData.nativeDistrict
@@ -194,7 +222,15 @@ const Search = (props) => {
               />
             </div>
             <div className="search-container-child option-selection">
-              <strong>Maritial Status :</strong>
+              <SelectDropdown
+                data={lookingForColumns}
+                name="lookingFor"
+                onChange={handleInputChange}
+                value={
+                  formData && formData.lookingFor ? formData.lookingFor : ""
+                }
+              />
+              {/* <strong>Maritial Status :</strong>
               <input
                 onChange={handleInputChange}
                 type="radio"
@@ -208,7 +244,7 @@ const Search = (props) => {
                 name="maritialStatus"
                 value="divorcee"
               />
-              Divorcee
+              Divorcee */}
             </div>
             <div className="search-container-child option-selection">
               <strong>Gender :</strong>

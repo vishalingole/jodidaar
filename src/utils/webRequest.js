@@ -177,3 +177,7 @@ export const getLatestProfiles = () => {
 export const getDisticts = () => {
   return getRequest("location/get-district-list");
 };
+
+export const requestProfileDetail = (filters) => {
+  return getRequest("user/get-profile-detail", filters);
+};

@@ -42,9 +42,9 @@ const Result = (props) => {
   const handleViewProfile = (item) => {
     // console.log("clear");
     const user = localStorage.getItem("user");
-    console.log("++", user);
-    const userObj = JSON.parse(user);
-    if (userObj.accessToken && userObj.id) {
+    const userObj = user ? JSON.parse(user) : {};
+    const userId = userObj && userObj.id ? userObj.id : "";
+    if (userId) {
       navigate(`/search/profile-detail/${item.uuid}`);
     } else {
       alert("Please register yourself.");

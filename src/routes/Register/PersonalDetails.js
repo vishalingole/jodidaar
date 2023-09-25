@@ -5,6 +5,8 @@ import { register } from "../../utils/webRequest";
 import "./index.css";
 import { DatePicker, TimePicker } from "antd";
 import dayjs from "dayjs";
+import { subCasteColumns } from "../Search/column";
+import SelectDropdown from "../../components/SelectDropdown";
 
 const PersonalDetails = (props) => {
   const { setStep } = props;
@@ -103,16 +105,12 @@ const PersonalDetails = (props) => {
             />
           </div>
           <div className="form-item-right">
-            <select
-              className="form-select form-select-sm"
-              aria-label=".form-select-sm example"
-              name="subCaste"
+            <SelectDropdown
+              data={subCasteColumns}
+              name="lookingFor"
               onChange={handleInputChange}
-            >
-              <option selected>Sub-caste</option>
-              <option value="1">One</option>
-              <option value="2">Two</option>
-            </select>
+              value={formData && formData.subCaste ? formData.subCaste : ""}
+            />
           </div>
           <div className="form-item-left">
             <Input

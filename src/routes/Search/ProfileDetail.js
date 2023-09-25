@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getProfileDetail } from "../../utils/webRequest";
+import { getProfileDetail, requestProfileDetail } from "../../utils/webRequest";
 import { useParams } from "react-router-dom";
 import { Button, Container } from "react-bootstrap";
 import Personal from "../ProfileDetail/Personal";
@@ -19,12 +19,34 @@ const getImageUrl = (item) => {
 const ProfileDetail = () => {
   const { profileId } = useParams();
   const [data, setData] = useState({});
+  const [message, setMessage] = useState("");
 
   useEffect(() => {
     getProfileDetail({ profileId: profileId }).then((response) =>
       setData(response.data)
     );
   }, []);
+
+  const handleRequestDetail = () => {
+    const user = localStorage.getItem("user");
+    const userObj = user ? JSON.parse(user) : {};
+    const userId = userObj && userObj.id ? userObj.id : "";
+    if (userId) {
+      requestProfileDetail({
+        requestedBy: userId,
+        requestedFor: profileId,
+      }).then((response) => {
+        console.log("----", response);
+        if (
+          response &&
+          response.data &&
+          response.data.responseType == "SUCCESS"
+        ) {
+          setMessage(response.data.responseMessage);
+        }
+      });
+    }
+  };
 
   return (
     <>
@@ -55,8 +77,9 @@ const ProfileDetail = () => {
                 : ""}
             </div>
             <div className="get-detail-section">
-              <Button>REQUEST DETAILS</Button>
+              <Button onClick={handleRequestDetail}>REQUEST DETAILS</Button>
             </div>
+            {message && <div className="request-message">{message}</div>}
           </div>
           <div className="profile-detail-right-section">
             <Personal data={data} />

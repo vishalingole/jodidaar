@@ -15,6 +15,7 @@ import { getDisticts } from "../../utils/webRequest";
 
 const Landing = () => {
   const [formData, setFormData] = useState({});
+  const [districtList, setDistrictList] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -32,7 +33,7 @@ const Landing = () => {
   };
 
   const getDistictsList = () => {
-    getDisticts().then((data) => console.log(data));
+    getDisticts().then((response) => setDistrictList(response.data));
   };
 
   const handleQuickSearch = () => {
@@ -73,12 +74,9 @@ const Landing = () => {
                 />
               </div>
               <div>
-                <Input
-                  type="text"
-                  className="form-control form-control-sm"
-                  variant="sm"
+                <SelectDropdown
+                  data={districtList}
                   name="nativeDistrict"
-                  placeholder="Native District"
                   onChange={handleInputChange}
                   value={
                     formData && formData.nativeDistrict
@@ -88,12 +86,21 @@ const Landing = () => {
                 />
               </div>
               <div>
-                <Button onClick={handleQuickSearch}>Search</Button>
+                <Button
+                  className="quick-search-button"
+                  onClick={handleQuickSearch}
+                >
+                  Search
+                </Button>
               </div>
             </div>
           </div>
-          <div className="shivaji-maharaj-logo">
-            <img height={180} width={180} src="/chatrapati.png" alt="Image" />
+          <div className="shivaji-maharaj-logo-container">
+            <img
+              className="shivaji-maharaj-logo"
+              src="/chatrapati.png"
+              alt="Image"
+            />
           </div>
         </Container>
       </div>

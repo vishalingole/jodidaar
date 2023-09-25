@@ -11,6 +11,10 @@ const getImageUrl = (item) => {
   else return process.env.PUBLIC_URL + "/dummy-woman.png";
 };
 
+const capital = (val) => {
+  return val.toUpperCase();
+};
+
 const LatestProfiles = () => {
   const [data, setData] = useState([]);
 
@@ -41,8 +45,10 @@ const LatestProfiles = () => {
                   />
                 </div>
                 <div>
-                  <div>{item.PersonalDetails.displayId}</div>
-                  <div>{item.PersonalDetails.lastName}</div>
+                  <div className="common-heading">
+                    {item.PersonalDetails.displayId}
+                  </div>
+                  <div>{capital(item.PersonalDetails.lastName)}</div>
                 </div>
               </div>
               <div className="detail-section">
@@ -53,10 +59,7 @@ const LatestProfiles = () => {
                 <div>HEIGHT : </div>
                 <div> 5.4 ft</div>
               </div>
-              <div className="detail-section">
-                <div>EDUCATION: </div>
-                <div>{item.EducationDetails.education}</div>
-              </div>
+
               <div className="detail-section">
                 <div>OCCUPATION : </div>
                 <div>{item.EducationDetails.occupationDetail}</div>
@@ -64,14 +67,20 @@ const LatestProfiles = () => {
               <div className="detail-section">
                 <div>INCOME : </div>
                 <div>
-                  {item.EducationDetails.income +
-                    " " +
-                    item.EducationDetails.incomeType}
+                  {item.EducationDetails.income
+                    ? item.EducationDetails.income +
+                      " " +
+                      item.EducationDetails.incomeType
+                    : ""}
                 </div>
               </div>
               <div className="detail-section">
                 <div>NATIVE DISTRICT : </div>
                 <div>{item.FamilyBackground.nativeDistrict}</div>
+              </div>
+              <div className="education-content">
+                <div>EDUCATION : </div>
+                <div>{item.EducationDetails.education}</div>
               </div>
             </div>
           </>

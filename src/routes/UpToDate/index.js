@@ -17,7 +17,7 @@ const UpToDate = () => {
               <span className="common-heading">JodiDaar</span>
             </h3>
           </div>
-          <div>
+          <div className="get-started">
             <Register name="Get Started" />
           </div>
         </div>

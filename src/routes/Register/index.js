@@ -66,47 +66,19 @@ const Register = ({ name = "Register" }) => {
                 // style: "dotted",
               }}
               styleConfig={{
-                activeBgColor: "orange",
+                activeBgColor: "#f54c1e",
                 completedBgColor: "green",
                 labelFontSize: "12px",
                 // completedTextColor: "white",
               }}
             >
-              <Step
-                active={step - 1 == 0}
-                completed={step - 1 > 0}
-                label="Personal"
-              />
-              <Step
-                active={step - 1 == 1}
-                completed={step - 1 > 1}
-                label="Education"
-              />
-              <Step
-                active={step - 1 == 2}
-                completed={step - 1 > 2}
-                label="Family"
-              />
-              <Step
-                active={step - 1 == 3}
-                completed={step - 1 > 3}
-                label="Address"
-              />
-              <Step
-                active={step - 1 == 4}
-                completed={step - 1 > 4}
-                label="Horoscope"
-              />
-              <Step
-                active={step - 1 == 5}
-                completed={step - 1 > 5}
-                label="Expectation"
-              />
-              <Step
-                active={step - 1 == 6}
-                completed={step - 1 > 6}
-                label="Profile Image"
-              />
+              <Step active={step - 1 == 0} completed={step - 1 > 0} label="" />
+              <Step active={step - 1 == 1} completed={step - 1 > 1} label="" />
+              <Step active={step - 1 == 2} completed={step - 1 > 2} label="" />
+              <Step active={step - 1 == 3} completed={step - 1 > 3} label="" />
+              <Step active={step - 1 == 4} completed={step - 1 > 4} label="" />
+              <Step active={step - 1 == 5} completed={step - 1 > 5} label="" />
+              <Step active={step - 1 == 6} completed={step - 1 > 6} label="" />
             </Stepper>
             {/* <p>Creating profile for.</p>
 

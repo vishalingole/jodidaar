@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import Input from "../../components/Input";
 import Button from "react-bootstrap/Button";
 import { expectations } from "../../utils/webRequest";
+import SelectDropdown from "../../components/SelectDropdown";
+import { subCasteColumns } from "../Search/column";
 
 const Expectations = (props) => {
   const { setStep } = props;
@@ -44,55 +46,14 @@ const Expectations = (props) => {
       <form onSubmit={handleFormSubmit}>
         <div className="form-container">
           <div className="form-item-left">
-            <select
-              class="form-select form-select-sm"
-              aria-label=".form-select-sm example"
-              name="expectedCaste"
+            <SelectDropdown
+              data={subCasteColumns}
+              name="lookingFor"
               onChange={handleInputChange}
-            >
-              <option
-                selected={formData.expectedCaste == "label"}
-                value="label"
-              >
-                Caste
-              </option>
-              <option
-                selected={formData.expectedCaste == "deshmukh"}
-                value="deshmukh"
-              >
-                Deshmukh
-              </option>
-              <option
-                selected={formData.expectedCaste == "96Kuli"}
-                value="96Kuli"
-              >
-                96 Kuli
-              </option>
-              <option
-                selected={formData.expectedCaste == "kunbi"}
-                value="kunbi"
-              >
-                kunbi
-              </option>
-              <option
-                selected={formData.expectedCaste == "deshmukhMaratha"}
-                value="deshmukhMaratha"
-              >
-                Deshmukh Maratha
-              </option>
-              <option
-                selected={formData.expectedCaste == "96KuliMaratha"}
-                value="96KuliMaratha"
-              >
-                96 Kuli Maratha
-              </option>
-              <option
-                selected={formData.expectedCaste == "tiralekunbi"}
-                value="tiralekunbi"
-              >
-                Tirale kunbi
-              </option>
-            </select>
+              value={
+                formData && formData.expectedCaste ? formData.expectedCaste : ""
+              }
+            />
           </div>
           <div className="form-item-right">
             <Input
