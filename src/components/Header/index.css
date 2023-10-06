@@ -1,4 +1,4 @@
-header {
+.user-header {
   background-color: #fff;
   display: flex;
   justify-content: space-between;
@@ -11,6 +11,28 @@ header {
   width: 100%;
   padding-left: 100px;
   padding-right: 100px;
+}
+
+.admin-header {
+  background-color: #000048;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 1em;
+  align-items: center;
+  height: 50px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding-left: 100px;
+  padding-right: 100px;
+  z-index: 1111 !important;
+}
+
+.admin-header h5 {
+  color: white;
+  font-size: 18px;
 }
 
 header h5 {
@@ -95,4 +117,12 @@ button {
 .active-link {
   color: #f54c1e;
   font-weight: 500;
+}
+
+.admin-navigation-links li a {
+  color: white !important;
+}
+
+.admin-navigation-links .active-link {
+  color: #f54c1e !important;
 }

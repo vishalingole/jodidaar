@@ -1,0 +1,11 @@
+.admin-login-container {
+  width: 340px;
+  transform: translateX(-50%);
+  position: relative;
+  left: 50%;
+  top: 50%;
+  margin: 50px;
+  border: 1px solid;
+  padding: 40px;
+  border-radius: 16px;
+}

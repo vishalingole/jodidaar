@@ -13,6 +13,10 @@ import Search from "./routes/Search/index";
 import ProfileDetail from "./routes/Search/ProfileDetail";
 import SignUp from "./routes/SignUp";
 import MyProfile from "./routes/MyProfile";
+import AdminLogin from "./routes/Admin/Login";
+import Dashboard from "./routes/Admin/Dashboard";
+import AdminSearch from "./routes/Admin/Search";
+import AddUser from "./routes/Admin/AddUser";
 
 function App() {
   const { i18n, t } = useTranslation();
@@ -34,8 +38,12 @@ function App() {
             />
             <Route exact path="/signUp" element={<SignUp />} />
             <Route exact path="/myprofile/:profileId" element={<MyProfile />} />
+            <Route exact path="/admin/login" element={<AdminLogin />} />
+            <Route exact path="/admin/dashboard" element={<Dashboard />} />
+            <Route exact path="/admin/search" element={<AdminSearch />} />
+            <Route exact path="/admin/user/add" element={<AddUser />} />
           </Routes>
-          <Footer />
+          {/* <Footer /> */}
         </BrowserRouter>
       </ErrorBoundry>
     </div>

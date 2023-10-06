@@ -226,15 +226,8 @@ const PersonalDetails = (props) => {
             />
             Female
           </div>
-          <div className="form-item-left">
-            <DatePicker onChange={handleDateChange} />
-          </div>
-          <div className="form-item-right">
-            <TimePicker
-              onChange={handleDateChange}
-              defaultOpenValue={dayjs("00:00:00", "HH:mm:ss")}
-            />
-          </div>
+          <div className="form-item-left"></div>
+          <div className="form-item-right"></div>
         </div>
         <div className="footer-buttons">
           <Button

@@ -48,6 +48,21 @@ export const educationAreaColumn = [
   },
 ];
 
+export const profileStatusColumn = [
+  {
+    lable: "Select Profile Status",
+    value: "",
+  },
+  {
+    lable: "Active",
+    value: "1",
+  },
+  {
+    lable: "InActive",
+    value: "0",
+  },
+];
+
 export const heightRangeColumn = [
   {
     lable: "Select Height",
@@ -274,4 +289,10 @@ export const subCasteColumns = [
   { lable: "96 Kuli Maratha", value: "96KuliMaratha" },
   { lable: "Deshmukh Maratha", value: "deshmukhMaratha" },
   { lable: "Kunbi", value: "kunbi" },
+];
+
+export const genderColumns = [
+  { lable: "Gender", value: "" },
+  { lable: "Male", value: "male" },
+  { lable: "Female", value: "female" },
 ];
