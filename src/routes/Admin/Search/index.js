@@ -3,11 +3,7 @@ import "./index.css";
 import Input from "../../../components/Input";
 import { Button, Container } from "react-bootstrap";
 import SelectDropdown from "../../../components/SelectDropdown";
-import {
-  getProfileImage,
-  getSerchResult,
-  getDisticts,
-} from "../../../utils/webRequest";
+import { getDisticts, getAdminSearchResult } from "../../../utils/webRequest";
 import {
   educationAreaColumn,
   occupationTypeColumn,
@@ -28,13 +24,13 @@ const AdminSearch = () => {
 
   useEffect(async () => {
     await getDistictsList();
-    if (location && location.state) {
-      setFormData({ ...location.state });
-      getSerchResult({ ...location.state }).then((response) => {
-        setShowResult(true);
-        setResult(response);
-      });
-    }
+    // if (location && location.state) {
+    setFormData({ ...location.state });
+    // getSerchResult({ ...location.state }).then((response) => {
+    //   setShowResult(true);
+    //   setResult(response);
+    // });
+    // }
   }, []);
 
   const getDistictsList = () => {
@@ -42,8 +38,6 @@ const AdminSearch = () => {
   };
 
   const handleInputChange = (e) => {
-    console.log(e.target.name);
-    console.log(e.target.value);
     const { name, value } = e.target;
     setFormData({
       ...formData,
@@ -53,15 +47,13 @@ const AdminSearch = () => {
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    console.log("handleSubmit", formData);
-    getSerchResult(formData).then((response) => {
+    getAdminSearchResult(formData).then((response) => {
       setShowResult(true);
       setResult(response);
     });
   };
 
   const handleClear = () => {
-    console.log("----");
     setFormData(initialState);
   };
 

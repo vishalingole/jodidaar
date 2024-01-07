@@ -181,3 +181,22 @@ export const getDisticts = () => {
 export const requestProfileDetail = (filters) => {
   return getRequest("user/get-profile-detail", filters);
 };
+
+export const createOperator = (params) => {
+  console.log("+++", params);
+  return axios({
+    method: "post",
+    url: "http://localhost:5000/api/admin/new-operator",
+    data: params,
+  }).catch((error) => {
+    console.log(error);
+  });
+};
+
+export const getOperator = () => {
+  return getRequest("admin/get-operator");
+};
+
+export const getAdminSearchResult = (filters) => {
+  return getRequest("admin/get-profile", filters);
+};

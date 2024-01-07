@@ -26,7 +26,6 @@ const AdminLogin = () => {
   };
 
   const handleLogin = () => {
-    console.log(formData);
     login(formData).then((response) => {
       if (response.status == "success") {
         setUserId(response.id);
@@ -39,7 +38,6 @@ const AdminLogin = () => {
   };
 
   const handleOtp = () => {
-    console.log(formData);
     // verifyOTP(formData).then((data) => {
     //   if (data.status == "success") {
     //     const { accessToken, refreshToken } = data;
@@ -64,8 +62,6 @@ const AdminLogin = () => {
   };
 
   const handleInputChange = (e) => {
-    console.log(e.target.name);
-    console.log(e.target.value);
     const { name, value } = e.target;
     setFormData({
       ...formData,

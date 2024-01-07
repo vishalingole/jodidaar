@@ -23,8 +23,6 @@ const Landing = () => {
   }, []);
 
   const handleInputChange = (e) => {
-    console.log(e.target.name);
-    console.log(e.target.value);
     const { name, value } = e.target;
     setFormData({
       ...formData,

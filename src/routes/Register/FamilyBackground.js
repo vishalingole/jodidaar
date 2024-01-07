@@ -9,7 +9,6 @@ const FamilyBackground = (props) => {
   const [formData, setFormData] = useState({});
 
   const handleInputChange = (e) => {
-    console.log(e.target.value);
     const { name, value } = e.target;
     setFormData({
       ...formData,
@@ -19,7 +18,6 @@ const FamilyBackground = (props) => {
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    console.log("handleSubmit", formData);
     const user = localStorage.getItem("user");
     const userObj = user ? JSON.parse(user) : {};
     const userId = userObj && userObj.id ? userObj.id : "";

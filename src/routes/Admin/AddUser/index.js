@@ -15,7 +15,6 @@ const AddUser = () => {
   const [formData, setFormData] = useState({});
 
   const handleInputChange = (e) => {
-    console.log(e.target.value);
     const { name, value } = e.target;
     setFormData({
       ...formData,
@@ -25,9 +24,7 @@ const AddUser = () => {
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    console.log("handleSubmit", formData);
     register(formData).then((data) => {
-      console.log(data);
       if (data) {
         localStorage.setItem("user", JSON.stringify(data));
       }
@@ -35,7 +32,6 @@ const AddUser = () => {
   };
 
   const handleClear = () => {
-    console.log("----");
     setFormData({});
   };
 

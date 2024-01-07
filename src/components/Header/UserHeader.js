@@ -29,12 +29,10 @@ const UserHeader = () => {
   ]);
 
   const handleLogout = () => {
-    console.log("handleLogout");
     const user = localStorage.getItem("user");
     const userObj = user ? JSON.parse(user) : {};
     const userId = userObj && userObj.id ? userObj.id : "";
     if (userId) {
-      console.log("----");
       localStorage.removeItem("user");
       setTimeout(() => {
         navigate("/");
@@ -56,8 +54,6 @@ const UserHeader = () => {
     else if (location.pathname.includes("/myprofile"))
       currentRoute = "myprofile";
   }
-
-  console.log(location, currentRoute);
 
   return (
     <header className="user-header">

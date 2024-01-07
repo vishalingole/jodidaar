@@ -21,7 +21,6 @@ const EducationDetails = (props) => {
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    console.log("handleSubmit", formData);
     const user = localStorage.getItem("user");
     const userObj = user ? JSON.parse(user) : {};
     const userId = userObj && userObj.id ? userObj.id : "";
@@ -36,7 +35,6 @@ const EducationDetails = (props) => {
   };
 
   const handleClear = () => {
-    console.log("----");
     setFormData(initialState);
   };
 

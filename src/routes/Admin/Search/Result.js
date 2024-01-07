@@ -62,7 +62,7 @@ const getHeadings = () => {
         <tr>
           <th>Id</th>
           <th>Name</th>
-          <th>Type</th>
+          <th>Gender</th>
           <th>Education</th>
           <th>Occupation</th>
           <th>Income</th>
@@ -93,7 +93,6 @@ const Result = (props) => {
   const { data: result } = props;
   const { totalItems, items } = result.data;
 
-  console.log("+++", result);
   return (
     <>
       <div className="result-container">{getTable(result)}</div>

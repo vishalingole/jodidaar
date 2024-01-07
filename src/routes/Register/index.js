@@ -30,7 +30,6 @@ const Register = ({ name = "Register" }) => {
   };
 
   const handleProfileSelection = (val) => {
-    console.log("+++", val);
     setCreateProfileFor(val);
   };
 

@@ -2,7 +2,6 @@ import React from "react";
 
 const SelectDropdown = (props) => {
   const { data, handleChange, onChange, name, value } = props;
-  console.log(props);
   return (
     <>
       <select
@@ -11,8 +10,6 @@ const SelectDropdown = (props) => {
         name={name}
       >
         {data.map((item, index) => {
-          console.log(item.value == value);
-
           return (
             <option
               selected={item.value === value ? true : false}

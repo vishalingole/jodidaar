@@ -8,7 +8,6 @@ const Result = (props) => {
   const { searchResult = [] } = props;
   const { data } = searchResult;
   const [imagePath, setImagePath] = useState("");
-  console.log(data.totalItems);
 
   const getImageUrl = (item) => {
     if (item.file) {
@@ -40,7 +39,6 @@ const Result = (props) => {
   };
 
   const handleViewProfile = (item) => {
-    // console.log("clear");
     const user = localStorage.getItem("user");
     const userObj = user ? JSON.parse(user) : {};
     const userId = userObj && userObj.id ? userObj.id : "";

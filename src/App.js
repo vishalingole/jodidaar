@@ -17,6 +17,8 @@ import AdminLogin from "./routes/Admin/Login";
 import Dashboard from "./routes/Admin/Dashboard";
 import AdminSearch from "./routes/Admin/Search";
 import AddUser from "./routes/Admin/AddUser";
+import Operator from "./routes/Admin/Operator";
+import AddOperator from "./routes/Admin/Operator/AddOperator";
 
 function App() {
   const { i18n, t } = useTranslation();
@@ -42,6 +44,8 @@ function App() {
             <Route exact path="/admin/dashboard" element={<Dashboard />} />
             <Route exact path="/admin/search" element={<AdminSearch />} />
             <Route exact path="/admin/user/add" element={<AddUser />} />
+            <Route exact path="/admin/operator" element={<Operator />} />
+            <Route exact path="/admin/operator/add" element={<AddOperator />} />
           </Routes>
           {/* <Footer /> */}
         </BrowserRouter>

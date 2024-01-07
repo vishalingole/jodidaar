@@ -247,21 +247,15 @@ const Search = (props) => {
               Divorcee */}
             </div>
             <div className="search-container-child option-selection">
-              <strong>Gender :</strong>
-              <input
+              <Input
+                type="text"
+                className="form-control form-control-sm"
+                variant="sm"
+                name="displayId"
+                placeholder="Profile Id"
                 onChange={handleInputChange}
-                type="radio"
-                name="gender"
-                value="male"
+                value={formData && formData.displayId ? formData.displayId : ""}
               />
-              Male
-              <input
-                onChange={handleInputChange}
-                type="radio"
-                name="gender"
-                value="female"
-              />
-              Female
             </div>
           </div>
           <div className="search-buttons">

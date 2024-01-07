@@ -24,7 +24,6 @@ const Login = () => {
   };
 
   const handleLogin = () => {
-    console.log(formData);
     login(formData).then((response) => {
       if (response.status == "success") {
         setUserId(response.id);
@@ -37,11 +36,9 @@ const Login = () => {
   };
 
   const handleOtp = () => {
-    console.log(formData);
     verifyOTP(formData).then((data) => {
       if (data.status == "success") {
         const { accessToken, refreshToken } = data;
-        console.log(userId);
         const cloneObj = Object.assign({}, data);
         delete cloneObj["message"];
         delete cloneObj["status"];
@@ -62,8 +59,6 @@ const Login = () => {
   };
 
   const handleInputChange = (e) => {
-    console.log(e.target.name);
-    console.log(e.target.value);
     const { name, value } = e.target;
     setFormData({
       ...formData,

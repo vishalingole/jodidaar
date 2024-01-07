@@ -19,6 +19,10 @@ const AdminHeader = () => {
       href: "/admin/user/add",
     },
     {
+      label: "Operator",
+      href: "/admin/operator",
+    },
+    {
       label: "Advance Search",
       href: "/admin/search",
     },
@@ -30,7 +34,6 @@ const AdminHeader = () => {
     const userObj = user ? JSON.parse(user) : {};
     const userId = userObj && userObj.id ? userObj.id : "";
     if (userId) {
-      console.log("----");
       localStorage.removeItem("user");
       setTimeout(() => {
         navigate("/");
@@ -43,16 +46,14 @@ const AdminHeader = () => {
   };
 
   let currentRoute = "";
-  console.log(location.pathname);
   if (location) {
     if (location.pathname == "/admin/dashboard") currentRoute = "Home";
     else if (location.pathname == "/admin/search")
       currentRoute = "Advance Search";
     else if (location.pathname.includes("/admin/user/add"))
       currentRoute = "Add User";
+    else if (location.pathname.includes("operator")) currentRoute = "Operator";
   }
-
-  console.log(location, currentRoute);
 
   return (
     <header className="admin-header">

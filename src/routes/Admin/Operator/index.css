@@ -1,0 +1,48 @@
+.add-operator-button-container {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  justify-content: end;
+  /* float: right; */
+}
+
+.operator-container {
+  background: white;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 20px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.admin-add-operator-container {
+  background: white;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  border: 1px solid #ccc;
+  padding: 40px;
+}
+
+.operator-result-table {
+  width: 100%;
+}
+
+.operator-result-table th,
+td {
+  padding: 5px;
+  text-align: left;
+  font-size: 12px;
+}
+
+.operator-result-table table,
+th,
+td {
+  border: 1px solid #ccc;
+}
+
+.operator-list {
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-bottom: 20px;
+}

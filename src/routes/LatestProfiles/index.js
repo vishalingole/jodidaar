@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
 import "./index.css";
 import { getLatestProfiles } from "../../utils/webRequest";
+import { useNavigate } from "react-router-dom";
 
 const getImageUrl = (item) => {
   if (item.file) {
@@ -17,13 +18,17 @@ const capital = (val) => {
 
 const LatestProfiles = () => {
   const [data, setData] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     getLatestProfiles().then((response) => setData(response.data));
   }, []);
 
+  const handleQuickSearch = (id) => {
+    navigate("/search", { state: { displayId: id } });
+  };
+
   const getCard = () => {
-    console.log(data.rows);
     return (
       data &&
       data.rows &&
@@ -46,9 +51,21 @@ const LatestProfiles = () => {
                 </div>
                 <div>
                   <div className="common-heading">
-                    {item.PersonalDetails.displayId}
+                    <a
+                      onClick={() =>
+                        handleQuickSearch(item.PersonalDetails.displayId)
+                      }
+                    >
+                      {item.PersonalDetails.displayId}
+                    </a>
                   </div>
-                  <div>{capital(item.PersonalDetails.lastName)}</div>
+                  <div>
+                    {item &&
+                    item.PersonalDetails &&
+                    item.PersonalDetails.lastName
+                      ? capital(item.PersonalDetails.lastName)
+                      : ""}
+                  </div>
                 </div>
               </div>
               <div className="detail-section">

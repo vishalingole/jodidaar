@@ -30,7 +30,6 @@ const SignUp = () => {
   };
 
   const handleProfileSelection = (val) => {
-    console.log("+++", val);
     setCreateProfileFor(val);
   };
 

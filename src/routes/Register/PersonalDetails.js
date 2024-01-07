@@ -24,9 +24,7 @@ const PersonalDetails = (props) => {
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    console.log("handleSubmit", formData);
     register(formData).then((data) => {
-      console.log(data);
       if (data) {
         localStorage.setItem("user", JSON.stringify(data));
         setStep(2);
@@ -35,7 +33,6 @@ const PersonalDetails = (props) => {
   };
 
   const handleClear = () => {
-    console.log("----");
     setFormData({});
   };
 

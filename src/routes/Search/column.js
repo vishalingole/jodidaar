@@ -281,6 +281,14 @@ export const lookingForColumns = [
     lable: "Divorcee Bride",
     value: "divorceeBride",
   },
+  {
+    lable: "Windower",
+    value: "windower",
+  },
+  {
+    lable: "Window",
+    value: "window",
+  },
 ];
 
 export const subCasteColumns = [

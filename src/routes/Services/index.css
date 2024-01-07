@@ -3,10 +3,13 @@
   margin-top: 10px;
 }
 .services-card .col .card {
-  /* background: red; */
+  background: #e6e6e3;
   /* margin: 20px; */
   width: 22rem;
-  border-radius: 0px;
+  border-radius: 22px;
+  border: none;
+  padding: 20px;
+  text-align: center;
 }
 
 .services-card .col {
