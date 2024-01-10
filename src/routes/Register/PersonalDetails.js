@@ -3,7 +3,6 @@ import Input from "../../components/Input";
 import Button from "react-bootstrap/Button";
 import { register } from "../../utils/webRequest";
 import "./index.css";
-import { DatePicker, TimePicker } from "antd";
 import dayjs from "dayjs";
 import { subCasteColumns } from "../Search/column";
 import SelectDropdown from "../../components/SelectDropdown";

@@ -48,10 +48,16 @@ const Landing = () => {
           <div className="top-section-left-content">
             <div>
               <h1>
-                Find Your
+                {/* Find Your
                 <br />
-                <span style={{ color: "#f54c1e" }}>Perfect Match</span> <br />
-                As per Your Personal Intrest
+                <span style={{ color: "#f54c1e" }}>Perfect Match</span> <br /> */}
+                {/* As per Your Personal Intrest Match beyond the basics. */}
+                {/* <br /> */}
+                Find
+                <br />
+                <span style={{ color: "#f54c1e" }}> Perfect Life Partner </span>
+                <br />
+                through shared passions.
               </h1>
               <div className="register-btn-container">
                 <Register />
@@ -106,7 +112,7 @@ const Landing = () => {
         <Services />
       </div>
       <AboutUs />
-      <SuccessStories />
+      {/* <SuccessStories /> */}
       <LatestProfiles />
       <UpToDate />
     </>

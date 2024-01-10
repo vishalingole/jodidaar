@@ -13,14 +13,13 @@ const AboutUs = () => {
           </div>
           <div className="about-us-right-section">
             <h5 className="about-us-heading">About Us</h5>
-            <h2 className="about-us-sub-heading">
-              Influencer Marketing for Your Business
-            </h2>
+            <h2 className="about-us-sub-heading">A Legacy of Harmony</h2>
             <div className="about-us-details">
-              With over 25 years of experience, we have crafted thousands of
-              Strategic discovery process that enables us to peel back the
-              Layers which enable us to understand, connect, represent and
-              Dominate your market.
+              For over 5 years, we've helped countless couples from the Maratha
+              community find love and build beautiful families together. Our
+              commitment to providing a safe, secure, and faith-based
+              environment has earned us the trust of families across
+              generations.
             </div>
             <div>
               <Button className="contact-btn">
