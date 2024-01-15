@@ -5,6 +5,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import { isUserLoggedIn, getUserId } from "../../utils/user";
 import IsMobile from "./IsMobile";
+import { useTranslation } from "react-i18next";
 
 const UserHeader = () => {
   const location = useLocation();
@@ -13,7 +14,7 @@ const UserHeader = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const isMobile = IsMobile();
   const mobileMenuRef = useRef(null);
-
+  const { i18n, t } = useTranslation();
   const handleClickOutside = (event) => {
     if (
       mobileMenuRef.current &&
@@ -33,7 +34,7 @@ const UserHeader = () => {
 
   const [linkOptions, setLinkOptions] = useState([
     {
-      label: "Home",
+      label: t("home"),
       href: "/",
     },
     {
@@ -41,7 +42,7 @@ const UserHeader = () => {
       href: "/about",
     },
     {
-      label: "Advance Search",
+      label: t("advance-search"),
       href: "/search",
     },
     {

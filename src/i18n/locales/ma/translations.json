@@ -6,5 +6,6 @@
   "welcome": "Welcome, {{username}}",
   "change-username": "Change your username:",
   "submit": "Submit",
-  "go-to-page2": "Click <0>here</0> to go to page 2, {{username}}"
+  "go-to-page2": "Click <0>here</0> to go to page 2, {{username}}",
+  "advance-search": "प्रगत शोध"
 }
