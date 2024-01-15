@@ -1,21 +1,43 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import "./index.css";
 import Login from "../Login";
 import { useLocation, useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import { isUserLoggedIn, getUserId } from "../../utils/user";
+import IsMobile from "./IsMobile";
 
 const UserHeader = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const loggedInUserId = getUserId();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const isMobile = IsMobile();
+  const mobileMenuRef = useRef(null);
+
+  const handleClickOutside = (event) => {
+    if (
+      mobileMenuRef.current &&
+      !mobileMenuRef.current.contains(event.target)
+    ) {
+      setIsMobileMenuOpen(false);
+    }
+  };
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen((prevState) => !prevState);
+  };
+
   const [linkOptions, setLinkOptions] = useState([
     {
       label: "Home",
       href: "/",
     },
     {
-      label: "About Us",
+      label: "How To Use",
       href: "/about",
     },
     {
@@ -23,7 +45,7 @@ const UserHeader = () => {
       href: "/search",
     },
     {
-      label: "Contact Us",
+      label: "Terms & Conditions",
       href: "/contact",
     },
   ]);
@@ -38,6 +60,46 @@ const UserHeader = () => {
         navigate("/");
       }, 500);
     }
+  };
+
+  const getMobileMenu = () => {
+    return (
+      <>
+        <nav className="mobile-nav">
+          <div className="logo">JodiDaar</div>
+          <div className="links">
+            <strong onClick={toggleMobileMenu}>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="black"
+                class="bi bi-list"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"
+                />
+              </svg>
+            </strong>
+          </div>
+        </nav>
+        <div
+          className="mobile-menu"
+          ref={mobileMenuRef}
+          style={{ display: isMobileMenuOpen ? "flex" : "none" }}
+        >
+          <ul>
+            <li>How To Use</li>
+            <li>Advance Search</li>
+            <li>Terms & Conditions</li>
+            <li>My Profile</li>
+            <li>Login</li>
+          </ul>
+        </div>
+      </>
+    );
   };
 
   const handleLogin = () => {
@@ -56,50 +118,58 @@ const UserHeader = () => {
   }
 
   return (
-    <header className="user-header">
-      <div>
-        <h5>JodiDaar</h5>
-      </div>
-      <div>
-        <ul className="navigation-links">
-          {linkOptions.map((option) => (
-            <li key={option.label}>
-              <a
-                className={currentRoute == option.label ? "active-link" : ""}
-                href={option.href}
-              >
-                {option.label}
-              </a>
-            </li>
-          ))}
-          {isUserLoggedIn() && (
-            <li>
-              <a
-                className={currentRoute == "myprofile" ? "active-link" : ""}
-                href={`/myprofile/${loggedInUserId}`}
-              >
-                My Profile
-              </a>
-            </li>
-          )}
-        </ul>
-      </div>
-      <div className="login-btn-container">
-        {!isUserLoggedIn() ? (
-          <Login />
-        ) : (
-          <>
-            <Button
-              className="login-btn"
-              variant="primary"
-              onClick={handleLogout}
-            >
-              Logout
-            </Button>
-          </>
-        )}
-      </div>
-    </header>
+    <>
+      {isMobile ? (
+        getMobileMenu()
+      ) : (
+        <header className="user-header">
+          <div>
+            <h5>JodiDaar</h5>
+          </div>
+          <div>
+            <ul className="navigation-links">
+              {linkOptions.map((option) => (
+                <li key={option.label}>
+                  <a
+                    className={
+                      currentRoute == option.label ? "active-link" : ""
+                    }
+                    href={option.href}
+                  >
+                    {option.label}
+                  </a>
+                </li>
+              ))}
+              {isUserLoggedIn() && (
+                <li>
+                  <a
+                    className={currentRoute == "myprofile" ? "active-link" : ""}
+                    href={`/myprofile/${loggedInUserId}`}
+                  >
+                    My Profile
+                  </a>
+                </li>
+              )}
+            </ul>
+          </div>
+          <div className="login-btn-container">
+            {!isUserLoggedIn() ? (
+              <Login />
+            ) : (
+              <>
+                <Button
+                  className="login-btn"
+                  variant="primary"
+                  onClick={handleLogout}
+                >
+                  Logout
+                </Button>
+              </>
+            )}
+          </div>
+        </header>
+      )}
+    </>
   );
 };
 

@@ -47,7 +47,7 @@ function App() {
             <Route exact path="/admin/operator" element={<Operator />} />
             <Route exact path="/admin/operator/add" element={<AddOperator />} />
           </Routes>
-          {/* <Footer /> */}
+          <Footer />
         </BrowserRouter>
       </ErrorBoundry>
     </div>

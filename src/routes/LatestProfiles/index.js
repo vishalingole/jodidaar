@@ -3,8 +3,7 @@ import { Container } from "react-bootstrap";
 import "./index.css";
 import { getLatestProfiles } from "../../utils/webRequest";
 import { useNavigate } from "react-router-dom";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
+import Slider from "./Slider";
 
 const getImageUrl = (item) => {
   if (item.file) {
@@ -36,144 +35,84 @@ const LatestProfiles = () => {
       data.rows &&
       data.rows.map((item) => {
         return (
-          <>
-            <div class="latest-profiles card text-center">
-              <div class="latest-profiles card-header">
-                <img
-                  style={{
-                    width: "100px",
-                    height: "100px",
-                    padding: "2px",
-                    border: "1px solid #ccc",
-                    borderRadius: "50px",
-                  }}
-                  src={getImageUrl(item)}
-                />
-              </div>
-              <div class="latest-profiles card-body">
-                <div className="common-heading">
-                  <a
-                    onClick={() =>
-                      handleQuickSearch(item.PersonalDetails.displayId)
-                    }
-                  >
-                    {item.PersonalDetails.displayId}
-                  </a>
-                </div>
-                <h5 class="card-title">
-                  {item && item.PersonalDetails && item.PersonalDetails.lastName
-                    ? capital(item.PersonalDetails.lastName)
-                    : ""}
-                </h5>
-                <p class="card-text">
-                  I am a {item.EducationDetails.occupationDetail}. Earning an
-                  income of Rs.
-                  {item.EducationDetails.income
-                    ? item.EducationDetails.income +
-                      " " +
-                      "per " +
-                      item.EducationDetails.incomeType
-                    : ""}
-                  . I am from {item.FamilyBackground.nativeDistrict} District. I
-                  have completed my education in
-                  {item.EducationDetails.education}.
-                </p>
-              </div>
-              <div class="latest-profiles card-footer text-muted">
+          <div className="latest-profiles card text-center">
+            <div className="latest-profiles card-header">
+              <img
+                style={{
+                  width: "100px",
+                  height: "100px",
+                  padding: "2px",
+                  border: "1px solid #ccc",
+                  borderRadius: "50px",
+                }}
+                src={getImageUrl(item)}
+              />
+            </div>
+            <div className="latest-profiles card-body">
+              <div className="common-heading">
                 <a
-                  href="#"
-                  style={{
-                    background: "#031333",
-                    color: "white",
-                    padding: "10px",
-                    borderRadius: "10px",
-                    fontSize: "12px",
-                  }}
+                  onClick={() =>
+                    handleQuickSearch(item.PersonalDetails.displayId)
+                  }
                 >
-                  Request Details
+                  {item.PersonalDetails.displayId}
                 </a>
               </div>
+              <h5 className="card-title">
+                {item && item.PersonalDetails && item.PersonalDetails.lastName
+                  ? capital(item.PersonalDetails.lastName)
+                  : ""}
+              </h5>
+              <p className="card-text">
+                I am a {item.EducationDetails.occupationDetail}. Earning an
+                income of Rs.
+                {item.EducationDetails.income
+                  ? item.EducationDetails.income +
+                    " " +
+                    "per " +
+                    item.EducationDetails.incomeType
+                  : ""}
+                . I am from {item.FamilyBackground.nativeDistrict} District. I
+                have completed my education in
+                {item.EducationDetails.education}.
+              </p>
             </div>
-            {/* <div className="latest-profile-card">
-              <div className="profile-img-section">
-                <div>
-                  <img
-                    style={{
-                      width: "100px",
-                      height: "100px",
-                      padding: "2px",
-                      border: "1px solid #ccc",
-                      borderRadius: "50px",
-                    }}
-                    src={getImageUrl(item)}
-                  />
-                </div>
-                <div>
-                  <div className="common-heading">
-                    <a
-                      onClick={() =>
-                        handleQuickSearch(item.PersonalDetails.displayId)
-                      }
-                    >
-                      {item.PersonalDetails.displayId}
-                    </a>
-                  </div>
-                  <div>
-                    {item &&
-                    item.PersonalDetails &&
-                    item.PersonalDetails.lastName
-                      ? capital(item.PersonalDetails.lastName)
-                      : ""}
-                  </div>
-                </div>
-              </div>
-              <div className="detail-section">
-                <div>DATE OF BIRTH : </div>
-                <div> {item.PersonalDetails.dob}</div>
-              </div>
-              <div className="detail-section">
-                <div>HEIGHT : </div>
-                <div> 5.4 ft</div>
-              </div>
-
-              <div className="detail-section">
-                <div>OCCUPATION : </div>
-                <div>{item.EducationDetails.occupationDetail}</div>
-              </div>
-              <div className="detail-section">
-                <div>INCOME : </div>
-                <div>
-                  {item.EducationDetails.income
-                    ? item.EducationDetails.income +
-                      " " +
-                      item.EducationDetails.incomeType
-                    : ""}
-                </div>
-              </div>
-              <div className="detail-section">
-                <div>NATIVE DISTRICT : </div>
-                <div>{item.FamilyBackground.nativeDistrict}</div>
-              </div>
-              <div className="education-content">
-                <div>EDUCATION : </div>
-                <div>{item.EducationDetails.education}</div>
-              </div>
-            </div> */}
-          </>
+            <div className="latest-profiles card-footer text-muted">
+              <a
+                href="#"
+                style={{
+                  background: "#031333",
+                  color: "white",
+                  padding: "10px",
+                  borderRadius: "10px",
+                  fontSize: "12px",
+                }}
+              >
+                Request Details
+              </a>
+            </div>
+          </div>
         );
       })
     );
   };
 
+  const getSlide = () => {
+    return;
+  };
+
   return (
     <>
-      {/* <Container className="latest-profiles"> */}
       <div className="latest-profiles-page">
-        <h5 className="success-stories-heading">Latest Profiles</h5>
-        <h3 className="success-stories-sub-heading">Look For Your Match</h3>
-        <div className="latest-profile-container">{getCard()}</div>
-
-        {/* </Container> */}
+        <h5 className="success-stories-heading">
+          Who knows, your forever might be just a click away.
+        </h5>
+        <h3 className="latest-profile-sub-heading">
+          Check out the new profiles!
+        </h3>
+        <div className="latest-profile-container">
+          <Slider>{getCard()}</Slider>
+        </div>
       </div>
     </>
   );

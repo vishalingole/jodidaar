@@ -9,17 +9,18 @@ const SelectDropdown = (props) => {
         className="form-select form-select-sm"
         name={name}
       >
-        {data.map((item, index) => {
-          return (
-            <option
-              selected={item.value === value ? true : false}
-              value={item.value}
-              key={index}
-            >
-              {item.lable}
-            </option>
-          );
-        })}
+        {data &&
+          data.map((item, index) => {
+            return (
+              <option
+                selected={item.value === value ? true : false}
+                value={item.value}
+                key={index}
+              >
+                {item.lable}
+              </option>
+            );
+          })}
       </select>
     </>
   );

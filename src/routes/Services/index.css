@@ -2,7 +2,7 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  flex-direction: row;
+  /* flex-direction: row; */
 }
 
 .services-card .card {
@@ -12,7 +12,7 @@
   padding: 20px;
   text-align: center;
   flex-basis: 32%;
-  margin: 5px;
+  margin: 3px;
 }
 .service-icon {
   padding: 20px;
@@ -27,8 +27,8 @@
   }
 }
 
-@media only screen and (orientation: landscape) {
+/* @media only screen and (orientation: landscape) {
   .services-card {
     flex-wrap: wrap;
   }
-}
+} */

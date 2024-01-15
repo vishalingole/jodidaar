@@ -42,6 +42,23 @@
   border-radius: 16px;
 }
 
+.success-stories-content div {
+  position: absolute;
+  top: 70%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+}
+
+.success-stories-content div h4 {
+  text-align: center;
+}
+
+.success-stories-content div p {
+  padding: 20px;
+  padding-top: 0px;
+}
+
 @media only screen and (max-width: 550px) {
   .success-stories-cards-container {
     flex-direction: column;
