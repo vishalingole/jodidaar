@@ -5,7 +5,7 @@ import { Container } from "react-bootstrap";
 const Footer = () => {
   return (
     <footer>
-      <Container>
+      {/* <Container>
         <div className="footer-section">
           <div className="social-section">
             <div>
@@ -79,7 +79,7 @@ const Footer = () => {
             <div>Company</div>
           </div>
         </div>
-      </Container>
+      </Container> */}
     </footer>
   );
 };

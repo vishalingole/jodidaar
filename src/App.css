@@ -44,7 +44,7 @@
 .form-container {
   display: flex;
   flex-wrap: wrap;
-  font-size: 30px;
+  /* font-size: 30px; */
   text-align: center;
 }
 .form-item-left {
@@ -76,8 +76,4 @@
 
 .next-btn {
   float: right;
-}
-
-.footer-buttons {
-  margin: 20px 5px;
 }

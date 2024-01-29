@@ -34,3 +34,45 @@
   /* border-radius: 20px; */
   color: black;
 }
+
+.footer-buttons {
+  margin: 20px 5px;
+}
+
+.registration-form .form-select {
+  border-radius: 0px !important;
+}
+
+.registration-form .form-control {
+  border-radius: 0px !important;
+}
+.form-item-left .react-datepicker-wrapper {
+  width: 100%;
+}
+
+.upload-image {
+  position: relative;
+}
+/* 
+.dropzone-div {
+  position: absolute;
+  width: 100%;
+  height: auto;
+}
+
+.cropper-div {
+  position: relative;
+} */
+
+@media (max-width: 768px) {
+  .footer-buttons {
+    margin: none;
+    flex-direction: row;
+    justify-content: center;
+    display: flex;
+  }
+
+  .footer-buttons > button {
+    margin-right: 10px;
+  }
+}

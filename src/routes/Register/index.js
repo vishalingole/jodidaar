@@ -17,7 +17,7 @@ const Register = ({ name = "Register" }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [createProfileFor, setCreateProfileFor] = useState("");
   const [error, setError] = useState([]);
-  const [step, setStep] = useState(1);
+  const [step, setStep] = useState(7);
   const [data, setData] = useState([]);
 
   const handleOpen = () => {

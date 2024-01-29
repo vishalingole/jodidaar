@@ -6,12 +6,41 @@ import "./index.css";
 import dayjs from "dayjs";
 import { subCasteColumns } from "../Search/column";
 import SelectDropdown from "../../components/SelectDropdown";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import moment from "moment";
+import getYear from "date-fns/getYear";
+import getMonth from "date-fns/getYear";
+
+const range = (start, end) => {
+  return new Array(end - start).fill().map((d, i) => i + start);
+};
+
+var oldYear = new Date();
+// oldYear.setDate(oldYear.getDate() - 6);
+oldYear.setFullYear(oldYear.getFullYear() - 50);
+console.log("+++", oldYear.getFullYear());
+const years = range(oldYear.getFullYear(), getYear(new Date()) - 18, 1);
+const months = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
 
 const PersonalDetails = (props) => {
   const { setStep } = props;
 
   const [formData, setFormData] = useState({});
-
+  const [userDob, setUserDob] = useState(null);
   const handleInputChange = (e) => {
     console.log(e.target.value);
     const { name, value } = e.target;
@@ -23,12 +52,17 @@ const PersonalDetails = (props) => {
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    register(formData).then((data) => {
-      if (data) {
-        localStorage.setItem("user", JSON.stringify(data));
-        setStep(2);
-      }
-    });
+    let payload = {
+      dob: userDob,
+      ...formData,
+    };
+    console.log(payload);
+    // register(payload).then((data) => {
+    //   if (data) {
+    //     localStorage.setItem("user", JSON.stringify(data));
+    //     setStep(2);
+    //   }
+    // });
   };
 
   const handleClear = () => {
@@ -42,7 +76,7 @@ const PersonalDetails = (props) => {
   return (
     <>
       <div className="form-heading">Personal Details</div>
-      <form onSubmit={handleFormSubmit}>
+      <form className="registration-form" onSubmit={handleFormSubmit}>
         <div className="form-container">
           <div className="form-item-left">
             <Input
@@ -180,7 +214,7 @@ const PersonalDetails = (props) => {
             </select>
           </div>
           <div className="form-item-right">
-            <Input
+            {/* <Input
               type="text"
               className="form-control form-control-sm"
               variant="sm"
@@ -190,9 +224,8 @@ const PersonalDetails = (props) => {
               value={
                 formData && formData.personality ? formData.personality : ""
               }
-            />
-          </div>
-          <div className="form-item-left">
+            /> */}
+
             <Input
               type="text"
               className="form-control form-control-sm"
@@ -203,7 +236,73 @@ const PersonalDetails = (props) => {
               value={formData && formData.weight ? formData.weight : ""}
             />
           </div>
-          <div className="form-item-right register-option-selection">
+          <div className="form-item-left">
+            <DatePicker
+              renderCustomHeader={({
+                date,
+                changeYear,
+                changeMonth,
+                decreaseMonth,
+                increaseMonth,
+                prevMonthButtonDisabled,
+                nextMonthButtonDisabled,
+              }) => (
+                <div
+                  style={{
+                    margin: 10,
+                    display: "flex",
+                    justifyContent: "center",
+                  }}
+                >
+                  <button
+                    onClick={decreaseMonth}
+                    disabled={prevMonthButtonDisabled}
+                  >
+                    {"<"}
+                  </button>
+                  <select
+                    value={getYear(date)}
+                    onChange={({ target: { value } }) => changeYear(value)}
+                  >
+                    {years.map((option) => (
+                      <option key={option} value={option}>
+                        {option}
+                      </option>
+                    ))}
+                  </select>
+
+                  <select
+                    value={months[getMonth(date)]}
+                    onChange={({ target: { value } }) =>
+                      changeMonth(months.indexOf(value))
+                    }
+                  >
+                    {months.map((option) => (
+                      <option key={option} value={option}>
+                        {option}
+                      </option>
+                    ))}
+                  </select>
+
+                  <button
+                    onClick={increaseMonth}
+                    disabled={nextMonthButtonDisabled}
+                  >
+                    {">"}
+                  </button>
+                </div>
+              )}
+              className="form-control form-control-sm"
+              selected={userDob ? userDob : null}
+              onChange={(date) => setUserDob(date)}
+              isClearable="true"
+              dateFormat="MM/dd/yyyy"
+              placeholderText="mm/dd/yyyy"
+              minDate={moment().subtract(150, "years")._d}
+              maxDate={moment().subtract(18, "years")._d}
+            />
+          </div>
+          <div className="form-item-left register-option-selection">
             <strong>Gender :</strong>
             <input
               onChange={handleInputChange}

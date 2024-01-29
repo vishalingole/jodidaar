@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { uploadProfileImage } from "../../utils/webRequest";
+import Button from "react-bootstrap/Button";
 
 const ProfileImageUpload = () => {
   const [file, setFile] = useState(null);
-
+  const [selectedImage, setSelectedImage] = useState(null);
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
+    setSelectedImage(URL.createObjectURL(e.target.files[0]));
   };
 
   const handleFormSubmit = async (e) => {
@@ -40,7 +42,25 @@ const ProfileImageUpload = () => {
     <>
       <form onSubmit={handleFormSubmit}>
         <input type="file" name="file" onChange={handleFileChange} />
-        <button type="submit">Upload Image</button>
+        {file && (
+          <img
+            style={{ width: "100%", height: "auto" }}
+            src={selectedImage}
+            alt="Preview"
+            className="responsive"
+          />
+        )}
+        {/* <button type="submit">Upload Image</button> */}
+        <div>
+          <Button
+            variant="primary"
+            size="sm"
+            className="next-btn"
+            type="submit"
+          >
+            Upload Image
+          </Button>
+        </div>
       </form>
     </>
   );
