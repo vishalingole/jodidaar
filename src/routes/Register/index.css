@@ -64,6 +64,13 @@
   position: relative;
 } */
 
+.error-div {
+  color: #bf1650;
+  padding: 5px;
+  text-align: left;
+  font-size: 12px;
+}
+
 @media (max-width: 768px) {
   .footer-buttons {
     margin: none;

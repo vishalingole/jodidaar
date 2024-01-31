@@ -9,7 +9,6 @@ import LatestProfiles from "../LatestProfiles";
 import UpToDate from "../UpToDate";
 import SelectDropdown from "../../components/SelectDropdown";
 import { lookingForColumns } from "../Search/column";
-import Input from "../../components/Input";
 import { useNavigate } from "react-router-dom";
 import { getDisticts } from "../../utils/webRequest";
 

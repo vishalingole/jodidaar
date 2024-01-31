@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import Input from "../../components/Input";
 import Button from "react-bootstrap/Button";
 import { educationDetail } from "../../utils/webRequest";
+import { ErrorMessage } from "@hookform/error-message";
+import { useForm, Controller } from "react-hook-form";
 
 const EducationDetails = (props) => {
   const { setStep } = props;
@@ -10,14 +12,15 @@ const EducationDetails = (props) => {
 
   const [formData, setFormData] = useState(initialState);
 
-  const handleInputChange = (e) => {
-    console.log(e.target.value);
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-  };
+  const {
+    reset,
+    control,
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm({
+    criteriaMode: "all",
+  });
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
@@ -35,147 +38,114 @@ const EducationDetails = (props) => {
   };
 
   const handleClear = () => {
-    setFormData(initialState);
+    reset();
   };
+
+  const onSubmit = (data) => console.log(data);
 
   return (
     <>
       <div className="form-heading">Education/Professional Details</div>
-      <form onSubmit={handleFormSubmit}>
+      <form className="registration-form" onSubmit={handleSubmit(onSubmit)}>
         <div className="form-container">
           <div className="form-item-left">
-            <select
-              className="form-select form-select-sm"
-              aria-label=".form-select-sm example"
+            <Controller
               name="educationArea"
-              onChange={handleInputChange}
-            >
-              <option selected={formData.educationArea == "label"}>
-                Education Area
-              </option>
-              <option value="ssc" selected={formData.educationArea == "ssc"}>
-                SSC
-              </option>
-              <option value="hsc" selected={formData.educationArea == "hsc"}>
-                HSC
-              </option>
-              <option
-                value="graduate"
-                selected={formData.educationArea == "graduate"}
-              >
-                Graduate
-              </option>
-              <option
-                value="postGraduate"
-                selected={formData.educationArea == "postGraduate"}
-              >
-                Post-Graduate
-              </option>
-            </select>
+              control={control}
+              rules={{ required: "Please select an education area." }}
+              render={({ field }) => (
+                <select
+                  {...field}
+                  className="form-select form-select-sm"
+                  aria-label=".form-select-sm example"
+                >
+                  <option>Education Area</option>
+                  <option value="ssc">SSC</option>
+                  <option value="hsc">HSC</option>
+                  <option value="graduate">Graduate</option>
+                  <option value="postGraduate">Post-Graduate</option>
+                </select>
+              )}
+            />
+            <ErrorMessage
+              errors={errors}
+              name="educationArea"
+              render={({ messages }) => {
+                console.log("messages", messages);
+                return messages
+                  ? Object.entries(messages).map(([type, message]) => (
+                      <div className="error-div" key={type}>
+                        {message}
+                      </div>
+                    ))
+                  : null;
+              }}
+            />
           </div>
           <div className="form-item-right">
-            <Input
-              type="text"
+            <input
+              {...register("education")}
               className="form-control form-control-sm"
-              variant="sm"
-              name="education"
               placeholder="Education"
-              onChange={handleInputChange}
-              value={formData.education || ""}
             />
           </div>
 
           <div className="form-item-left">
-            <select
-              className="form-select form-select-sm"
-              aria-label=".form-select-sm example"
+            <Controller
               name="occupationType"
-              onChange={handleInputChange}
-            >
-              <option
-                value="label"
-                selected={formData.occupationType == "lable"}
-              >
-                Occupation Type
-              </option>
-              <option
-                value="private"
-                selected={formData.occupationType == "private"}
-              >
-                Private Service
-              </option>
-              <option
-                value="goverment"
-                selected={formData.occupationType == "goverment"}
-              >
-                Goverment Service
-              </option>
-              <option
-                value="buisnessman"
-                selected={formData.occupationType == "buisnessman"}
-              >
-                Buisnessman
-              </option>
-              <option
-                value="farming"
-                selected={formData.occupationType == "farming"}
-              >
-                Farming
-              </option>
-            </select>
+              control={control}
+              render={({ field }) => (
+                <select
+                  {...field}
+                  className="form-select form-select-sm"
+                  aria-label=".form-select-sm example"
+                >
+                  <option value="label">Occupation Type</option>
+                  <option value="private">Private Service</option>
+                  <option value="goverment">Goverment Service</option>
+                  <option value="buisnessman">Buisnessman</option>
+                  <option value="farming">Farming</option>
+                  <option value="other">Other</option>
+                </select>
+              )}
+            />
           </div>
           <div className="form-item-right">
-            <Input
-              type="text"
+            <input
+              {...register("occupationDetail")}
               className="form-control form-control-sm"
-              variant="sm"
-              name="occupationDetail"
               placeholder="Occupation Detail"
-              onChange={handleInputChange}
-              value={formData.occupationDetail || ""}
             />
           </div>
           <div className="form-item-left">
-            <Input
-              type="text"
+            <input
+              {...register("income")}
               className="form-control form-control-sm"
-              variant="sm"
-              name="income"
               placeholder="Income"
-              onChange={handleInputChange}
-              value={formData.income || ""}
             />
           </div>
           <div className="form-item-right">
-            <select
-              className="form-select form-select-sm"
-              aria-label=".form-select-sm example"
+            <Controller
               name="incomeType"
-              onChange={handleInputChange}
-            >
-              <option selected={formData.incomeType == "lable"}>
-                Income Type
-              </option>
-              <option value="annual" selected={formData.incomeType == "annual"}>
-                Annual
-              </option>
-              <option
-                value="monthly"
-                selected={formData.incomeType == "monthly"}
-              >
-                Monthly
-              </option>
-            </select>
+              control={control}
+              render={({ field }) => (
+                <select
+                  {...field}
+                  className="form-select form-select-sm"
+                  aria-label=".form-select-sm example"
+                >
+                  <option>Income Type</option>
+                  <option value="annual">Annual</option>
+                  <option value="monthly">Monthly</option>
+                </select>
+              )}
+            />
           </div>
           <div className="form-item-right">
-            <Input
-              type="text"
+            <input
+              {...register("occupationPlace")}
               className="form-control form-control-sm"
-              variant="sm"
-              name="occupationPlace"
-              placeholder="Occupation Place"
-              onChange={handleInputChange}
-              value={formData.occupationPlace || ""}
+              placeholder="Occupation Detail"
             />
           </div>
         </div>

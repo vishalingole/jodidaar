@@ -41,7 +41,7 @@ const HoroscopeDetails = (props) => {
   return (
     <>
       <div className="form-heading">Horoscope Details</div>
-      <form onSubmit={handleFormSubmit}>
+      <form className="registration-form" onSubmit={handleFormSubmit}>
         <div className="form-container">
           <div className="form-item-left">
             <select

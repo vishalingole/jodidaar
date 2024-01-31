@@ -11,6 +11,8 @@ import "react-datepicker/dist/react-datepicker.css";
 import moment from "moment";
 import getYear from "date-fns/getYear";
 import getMonth from "date-fns/getYear";
+import { ErrorMessage } from "@hookform/error-message";
+import { useForm, Controller } from "react-hook-form";
 
 const range = (start, end) => {
   return new Array(end - start).fill().map((d, i) => i + start);
@@ -19,7 +21,6 @@ const range = (start, end) => {
 var oldYear = new Date();
 // oldYear.setDate(oldYear.getDate() - 6);
 oldYear.setFullYear(oldYear.getFullYear() - 50);
-console.log("+++", oldYear.getFullYear());
 const years = range(oldYear.getFullYear(), getYear(new Date()) - 18, 1);
 const months = [
   "January",
@@ -41,6 +42,16 @@ const PersonalDetails = (props) => {
 
   const [formData, setFormData] = useState({});
   const [userDob, setUserDob] = useState(null);
+
+  const {
+    control,
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm({
+    criteriaMode: "all",
+  });
+
   const handleInputChange = (e) => {
     console.log(e.target.value);
     const { name, value } = e.target;
@@ -57,12 +68,12 @@ const PersonalDetails = (props) => {
       ...formData,
     };
     console.log(payload);
-    // register(payload).then((data) => {
-    //   if (data) {
-    //     localStorage.setItem("user", JSON.stringify(data));
-    //     setStep(2);
-    //   }
-    // });
+    register(payload).then((data) => {
+      if (data) {
+        localStorage.setItem("user", JSON.stringify(data));
+        setStep(2);
+      }
+    });
   };
 
   const handleClear = () => {
@@ -73,65 +84,142 @@ const PersonalDetails = (props) => {
     console.log(date, dateString);
   };
 
+  const onSubmit = (data) => {
+    register(data).then((data) => {
+      if (data) {
+        localStorage.setItem("user", JSON.stringify(data));
+        setStep(2);
+      }
+    });
+  };
+
   return (
     <>
       <div className="form-heading">Personal Details</div>
-      <form className="registration-form" onSubmit={handleFormSubmit}>
+      <form className="registration-form" onSubmit={handleSubmit(onSubmit)}>
         <div className="form-container">
           <div className="form-item-left">
-            <Input
-              type="text"
+            <input
+              {...register("firstName", {
+                required: "This input is required.",
+              })}
               className="form-control form-control-sm"
-              variant="sm"
-              name="firstName"
               placeholder="First Name"
-              onChange={handleInputChange}
-              value={formData && formData.firstName ? formData.firstName : ""}
+            />
+            <ErrorMessage
+              errors={errors}
+              name="firstName"
+              render={({ messages }) => {
+                console.log("messages", messages);
+                return messages
+                  ? Object.entries(messages).map(([type, message]) => (
+                      <div className="error-div" key={type}>
+                        {message}
+                      </div>
+                    ))
+                  : null;
+              }}
             />
           </div>
           <div className="form-item-right">
-            <Input
-              type="text"
+            <input
+              {...register("middleName", {
+                required: "This input is required.",
+              })}
               className="form-control form-control-sm"
-              variant="sm"
-              name="middleName"
               placeholder="Middle Name"
-              onChange={handleInputChange}
-              value={formData && formData.middleName ? formData.middleName : ""}
+            />
+            <ErrorMessage
+              errors={errors}
+              name="middleName"
+              render={({ messages }) => {
+                console.log("messages", messages);
+                return messages
+                  ? Object.entries(messages).map(([type, message]) => (
+                      <div className="error-div" key={type}>
+                        {message}
+                      </div>
+                    ))
+                  : null;
+              }}
             />
           </div>
 
           <div className="form-item-left">
-            <Input
-              type="text"
+            <input
+              {...register("lastName", {
+                required: "This input is required.",
+              })}
               className="form-control form-control-sm"
-              variant="sm"
-              name="lastName"
               placeholder="Last Name"
-              onChange={handleInputChange}
-              value={formData && formData.lastName ? formData.lastName : ""}
+            />
+            <ErrorMessage
+              errors={errors}
+              name="lastName"
+              render={({ messages }) => {
+                console.log("messages", messages);
+                return messages
+                  ? Object.entries(messages).map(([type, message]) => (
+                      <div className="error-div" key={type}>
+                        {message}
+                      </div>
+                    ))
+                  : null;
+              }}
             />
           </div>
           <div className="form-item-right">
-            <Input
-              type="text"
+            <input
+              {...register("mobile", {
+                required: "This input is required.",
+                pattern: {
+                  value: /^\d{10}$/, // Validate 10-digit mobile numbers
+                  message: "Invalid mobile number",
+                },
+              })}
+              placeholder="Mobile Number"
               className="form-control form-control-sm"
-              variant="sm"
+            />
+            <ErrorMessage
+              errors={errors}
               name="mobile"
-              placeholder="Mobile"
-              onChange={handleInputChange}
-              value={formData && formData.mobile ? formData.mobile : ""}
+              render={({ messages }) => {
+                console.log("messages", messages);
+                return messages
+                  ? Object.entries(messages).map(([type, message]) => (
+                      <div className="error-div" key={type}>
+                        {message}
+                      </div>
+                    ))
+                  : null;
+              }}
             />
           </div>
           <div className="form-item-left">
-            <Input
-              type="text"
-              className="form-control form-control-sm"
-              variant="sm"
-              name="email"
+            <input
+              {...register("email", {
+                required: "This input is required.",
+                pattern: {
+                  value: /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/,
+                  message: "Invalid email address",
+                },
+              })}
               placeholder="Email"
-              onChange={handleInputChange}
-              value={formData && formData.email ? formData.email : ""}
+              className="form-control form-control-sm"
+            />
+            <ErrorMessage
+              errors={errors}
+              name="email"
+              render={({ messages }) => {
+                console.log("messages", messages);
+                return messages
+                  ? Object.entries(messages).map(([type, message]) => (
+                      <div className="error-div" key={type}>
+                        {message}
+                      </div>
+                    ))
+                  : null;
+              }}
             />
           </div>
           <div className="form-item-right">
@@ -189,13 +277,30 @@ const PersonalDetails = (props) => {
               aria-label=".form-select-sm example"
               name="maritialStatus"
               onChange={handleInputChange}
+              {...register("maritialStatus", {
+                required: "Please select a Maritial Status.",
+              })}
             >
-              <option selected>Maritial Status</option>
+              <option value="">Maritial Status</option>
               <option value="unmarried">Unmarried</option>
               <option value="divorcee">Divorcee</option>
               <option value="widower">Widower</option>
               <option value="widow">Widow</option>
             </select>
+            <ErrorMessage
+              errors={errors}
+              name="maritialStatus"
+              render={({ messages }) => {
+                console.log("messages", messages);
+                return messages
+                  ? Object.entries(messages).map(([type, message]) => (
+                      <div className="error-div" key={type}>
+                        {message}
+                      </div>
+                    ))
+                  : null;
+              }}
+            />
           </div>
           <div className="form-item-left">
             <select
@@ -237,69 +342,91 @@ const PersonalDetails = (props) => {
             />
           </div>
           <div className="form-item-left">
-            <DatePicker
-              renderCustomHeader={({
-                date,
-                changeYear,
-                changeMonth,
-                decreaseMonth,
-                increaseMonth,
-                prevMonthButtonDisabled,
-                nextMonthButtonDisabled,
-              }) => (
-                <div
-                  style={{
-                    margin: 10,
-                    display: "flex",
-                    justifyContent: "center",
-                  }}
-                >
-                  <button
-                    onClick={decreaseMonth}
-                    disabled={prevMonthButtonDisabled}
-                  >
-                    {"<"}
-                  </button>
-                  <select
-                    value={getYear(date)}
-                    onChange={({ target: { value } }) => changeYear(value)}
-                  >
-                    {years.map((option) => (
-                      <option key={option} value={option}>
-                        {option}
-                      </option>
-                    ))}
-                  </select>
+            <Controller
+              name="dob"
+              control={control}
+              rules={{ required: "Date of Birth is required" }}
+              render={({ field }) => (
+                <DatePicker
+                  renderCustomHeader={({
+                    date,
+                    changeYear,
+                    changeMonth,
+                    decreaseMonth,
+                    increaseMonth,
+                    prevMonthButtonDisabled,
+                    nextMonthButtonDisabled,
+                  }) => (
+                    <div
+                      style={{
+                        margin: 10,
+                        display: "flex",
+                        justifyContent: "center",
+                      }}
+                    >
+                      <button
+                        onClick={decreaseMonth}
+                        disabled={prevMonthButtonDisabled}
+                      >
+                        {"<"}
+                      </button>
+                      <select
+                        value={getYear(date)}
+                        onChange={({ target: { value } }) => changeYear(value)}
+                      >
+                        {years.map((option) => (
+                          <option key={option} value={option}>
+                            {option}
+                          </option>
+                        ))}
+                      </select>
 
-                  <select
-                    value={months[getMonth(date)]}
-                    onChange={({ target: { value } }) =>
-                      changeMonth(months.indexOf(value))
-                    }
-                  >
-                    {months.map((option) => (
-                      <option key={option} value={option}>
-                        {option}
-                      </option>
-                    ))}
-                  </select>
+                      <select
+                        value={months[getMonth(date)]}
+                        onChange={({ target: { value } }) =>
+                          changeMonth(months.indexOf(value))
+                        }
+                      >
+                        {months.map((option) => (
+                          <option key={option} value={option}>
+                            {option}
+                          </option>
+                        ))}
+                      </select>
 
-                  <button
-                    onClick={increaseMonth}
-                    disabled={nextMonthButtonDisabled}
-                  >
-                    {">"}
-                  </button>
-                </div>
+                      <button
+                        onClick={increaseMonth}
+                        disabled={nextMonthButtonDisabled}
+                      >
+                        {">"}
+                      </button>
+                    </div>
+                  )}
+                  className="form-control form-control-sm"
+                  // selected={userDob ? userDob : null}
+                  selected={field.value}
+                  onChange={(date) => field.onChange(date)}
+                  isClearable="true"
+                  dateFormat="MM/dd/yyyy"
+                  placeholderText="Date Of Birth (mm/dd/yyyy)"
+                  minDate={moment().subtract(50, "years")._d}
+                  maxDate={moment().subtract(18, "years")._d}
+                />
               )}
-              className="form-control form-control-sm"
-              selected={userDob ? userDob : null}
-              onChange={(date) => setUserDob(date)}
-              isClearable="true"
-              dateFormat="MM/dd/yyyy"
-              placeholderText="mm/dd/yyyy"
-              minDate={moment().subtract(150, "years")._d}
-              maxDate={moment().subtract(18, "years")._d}
+            />
+            <ErrorMessage
+              errors={errors}
+              name="dob"
+              render={({ messages }) => {
+                console.log("messages", messages);
+                return messages
+                  ? Object.entries(messages).map(([type, message]) => (
+                      <div className="error-div" key={type}>
+                        {message}
+                      </div>
+                    ))
+                  : null;
+              }}
             />
           </div>
           <div className="form-item-left register-option-selection">
@@ -308,18 +435,32 @@ const PersonalDetails = (props) => {
               onChange={handleInputChange}
               type="radio"
               name="gender"
-              value="Male"
-              checked={formData.gender == "Male" ? true : false}
+              id="Male"
+              {...register("gender", { required: "Please select an Gender." })}
             />
             Male
             <input
               onChange={handleInputChange}
               type="radio"
               name="gender"
-              value="Female"
-              checked={formData.gender == "Female" ? true : false}
+              id="Female"
+              {...register("gender")}
             />
             Female
+            <ErrorMessage
+              errors={errors}
+              name="gender"
+              render={({ messages }) => {
+                console.log("messages", messages);
+                return messages
+                  ? Object.entries(messages).map(([type, message]) => (
+                      <div className="error-div" key={type}>
+                        {message}
+                      </div>
+                    ))
+                  : null;
+              }}
+            />
           </div>
           <div className="form-item-left"></div>
           <div className="form-item-right"></div>

@@ -12,13 +12,16 @@ import HoroscopeDetails from "./HoroscopeDetails";
 import Expectations from "./Expectation";
 import { Stepper, Step } from "react-form-stepper";
 import ProfileImageUpload from "./ProfileImageUpload";
+import IsMobile from "../../components/Header/IsMobile";
+import { IoPerson } from "react-icons/io5";
 
 const Register = ({ name = "Register" }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [createProfileFor, setCreateProfileFor] = useState("");
   const [error, setError] = useState([]);
-  const [step, setStep] = useState(7);
+  const [step, setStep] = useState(1);
   const [data, setData] = useState([]);
+  let isMobileDevice = IsMobile();
 
   const handleOpen = () => {
     setIsModalOpen(true);
@@ -55,30 +58,60 @@ const Register = ({ name = "Register" }) => {
             <div>Registration</div>
           </Modal.Header>
           <Modal.Body>
-            <Stepper
-              activeStep={step - 1}
-              connectorStateColors={true}
-              connectorStyleConfig={{
-                size: 2,
-                completedColor: "green",
-                activeColor: "orange",
-                // style: "dotted",
-              }}
-              styleConfig={{
-                activeBgColor: "#f54c1e",
-                completedBgColor: "green",
-                labelFontSize: "12px",
-                // completedTextColor: "white",
-              }}
-            >
-              <Step active={step - 1 == 0} completed={step - 1 > 0} label="" />
-              <Step active={step - 1 == 1} completed={step - 1 > 1} label="" />
-              <Step active={step - 1 == 2} completed={step - 1 > 2} label="" />
-              <Step active={step - 1 == 3} completed={step - 1 > 3} label="" />
-              <Step active={step - 1 == 4} completed={step - 1 > 4} label="" />
-              <Step active={step - 1 == 5} completed={step - 1 > 5} label="" />
-              <Step active={step - 1 == 6} completed={step - 1 > 6} label="" />
-            </Stepper>
+            {!isMobileDevice && (
+              <Stepper
+                activeStep={step - 1}
+                connectorStateColors={true}
+                connectorStyleConfig={{
+                  size: 2,
+                  completedColor: "green",
+                  activeColor: "orange",
+                  // style: "dotted",
+                }}
+                styleConfig={{
+                  activeBgColor: "#f54c1e",
+                  completedBgColor: "green",
+                  labelFontSize: "12px",
+                  // completedTextColor: "white",
+                }}
+              >
+                <Step
+                  active={step - 1 == 0}
+                  completed={step - 1 > 0}
+                  label={<IoPerson />}
+                />
+                <Step
+                  active={step - 1 == 1}
+                  completed={step - 1 > 1}
+                  label=""
+                />
+                <Step
+                  active={step - 1 == 2}
+                  completed={step - 1 > 2}
+                  label=""
+                />
+                <Step
+                  active={step - 1 == 3}
+                  completed={step - 1 > 3}
+                  label=""
+                />
+                <Step
+                  active={step - 1 == 4}
+                  completed={step - 1 > 4}
+                  label=""
+                />
+                <Step
+                  active={step - 1 == 5}
+                  completed={step - 1 > 5}
+                  label=""
+                />
+                <Step
+                  active={step - 1 == 6}
+                  completed={step - 1 > 6}
+                  label=""
+                />
+              </Stepper>
+            )}
             {/* <p>Creating profile for.</p>
 
             {options.map((item) => {

@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import Input from "../../components/Input";
 import Button from "react-bootstrap/Button";
 import { address } from "../../utils/webRequest";
+import { ErrorMessage } from "@hookform/error-message";
+import { useForm, Controller } from "react-hook-form";
 
 const Address = (props) => {
   const { setStep } = props;
@@ -16,6 +18,16 @@ const Address = (props) => {
       [name]: value,
     });
   };
+
+  const {
+    reset,
+    control,
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm({
+    criteriaMode: "all",
+  });
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
@@ -37,76 +49,135 @@ const Address = (props) => {
     setFormData({});
   };
 
+  const onSubmit = (data) => {
+    console.log(data);
+    const user = localStorage.getItem("user");
+    const userObj = user ? JSON.parse(user) : {};
+    const userId = userObj && userObj.id ? userObj.id : "";
+    if (userId) {
+      address({ id: userId, ...data })
+        .then((data) => {
+          setStep(5);
+        })
+        .catch((error) => console.log(error));
+    }
+    setStep(5);
+  };
+
   return (
     <>
       <div className="form-heading">Address</div>
-      <form onSubmit={handleFormSubmit}>
+      <form className="registration-form" onSubmit={handleSubmit(onSubmit)}>
         <div className="form-container">
           <div className="form-item-left">
-            <select
-              class="form-select form-select-sm"
-              aria-label=".form-select-sm example"
+            <Controller
               name="idType"
-              onChange={handleInputChange}
-            >
-              <option selected={formData.idType == "label"} value="label">
-                Id Proof
-              </option>
-              <option selected={formData.idType == "passport"} value="passport">
-                Passport
-              </option>
-              <option selected={formData.idType == "aadhar"} value="aadhar">
-                Aadhar
-              </option>
-              <option selected={formData.idType == "pan"} value="pan">
-                PAN
-              </option>
-            </select>
+              control={control}
+              rules={{ required: "Please select ID Proof." }}
+              render={({ field }) => (
+                <select
+                  class="form-select form-select-sm"
+                  aria-label=".form-select-sm example"
+                  {...field}
+                >
+                  <option value="">
+                    <span className="mandatory-astrick">*</span> Id Proof
+                  </option>
+                  <option value="passport">Passport</option>
+                  <option value="aadhar">Aadhar</option>
+                  <option value="pan">PAN</option>
+                </select>
+              )}
+            />
+            <ErrorMessage
+              errors={errors}
+              name="idType"
+              render={({ messages }) => {
+                console.log("messages", messages);
+                return messages
+                  ? Object.entries(messages).map(([type, message]) => (
+                      <div className="error-div" key={type}>
+                        {message}
+                      </div>
+                    ))
+                  : null;
+              }}
+            />
           </div>
           <div className="form-item-right">
-            <Input
-              type="text"
+            <input
+              {...register("idDetails", {
+                required: "This input is required.",
+              })}
+              placeholder="* Id Detail"
               className="form-control form-control-sm"
-              variant="sm"
+            />
+            <ErrorMessage
+              errors={errors}
               name="idDetails"
-              placeholder="Id Detail"
-              onChange={handleInputChange}
-              value={formData && formData.idDetails ? formData.idDetails : ""}
+              render={({ messages }) => {
+                console.log("messages", messages);
+                return messages
+                  ? Object.entries(messages).map(([type, message]) => (
+                      <div className="error-div" key={type}>
+                        {message}
+                      </div>
+                    ))
+                  : null;
+              }}
             />
           </div>
 
           <div className="form-item-left">
-            <Input
-              type="text"
-              className="form-control form-control-sm"
-              variant="sm"
-              name="alternateEmail"
+            <input
+              {...register("alternateEmail")}
               placeholder="Alternate Email"
-              onChange={handleInputChange}
-              value={
-                formData && formData.alternateEmail
-                  ? formData.alternateEmail
-                  : ""
-              }
+              className="form-control form-control-sm"
+            />
+            <ErrorMessage
+              errors={errors}
+              name="alternateEmail"
+              render={({ messages }) => {
+                console.log("messages", messages);
+                return messages
+                  ? Object.entries(messages).map(([type, message]) => (
+                      <div className="error-div" key={type}>
+                        {message}
+                      </div>
+                    ))
+                  : null;
+              }}
             />
           </div>
           <div className="form-item-right">
-            <Input
-              type="text"
+            <input
+              {...register("alternateMobile", {
+                required: "This input is required.",
+                pattern: {
+                  value: /^\d{10}$/, // Validate 10-digit mobile numbers
+                  message: "Invalid mobile number",
+                },
+              })}
+              placeholder="* Alternate Mobile"
               className="form-control form-control-sm"
-              variant="sm"
+            />
+            <ErrorMessage
+              errors={errors}
               name="alternateMobile"
-              placeholder="Alternate Mobile"
-              onChange={handleInputChange}
-              value={
-                formData && formData.alternateMobile
-                  ? formData.alternateMobile
-                  : ""
-              }
+              render={({ messages }) => {
+                console.log("messages", messages);
+                return messages
+                  ? Object.entries(messages).map(([type, message]) => (
+                      <div className="error-div" key={type}>
+                        {message}
+                      </div>
+                    ))
+                  : null;
+              }}
             />
           </div>
           <div className="form-item-left">
-            <textarea
+            {/* <textarea
               className="form-control"
               name="residenceAddress"
               placeholder="Residence Address"
@@ -116,6 +187,11 @@ const Address = (props) => {
                   ? formData.residenceAddress
                   : ""
               }
+            /> */}
+            <textarea
+              className="form-control"
+              {...register("residenceAddress")}
+              placeholder="Residence Address"
             />
           </div>
         </div>

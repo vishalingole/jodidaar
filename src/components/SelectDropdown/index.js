@@ -1,13 +1,14 @@
 import React from "react";
 
 const SelectDropdown = (props) => {
-  const { data, handleChange, onChange, name, value } = props;
+  const { data, handleChange, onChange, name, value, field } = props;
   return (
     <>
       <select
         onChange={onChange}
         className="form-select form-select-sm"
         name={name}
+        {...field}
       >
         {data &&
           data.map((item, index) => {

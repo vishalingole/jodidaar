@@ -1,20 +1,41 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Input from "../../components/Input";
 import Button from "react-bootstrap/Button";
 import { familyBackground } from "../../utils/webRequest";
+import { getDisticts } from "../../utils/webRequest";
+import { ErrorMessage } from "@hookform/error-message";
+import { useForm, Controller } from "react-hook-form";
+import SelectDropdown from "../../components/SelectDropdown";
 
 const FamilyBackground = (props) => {
   const { setStep } = props;
 
   const [formData, setFormData] = useState({});
+  const [districtList, setDistrictList] = useState([]);
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
+  let selectObj = { id: 0, lable: "Native District", value: "" };
+
+  useEffect(() => {
+    getDistictsList();
+  }, []);
+
+  const getDistictsList = () => {
+    getDisticts().then((response) => {
+      let cloneObj = Array.from(response.data);
+      cloneObj.unshift(selectObj);
+      setDistrictList(cloneObj);
     });
   };
+
+  const {
+    reset,
+    control,
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm({
+    criteriaMode: "all",
+  });
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
@@ -32,270 +53,192 @@ const FamilyBackground = (props) => {
   };
 
   const handleClear = () => {
-    console.log("----");
-    setFormData({});
+    reset();
+  };
+
+  const onSubmit = (data) => {
+    const user = localStorage.getItem("user");
+    const userObj = user ? JSON.parse(user) : {};
+    const userId = userObj && userObj.id ? userObj.id : "";
+    if (userId) {
+      familyBackground({ id: userId, ...data })
+        .then((data) => {
+          setStep(4);
+        })
+        .catch((error) => console.log(error));
+    }
+    setStep(4);
   };
 
   return (
     <>
       <div className="form-heading">Family Background</div>
-      <form onSubmit={handleFormSubmit}>
+      <form className="registration-form" onSubmit={handleSubmit(onSubmit)}>
         <div className="form-container">
           <div className="form-item-left">
-            <Input
-              type="text"
-              className="form-control form-control-sm"
-              variant="sm"
-              name="nativeTaluka"
+            <input
+              {...register("nativeTaluka")}
               placeholder="Native Taluka"
-              onChange={handleInputChange}
-              value={
-                formData && formData.nativeTaluka ? formData.nativeTaluka : ""
-              }
+              className="form-control form-control-sm"
             />
           </div>
           <div className="form-item-right">
-            <Input
-              type="text"
-              className="form-control form-control-sm"
-              variant="sm"
+            <Controller
               name="nativeDistrict"
-              placeholder="Native District"
-              onChange={handleInputChange}
-              value={
-                formData && formData.nativeDistrict
-                  ? formData.nativeDistrict
-                  : ""
-              }
+              control={control}
+              rules={{ required: "Please select Native District." }}
+              render={({ field }) => (
+                <SelectDropdown
+                  data={districtList}
+                  name="nativeDistrict"
+                  field={field}
+                />
+              )}
+            />
+            <ErrorMessage
+              errors={errors}
+              name="nativeDistrict"
+              render={({ messages }) => {
+                console.log("messages", messages);
+                return messages
+                  ? Object.entries(messages).map(([type, message]) => (
+                      <div className="error-div" key={type}>
+                        {message}
+                      </div>
+                    ))
+                  : null;
+              }}
             />
           </div>
           <div className="form-item-left">
-            <Input
-              type="text"
-              className="form-control form-control-sm"
-              variant="sm"
-              name="mamasSurname"
+            <input
+              {...register("mamasSurname")}
               placeholder="Mama's Surname"
-              onChange={handleInputChange}
-              value={
-                formData && formData.mamasSurname ? formData.mamasSurname : ""
-              }
+              className="form-control form-control-sm"
             />
           </div>
           <div className="form-item-right">
-            <Input
-              type="text"
-              className="form-control form-control-sm"
-              variant="sm"
-              name="relativeSurname"
+            <input
+              {...register("relativeSurname")}
               placeholder="Relative's Surname"
-              onChange={handleInputChange}
-              value={
-                formData && formData.relativeSurname
-                  ? formData.relativeSurname
-                  : ""
-              }
+              className="form-control form-control-sm"
             />
           </div>
           <div className="form-item-left">
-            <Input
-              type="text"
+            <input
+              {...register("parentsFullname", {
+                required: "This input is required.",
+              })}
+              placeholder="*Parent's Fullname"
               className="form-control form-control-sm"
-              variant="sm"
+            />
+            <ErrorMessage
+              errors={errors}
               name="parentsFullname"
-              placeholder="Parent's Fullname"
-              onChange={handleInputChange}
-              value={
-                formData && formData.parentsFullname
-                  ? formData.parentsFullname
-                  : ""
-              }
+              render={({ messages }) => {
+                console.log("messages", messages);
+                return messages
+                  ? Object.entries(messages).map(([type, message]) => (
+                      <div className="error-div" key={type}>
+                        {message}
+                      </div>
+                    ))
+                  : null;
+              }}
             />
           </div>
           <div className="form-item-right">
-            <Input
-              type="text"
-              className="form-control form-control-sm"
-              variant="sm"
-              name="parentsOccupation"
+            <input
+              {...register("parentsOccupation", {
+                required: "This input is required.",
+              })}
               placeholder="Parent's Occupation"
-              onChange={handleInputChange}
-              value={
-                formData && formData.parentsOccupation
-                  ? formData.parentsOccupation
-                  : ""
-              }
+              className="form-control form-control-sm"
             />
           </div>
           <div className="form-item-left">
-            <Input
-              type="text"
-              className="form-control form-control-sm"
-              variant="sm"
-              name="parentsResidanceAddress"
+            <input
+              {...register("parentsResidanceAddress")}
               placeholder="Parent's Residance Address"
-              onChange={handleInputChange}
-              value={
-                formData && formData.parentsResidanceAddress
-                  ? formData.parentsResidanceAddress
-                  : ""
-              }
+              className="form-control form-control-sm"
             />
           </div>
           <div className="form-item-right">
-            <Input
-              type="text"
+            <input
+              {...register("familyWealth")}
+              placeholder="Family Wealth : Land,Car,Farm"
               className="form-control form-control-sm"
-              variant="sm"
-              name="familyWealth"
-              placeholder="Family Wealth"
-              onChange={handleInputChange}
-              value={
-                formData && formData.familyWealth ? formData.familyWealth : ""
-              }
             />
           </div>
 
           <div className="form-item-left">
-            <select
-              className="form-select form-select-sm"
-              aria-label=".form-select-sm example"
+            <Controller
               name="father"
-              onChange={handleInputChange}
-            >
-              <option selected={formData && formData.father == "label"}>
-                Father
-              </option>
-              <option selected={formData && formData.father == "1"} value="1">
-                Yes
-              </option>
-              <option selected={formData && formData.father == "0"} value="0">
-                No
-              </option>
-            </select>
+              control={control}
+              render={({ field }) => (
+                <select
+                  className="form-select form-select-sm"
+                  aria-label=".form-select-sm example"
+                  {...field}
+                >
+                  <option value="">Father</option>
+                  <option value="1">Yes</option>
+                  <option value="0">No</option>
+                </select>
+              )}
+            />
           </div>
           <div className="form-item-right">
-            <select
-              className="form-select form-select-sm"
-              aria-label=".form-select-sm example"
+            <Controller
               name="mother"
-              onChange={handleInputChange}
-            >
-              <option selected={formData.mother == "label"} value="label">
-                Mother
-              </option>
-              <option selected={formData.mother == "1"} value="1">
-                Yes
-              </option>
-              <option selected={formData.mother == "0"} value="0">
-                No
-              </option>
-            </select>
+              control={control}
+              render={({ field }) => (
+                <select
+                  className="form-select form-select-sm"
+                  aria-label=".form-select-sm example"
+                  {...field}
+                >
+                  <option value="">Mother</option>
+                  <option value="1">Yes</option>
+                  <option value="0">No</option>
+                </select>
+              )}
+            />
           </div>
           <div className="form-item-left">
-            <select
-              className="form-select form-select-sm"
-              aria-label=".form-select-sm example"
+            <Controller
               name="brother"
-              onChange={handleInputChange}
-            >
-              <option selected={formData.brother == "label"} value="label">
-                Brother
-              </option>
-              <option selected={formData.brother == "1"} value="1">
-                Yes
-              </option>
-              <option selected={formData.brother == "0"} value="0">
-                No
-              </option>
-            </select>
+              control={control}
+              render={({ field }) => (
+                <select
+                  className="form-select form-select-sm"
+                  aria-label=".form-select-sm example"
+                  {...field}
+                >
+                  <option value="">Brother</option>
+                  <option value="1">Yes</option>
+                  <option value="0">No</option>
+                </select>
+              )}
+            />
           </div>
           <div className="form-item-right">
-            <select
-              className="form-select form-select-sm"
-              aria-label=".form-select-sm example"
+            <Controller
               name="sister"
-              onChange={handleInputChange}
-            >
-              <option selected={formData.sister == "label"} value="label">
-                Sister
-              </option>
-              <option selected={formData.sister == "1"} value="1">
-                Yes
-              </option>
-              <option selected={formData.sister == "0"} value="0">
-                No
-              </option>
-            </select>
+              control={control}
+              render={({ field }) => (
+                <select
+                  className="form-select form-select-sm"
+                  aria-label=".form-select-sm example"
+                  {...field}
+                >
+                  <option value="">Sister</option>
+                  <option value="1">Yes</option>
+                  <option value="0">No</option>
+                </select>
+              )}
+            />
           </div>
-          {formData && formData.sister && formData.sister == "1" && (
-            <>
-              <div className="form-item-left">
-                <Input
-                  type="text"
-                  className="form-control form-control-sm"
-                  variant="sm"
-                  name="marriedSister"
-                  placeholder="Married Sister's"
-                  onChange={handleInputChange}
-                  value={
-                    formData && formData.marriedSister
-                      ? formData.marriedSister
-                      : ""
-                  }
-                />
-              </div>
-              <div className="form-item-right">
-                <Input
-                  type="text"
-                  className="form-control form-control-sm"
-                  variant="sm"
-                  name="unmarriedSister"
-                  placeholder="Unmarried Sister's"
-                  onChange={handleInputChange}
-                  value={
-                    formData && formData.unmarriedSister
-                      ? formData.unmarriedSister
-                      : ""
-                  }
-                />
-              </div>
-            </>
-          )}
-          {formData && formData.brother && formData.brother == "1" && (
-            <>
-              <div className="form-item-left">
-                <Input
-                  type="text"
-                  className="form-control form-control-sm"
-                  variant="sm"
-                  name="marriedBrother"
-                  placeholder="Married Brother's"
-                  onChange={handleInputChange}
-                  value={
-                    formData && formData.marriedBrother
-                      ? formData.marriedBrother
-                      : ""
-                  }
-                />
-              </div>
-              <div className="form-item-right">
-                <Input
-                  type="text"
-                  className="form-control form-control-sm"
-                  variant="sm"
-                  name="unmarriedBrother"
-                  placeholder="Unmarried Brother's"
-                  onChange={handleInputChange}
-                  value={
-                    formData && formData.unmarriedBrother
-                      ? formData.unmarriedBrother
-                      : ""
-                  }
-                />
-              </div>
-            </>
-          )}
         </div>
         <div className="footer-buttons">
           <Button
