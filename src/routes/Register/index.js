@@ -78,7 +78,7 @@ const Register = ({ name = "Register" }) => {
                 <Step
                   active={step - 1 == 0}
                   completed={step - 1 > 0}
-                  label={<IoPerson />}
+                  label=""
                 />
                 <Step
                   active={step - 1 == 1}

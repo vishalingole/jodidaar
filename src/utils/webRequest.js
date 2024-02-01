@@ -53,11 +53,11 @@ export const getSerchResult = (filters) => {
     .then((data) => data);
 };
 
-export const register = (filters) => {
+export const registerUser = (filters) => {
   if (MOCK_DATA.register) {
     return { accessToken: "test", refreshToken: "sss" };
   }
-
+  console.log("---", filters);
   return axios
     .post(`http://localhost:5000/api/register/user/personal-detail`, filters)
     .then((response) => response.data)

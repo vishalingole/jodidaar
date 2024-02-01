@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Container } from "react-bootstrap";
 import PersonalDetails from "./PersonalDetails";
 import "./index.css";
-import { register } from "../../../utils/webRequest";
+import { registerUser } from "../../../utils/webRequest";
 import { AddUserProvider } from "./AddUserContext";
 import EducationDetails from "./EducationDetails";
 import Button from "react-bootstrap/Button";
@@ -24,7 +24,7 @@ const AddUser = () => {
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    register(formData).then((data) => {
+    registerUser(formData).then((data) => {
       if (data) {
         localStorage.setItem("user", JSON.stringify(data));
       }
