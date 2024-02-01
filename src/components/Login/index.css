@@ -13,6 +13,7 @@
 .login-modal .modal-dialog {
   opacity: 0.9;
   max-width: 350px;
+  margin: auto;
 }
 .modal-body,
 .modal-footer {

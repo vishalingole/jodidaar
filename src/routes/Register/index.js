@@ -14,6 +14,12 @@ import { Stepper, Step } from "react-form-stepper";
 import ProfileImageUpload from "./ProfileImageUpload";
 import IsMobile from "../../components/Header/IsMobile";
 import { IoPerson } from "react-icons/io5";
+import { IoSchoolSharp } from "react-icons/io5";
+import { MdPeopleAlt } from "react-icons/md";
+import { FaRegAddressCard } from "react-icons/fa6";
+import { FaStarOfDavid } from "react-icons/fa";
+import { DiRequirejs } from "react-icons/di";
+import { MdAddPhotoAlternate } from "react-icons/md";
 
 const Register = ({ name = "Register" }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -78,38 +84,52 @@ const Register = ({ name = "Register" }) => {
                 <Step
                   active={step - 1 == 0}
                   completed={step - 1 > 0}
-                  label=""
-                />
+                  label={""}
+                >
+                  <IoPerson />
+                </Step>
                 <Step
                   active={step - 1 == 1}
                   completed={step - 1 > 1}
-                  label=""
-                />
+                  label={""}
+                >
+                  <IoSchoolSharp />
+                </Step>
                 <Step
                   active={step - 1 == 2}
                   completed={step - 1 > 2}
-                  label=""
-                />
+                  label={""}
+                >
+                  <MdPeopleAlt />
+                </Step>
                 <Step
                   active={step - 1 == 3}
                   completed={step - 1 > 3}
-                  label=""
-                />
+                  label={""}
+                >
+                  <FaRegAddressCard />
+                </Step>
                 <Step
                   active={step - 1 == 4}
                   completed={step - 1 > 4}
-                  label=""
-                />
+                  label={""}
+                >
+                  <FaStarOfDavid />
+                </Step>
                 <Step
                   active={step - 1 == 5}
                   completed={step - 1 > 5}
-                  label=""
-                />
+                  label={""}
+                >
+                  <DiRequirejs />
+                </Step>
                 <Step
                   active={step - 1 == 6}
                   completed={step - 1 > 6}
-                  label=""
-                />
+                  label={""}
+                >
+                  <MdAddPhotoAlternate />
+                </Step>
               </Stepper>
             )}
             {/* <p>Creating profile for.</p>

@@ -496,6 +496,7 @@ const PersonalDetails = (props) => {
           </Button>
         </div>
       </form>
+
     </>
   );
 };

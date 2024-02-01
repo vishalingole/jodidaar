@@ -130,6 +130,9 @@ button {
 
 nav .links {
   display: flex;
+  position: fixed;
+  align-items: center;
+  justify-content: space-around;
 }
 .links ul {
   padding: 10px;
@@ -141,7 +144,7 @@ nav .links {
   color: white;
   display: none;
   position: fixed;
-  right: 0;
+  left: 0;
   height: 100%;
   width: 70vw;
   background-color: #031333;
@@ -160,6 +163,7 @@ nav .links {
   z-index: 1;
   background-color: #fff;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+  align-items: center;
 }
 
 @media (max-width: 600px) {

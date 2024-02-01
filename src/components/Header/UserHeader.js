@@ -6,6 +6,7 @@ import Button from "react-bootstrap/Button";
 import { isUserLoggedIn, getUserId } from "../../utils/user";
 import IsMobile from "./IsMobile";
 import { useTranslation } from "react-i18next";
+import { RxHamburgerMenu } from "react-icons/rx";
 
 const UserHeader = () => {
   const location = useLocation();
@@ -67,23 +68,28 @@ const UserHeader = () => {
     return (
       <>
         <nav className="mobile-nav">
-          <div className="logo">JodiDaar</div>
           <div className="links">
             <strong onClick={toggleMobileMenu}>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                fill="black"
-                class="bi bi-list"
-                viewBox="0 0 16 16"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"
-                />
-              </svg>
+              <RxHamburgerMenu />
             </strong>
+          </div>
+          <div className="logo" style={{ marginLeft: "30px", fontWeight: 600 }}>
+            JOD<span style={{ color: "#F54C1E" }}>I</span>DAAR
+          </div>
+          <div className="login-btn-container">
+            {!isUserLoggedIn() ? (
+              <Login />
+            ) : (
+              <>
+                <Button
+                  className="login-btn"
+                  variant="primary"
+                  onClick={handleLogout}
+                >
+                  Logout
+                </Button>
+              </>
+            )}
           </div>
         </nav>
         <div
