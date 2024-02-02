@@ -110,6 +110,12 @@ button {
   border-radius: 0px;
 }
 
+.login-btn-mobile {
+  background: #f54c1e;
+  border: none;
+  font-size: 12px;
+}
+
 .login-btn-container {
   display: flex;
   align-items: center;

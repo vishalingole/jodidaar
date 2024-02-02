@@ -20,6 +20,7 @@ import { FaRegAddressCard } from "react-icons/fa6";
 import { FaStarOfDavid } from "react-icons/fa";
 import { DiRequirejs } from "react-icons/di";
 import { MdAddPhotoAlternate } from "react-icons/md";
+import CloseIcon from "./CloseIcon";
 
 const Register = ({ name = "Register" }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -59,9 +60,10 @@ const Register = ({ name = "Register" }) => {
       </Button>
       {isModalOpen && (
         <Modal show={isModalOpen} onHide={handleClose} backdrop={false}>
-          <Modal.Header closeButton>
+          <Modal.Header closeButton={false}>
             {/* <Modal.Title>Registration</Modal.Title> */}
             <div>Registration</div>
+            <CloseIcon onClick={handleClose} />
           </Modal.Header>
           <Modal.Body>
             {!isMobileDevice && (

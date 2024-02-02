@@ -5,6 +5,7 @@ import { login, verifyOTP } from "../../utils/webRequest";
 import "./index.css";
 import { useNavigate } from "react-router-dom";
 import { error } from "jquery";
+import IsMobile from "../Header/IsMobile";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -14,6 +15,7 @@ const Login = () => {
   const [otp, setOtp] = useState(false);
   const [error, setError] = useState("");
   const [userId, setUserId] = useState(null);
+  const isMobile = IsMobile();
 
   const handleOpen = () => {
     setIsModalOpen(true);
@@ -71,7 +73,11 @@ const Login = () => {
       {/* <a style={{ color: "white" }} onClick={handleOpen}>
         Login
       </a> */}
-      <Button className="login-btn" variant="primary" onClick={handleOpen}>
+      <Button
+        className={!isMobile ? "login-btn" : "login-btn-mobile"}
+        variant="primary"
+        onClick={handleOpen}
+      >
         Login
       </Button>
       {isModalOpen && (
