@@ -29,7 +29,10 @@ const LatestProfiles = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    getLatestProfiles().then((response) => setData(response.data));
+    getLatestProfiles().then((response) => {
+      console.log("response", response);
+      setData(response.data);
+    });
   }, []);
 
   useEffect(() => {
@@ -147,7 +150,8 @@ const LatestProfiles = () => {
     <>
       <div className="latest-profiles-page">
         <h5 className="success-stories-heading">
-          Who knows, your forever might be just a click away.
+          Who knows,
+          <br /> Your forever might be just a click away.
         </h5>
         <h3 className="latest-profile-sub-heading">
           Check out the new profiles!

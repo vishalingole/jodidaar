@@ -41,7 +41,19 @@ const EducationDetails = (props) => {
     reset();
   };
 
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (data) => {
+    const user = localStorage.getItem("user");
+    const userObj = user ? JSON.parse(user) : {};
+    const userId = userObj && userObj.id ? userObj.id : "";
+    if (userId) {
+      educationDetail({ id: userId, ...data })
+        .then((response) => {
+          setStep(3);
+        })
+        .catch((error) => console.log(error));
+    }
+    setStep(3);
+  };
 
   return (
     <>

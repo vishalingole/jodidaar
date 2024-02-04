@@ -20,6 +20,7 @@
   gap: 20px;
   justify-content: center;
   padding: 20px;
+  flex-wrap: wrap;
 }
 
 .success-stories-content-wrapper {
@@ -69,6 +70,6 @@
   }
 
   .success-stories-sub-heading {
-    font-size: 30px;
+    font-size: 26px;
   }
 }

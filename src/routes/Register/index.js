@@ -1,9 +1,6 @@
 import React, { useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
-import { Col, Container, Row } from "react-bootstrap";
-import FloatingLabel from "react-bootstrap/FloatingLabel";
 import PersonalDetails from "./PersonalDetails";
 import EducationDetails from "./EducationDetails";
 import FamilyBackground from "./FamilyBackground";

@@ -13,6 +13,10 @@ const UserHeader = () => {
   const navigate = useNavigate();
   const loggedInUserId = getUserId();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isChecked, setIsChecked] = useState(false);
+
+  const handleToggle = () => setIsChecked(!isChecked);
+
   const isMobile = IsMobile();
   const mobileMenuRef = useRef(null);
   const { i18n, t } = useTranslation();
@@ -73,7 +77,11 @@ const UserHeader = () => {
               <RxHamburgerMenu />
             </strong>
           </div>
-          <div className="logo" style={{ marginLeft: "30px", fontWeight: 600 }}>
+          <div
+            className="logo"
+            style={{ marginLeft: "30px", fontWeight: 600 }}
+            onClick={() => navigate("/")}
+          >
             JOD<span style={{ color: "#F54C1E" }}>I</span>DAAR
           </div>
           <div className="login-btn-container">
@@ -88,6 +96,11 @@ const UserHeader = () => {
                 >
                   Logout
                 </Button>
+                {/* <CustomToggleButton
+                  imageSrc={process.env.PUBLIC_URL + "/dummy-man.png"} // Replace with your image URL
+                  checked={isChecked}
+                  onChange={handleToggle}
+                /> */}
               </>
             )}
           </div>

@@ -134,6 +134,7 @@
 
 .latest-profiles.card {
   width: 300px !important;
+  min-height: 300px;
   /* flex-basis: 32% 32% 32%; */
 }
 
@@ -162,10 +163,10 @@
     width: none;
   }
   .latest-profiles-page {
-    padding: 10px;
+    padding: 20px;
   }
   .latest-profile-sub-heading {
-    font-size: 30px;
+    font-size: 26px;
   }
   .latest-profile-container {
     padding: 10px;
