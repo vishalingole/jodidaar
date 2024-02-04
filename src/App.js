@@ -19,6 +19,7 @@ import AdminSearch from "./routes/Admin/Search";
 import AddUser from "./routes/Admin/AddUser";
 import Operator from "./routes/Admin/Operator";
 import AddOperator from "./routes/Admin/Operator/AddOperator";
+import TermsAndConditions from "./routes/TermsAndConditions";
 
 function App() {
   const { i18n, t } = useTranslation();
@@ -46,6 +47,7 @@ function App() {
             <Route exact path="/admin/user/add" element={<AddUser />} />
             <Route exact path="/admin/operator" element={<Operator />} />
             <Route exact path="/admin/operator/add" element={<AddOperator />} />
+            <Route exact path="/contact" element={<TermsAndConditions />} />
           </Routes>
           <Footer />
         </BrowserRouter>
@@ -55,3 +57,14 @@ function App() {
 }
 
 export default App;
+
+
+
+// Create folder inside route
+// name it as TermsAndConditions
+// create index.js inside the folder
+// define a functional component with terms and condition name
+// export term& condition
+// import that compo inside app.js
+// create route element and define path and sepcific <Terms/> component.
+

@@ -91,7 +91,7 @@ const UserHeader = () => {
           ref={mobileMenuRef}
           style={{ display: isMobileMenuOpen ? "flex" : "none" }}
         >
-          <ul>
+          <ul className="list-of-menubar" >
             <li>How To Use</li>
             <li>Advance Search</li>
             <li>Terms & Conditions</li>
