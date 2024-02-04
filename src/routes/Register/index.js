@@ -1,9 +1,6 @@
 import React, { useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
-import { Col, Container, Row } from "react-bootstrap";
-import FloatingLabel from "react-bootstrap/FloatingLabel";
 import PersonalDetails from "./PersonalDetails";
 import EducationDetails from "./EducationDetails";
 import FamilyBackground from "./FamilyBackground";
@@ -20,8 +17,7 @@ import { FaRegAddressCard } from "react-icons/fa6";
 import { FaStarOfDavid } from "react-icons/fa";
 import { DiRequirejs } from "react-icons/di";
 import { MdAddPhotoAlternate } from "react-icons/md";
-
-
+import CloseIcon from "./CloseIcon";
 
 const Register = ({ name = "Register" }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -61,9 +57,10 @@ const Register = ({ name = "Register" }) => {
       </Button>
       {isModalOpen && (
         <Modal show={isModalOpen} onHide={handleClose} backdrop={false}>
-          <Modal.Header closeButton>
+          <Modal.Header closeButton={false}>
             {/* <Modal.Title>Registration</Modal.Title> */}
             <div>Registration</div>
+            <CloseIcon onClick={handleClose} />
           </Modal.Header>
           <Modal.Body>
             {!isMobileDevice && (
@@ -123,7 +120,7 @@ const Register = ({ name = "Register" }) => {
                   completed={step - 1 > 5}
                   label={""}
                 >
-                  <DiRequirejs /> 
+                  <DiRequirejs />
                 </Step>
                 <Step
                   active={step - 1 == 6}

@@ -1,3 +1,6 @@
+import { cityListMock } from "../Mock/cityList";
+import { latestProfilesMock } from "../Mock/latestProfiles";
+import { searchResultMock } from "../Mock/searchResult";
 import { MOCK_DATA } from "../environment";
 import { getRequest } from "./request";
 import axios from "axios";
@@ -44,20 +47,18 @@ export const stepOneRegistration = (filters) => {
 };
 
 export const getSerchResult = (filters) => {
-  if (MOCK_DATA.search) {
-    return { accessToken: "test", refreshToken: "sss" };
-  }
+  if (MOCK_DATA.searchResult) return Promise.resolve(searchResultMock);
 
   return axios
     .get(`http://localhost:5000/api/search?${buildQueryForFilters(filters)}`)
     .then((data) => data);
 };
 
-export const register = (filters) => {
+export const registerUser = (filters) => {
   if (MOCK_DATA.register) {
     return { accessToken: "test", refreshToken: "sss" };
   }
-
+  console.log("---", filters);
   return axios
     .post(`http://localhost:5000/api/register/user/personal-detail`, filters)
     .then((response) => response.data)
@@ -171,10 +172,13 @@ export const siteVisits = (filters) => {
 };
 
 export const getLatestProfiles = () => {
+  if (MOCK_DATA.latestProfiles) return Promise.resolve(latestProfilesMock);
+
   return getRequest("user/latest-profile");
 };
 
 export const getDisticts = () => {
+  if (MOCK_DATA.cityList) return Promise.resolve(cityListMock);
   return getRequest("location/get-district-list");
 };
 

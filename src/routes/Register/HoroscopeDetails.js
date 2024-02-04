@@ -1,12 +1,28 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Input from "../../components/Input";
 import Button from "react-bootstrap/Button";
-import { horoscopeDetail } from "../../utils/webRequest";
+import { horoscopeDetail, getDisticts } from "../../utils/webRequest";
+import SelectDropdown from "../../components/SelectDropdown";
 
 const HoroscopeDetails = (props) => {
   const { setStep } = props;
 
   const [formData, setFormData] = useState({});
+  const [districtList, setDistrictList] = useState([]);
+
+  let selectObj = { id: 0, lable: "Native District", value: "" };
+
+  useEffect(() => {
+    getDistictsList();
+  }, []);
+
+  const getDistictsList = () => {
+    getDisticts().then((response) => {
+      let cloneObj = Array.from(response.data);
+      cloneObj.unshift(selectObj);
+      setDistrictList(cloneObj);
+    });
+  };
 
   const handleInputChange = (e) => {
     console.log(e.target.value);
@@ -363,7 +379,7 @@ const HoroscopeDetails = (props) => {
             />
           </div>
           <div className="form-item-right">
-            <Input
+            {/* <Input
               type="text"
               className="form-control form-control-sm"
               variant="sm"
@@ -371,6 +387,14 @@ const HoroscopeDetails = (props) => {
               placeholder="Birth District"
               onChange={handleInputChange}
               value={formData.birthDistrict || ""}
+            /> */}
+            <SelectDropdown
+              data={districtList}
+              name="birthDistrict"
+              onChange={handleInputChange}
+              value={
+                formData && formData.birthDistrict ? formData.birthDistrict : ""
+              }
             />
           </div>
         </div>

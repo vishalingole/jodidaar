@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Input from "../../components/Input";
 import Button from "react-bootstrap/Button";
-import { register } from "../../utils/webRequest";
+import { registerUser } from "../../utils/webRequest";
 import "./index.css";
 import dayjs from "dayjs";
 import { subCasteColumns } from "../Search/column";
@@ -85,7 +85,10 @@ const PersonalDetails = (props) => {
   };
 
   const onSubmit = (data) => {
-    register(data).then((data) => {
+    let cloneObj = Object.assign({}, data);
+    cloneObj.dob = moment(cloneObj.dob).format("MM/DD/YYYY");
+    console.log("eee", cloneObj);
+    registerUser(cloneObj).then((data) => {
       if (data) {
         localStorage.setItem("user", JSON.stringify(data));
         setStep(2);
@@ -223,41 +226,47 @@ const PersonalDetails = (props) => {
             />
           </div>
           <div className="form-item-right">
-            <SelectDropdown
-              data={subCasteColumns}
-              name="lookingFor"
-              onChange={handleInputChange}
-              value={formData && formData.subCaste ? formData.subCaste : ""}
+            <Controller
+              name="subCaste"
+              control={control}
+              render={({ field }) => (
+                <SelectDropdown
+                  data={subCasteColumns}
+                  name="subCaste"
+                  {...field}
+                />
+              )}
             />
           </div>
           <div className="form-item-left">
-            <Input
-              type="text"
-              className="form-control form-control-sm"
-              variant="sm"
-              name="height"
+            <input
+              {...register("height")}
               placeholder="Height"
-              onChange={handleInputChange}
-              value={formData && formData.height ? formData.height : ""}
+              className="form-control form-control-sm"
             />
           </div>
           <div className="form-item-right">
-            <select
-              className="form-select form-select-sm"
-              aria-label=".form-select-sm example"
+            <Controller
               name="bloodGroup"
-              onChange={handleInputChange}
-            >
-              <option selected>Blood Group</option>
-              <option value="aPositive">A+</option>
-              <option value="aNegative">A-</option>
-              <option value="bPositive">B+</option>
-              <option value="bNegative">B-</option>
-              <option value="oPositive">O+</option>
-              <option value="bNegative">O-</option>
-              <option value="abPositive">AB+</option>
-              <option value="abNegative">AB-</option>
-            </select>
+              control={control}
+              render={({ field }) => (
+                <select
+                  className="form-select form-select-sm"
+                  aria-label=".form-select-sm example"
+                  {...field}
+                >
+                  <option value="">Blood Group</option>
+                  <option value="aPositive">A+</option>
+                  <option value="aNegative">A-</option>
+                  <option value="bPositive">B+</option>
+                  <option value="bNegative">B-</option>
+                  <option value="oPositive">O+</option>
+                  <option value="bNegative">O-</option>
+                  <option value="abPositive">AB+</option>
+                  <option value="abNegative">AB-</option>
+                </select>
+              )}
+            />
           </div>
           <div className="form-item-left">
             <select
@@ -307,9 +316,9 @@ const PersonalDetails = (props) => {
               className="form-select form-select-sm"
               aria-label=".form-select-sm example"
               name="complexion"
-              onChange={handleInputChange}
+              {...register("complexion")}
             >
-              <option selected>Complexion</option>
+              <option value="">Complexion</option>
               <option value="gaval">Gavhal</option>
               <option value="sawala">Sawala</option>
               <option value="gora">Gora</option>
@@ -319,26 +328,29 @@ const PersonalDetails = (props) => {
             </select>
           </div>
           <div className="form-item-right">
-            {/* <Input
-              type="text"
+            <input
+              {...register("weight", {
+                pattern: {
+                  value: /^\d+$/,
+                  message: "Invalid Weight Input",
+                },
+              })}
+              placeholder="Weight (kg)"
               className="form-control form-control-sm"
-              variant="sm"
-              name="personality"
-              placeholder="Personality"
-              onChange={handleInputChange}
-              value={
-                formData && formData.personality ? formData.personality : ""
-              }
-            /> */}
-
-            <Input
-              type="text"
-              className="form-control form-control-sm"
-              variant="sm"
+            />
+            <ErrorMessage
+              errors={errors}
               name="weight"
-              placeholder="Weight"
-              onChange={handleInputChange}
-              value={formData && formData.weight ? formData.weight : ""}
+              render={({ messages }) => {
+                console.log("messages", messages);
+                return messages
+                  ? Object.entries(messages).map(([type, message]) => (
+                      <div className="error-div" key={type}>
+                        {message}
+                      </div>
+                    ))
+                  : null;
+              }}
             />
           </div>
           <div className="form-item-left">
@@ -432,18 +444,18 @@ const PersonalDetails = (props) => {
           <div className="form-item-left register-option-selection">
             <strong>Gender :</strong>
             <input
-              onChange={handleInputChange}
               type="radio"
               name="gender"
               id="Male"
+              value="Male"
               {...register("gender", { required: "Please select an Gender." })}
             />
             Male
             <input
-              onChange={handleInputChange}
               type="radio"
               name="gender"
               id="Female"
+              value="Female"
               {...register("gender")}
             />
             Female
@@ -484,7 +496,6 @@ const PersonalDetails = (props) => {
           </Button>
         </div>
       </form>
-
     </>
   );
 };

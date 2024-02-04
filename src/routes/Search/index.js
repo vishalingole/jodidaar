@@ -26,8 +26,8 @@ const Search = (props) => {
   const [showResult, setShowResult] = useState(false);
   const [image, setImage] = useState("");
 
-  useEffect(async () => {
-    await getDistictsList();
+  useEffect(() => {
+    getDistictsList();
     if (location && location.state) {
       setFormData({ ...location.state });
       getSerchResult({ ...location.state }).then((response) => {
@@ -37,8 +37,11 @@ const Search = (props) => {
     }
   }, []);
 
-  const getDistictsList = () => {
-    getDisticts().then((response) => setDistrictList(response.data));
+  const getDistictsList = async () => {
+    await getDisticts().then((response) => {
+      console.log("+++", response.data);
+      setDistrictList(response.data);
+    });
   };
 
   const handleInputChange = (e) => {

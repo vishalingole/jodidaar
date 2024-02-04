@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { Container } from "react-bootstrap";
 import "./index.css";
 import { getLatestProfiles } from "../../utils/webRequest";
 import { useNavigate } from "react-router-dom";
 import Slider from "./Slider";
+import { AiOutlineCloseCircle } from "react-icons/ai";
+import IsMobile from "../../components/Header/IsMobile";
 
 const getImageUrl = (item) => {
   if (item.file) {
@@ -19,14 +21,55 @@ const capital = (val) => {
 
 const LatestProfiles = () => {
   const [data, setData] = useState([]);
+  const [isPreviewOpen, setIsPreviewOpen] = useState(false);
+  const [imageUrl, setImageUrl] = useState("");
+  const imageRef = useRef(null);
+  let isMobile = IsMobile();
+
   const navigate = useNavigate();
 
   useEffect(() => {
-    getLatestProfiles().then((response) => setData(response.data));
+    getLatestProfiles().then((response) => {
+      console.log("response", response);
+      setData(response.data);
+    });
   }, []);
+
+  useEffect(() => {
+    if (isPreviewOpen) {
+      console.log("+++");
+      const image = imageRef.current;
+      const canvas = document.createElement("canvas");
+      const ctx = canvas.getContext("2d");
+      // Draw image onto canvas
+      canvas.width = image.width;
+      canvas.height = image.height;
+      // ctx.imageSmoothingEnabled = false;
+      ctx.drawImage(image, 0, 0, image.width, image.height);
+
+      // Write brand website name on canvas
+      ctx.font = "20px Arial BOLD"; // Adjust font as needed
+      ctx.fillStyle = "black"; //"rgba(255, 255, 255, 0.8)"; // Semi-transparent white
+      ctx.textAlign = "center";
+      ctx.fillText("JODIDAAR.com", canvas.width / 2, canvas.height - 30); // Adjust position as needed
+      console.log("canvas", canvas);
+      // Display the modified canvas image
+      image.src = canvas.toDataURL();
+    }
+  }, [isPreviewOpen]);
 
   const handleQuickSearch = (id) => {
     navigate("/search", { state: { displayId: id } });
+  };
+
+  const handleImageClick = async (item) => {
+    let imageUrl = getImageUrl(item);
+    setImageUrl(imageUrl);
+    setIsPreviewOpen(true);
+  };
+
+  const handlePreviewClose = () => {
+    setIsPreviewOpen(false);
   };
 
   const getCard = () => {
@@ -44,8 +87,10 @@ const LatestProfiles = () => {
                   padding: "2px",
                   border: "1px solid #ccc",
                   borderRadius: "50px",
+                  cursor: "pointer",
                 }}
                 src={getImageUrl(item)}
+                onClick={() => handleImageClick(item)}
               />
             </div>
             <div className="latest-profiles card-body">
@@ -105,7 +150,8 @@ const LatestProfiles = () => {
     <>
       <div className="latest-profiles-page">
         <h5 className="success-stories-heading">
-          Who knows, your forever might be just a click away.
+          Who knows,
+          <br /> Your forever might be just a click away.
         </h5>
         <h3 className="latest-profile-sub-heading">
           Check out the new profiles!
@@ -114,6 +160,14 @@ const LatestProfiles = () => {
           <Slider>{getCard()}</Slider>
         </div>
       </div>
+      {isPreviewOpen && (
+        <div className="image-preview-overlay">
+          <img ref={imageRef} src={imageUrl} alt="Profile Image Preview" />
+          <button className={"preview-close-btn"} onClick={handlePreviewClose}>
+            <AiOutlineCloseCircle />
+          </button>
+        </div>
+      )}
     </>
   );
 };

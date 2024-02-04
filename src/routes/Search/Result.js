@@ -55,31 +55,43 @@ const Result = (props) => {
       {data && data.totalItems && data.totalItems == 0 ? (
         <div>No Result Found.</div>
       ) : (
-        data.items.map((item) => {
-          console.log(item);
-          return (
-            <Container>
-              <div className="search-result-widget">
-                <div className="search-result">
-                  {/* {JSON.stringify(item)} */}
-                  <div className="profile-section-left">
-                    <img
-                      style={{
-                        width: "150px",
-                        height: "150px",
-                        padding: "2px",
-                        borderRadius: "10px",
-                      }}
-                      src={getImageUrl(item)}
-                    />
-                  </div>
-                  <div className="profile-middle-section">
-                    <div className="profile-id">
-                      {item && item.PersonalDetails.displayId
-                        ? capital(item.PersonalDetails.displayId)
-                        : ""}
+        <Container className="search-result-container">
+          {data &&
+            data.items.map((item, index) => {
+              console.log(item);
+              return (
+                <div className="search-result-widget">
+                  <div className="search-result">
+                    {/* {JSON.stringify(item)} */}
+                    <div className="profile-section-left">
+                      <img
+                        style={{
+                          width: "150px",
+                          height: "150px",
+                          padding: "2px",
+                          borderRadius: "10px",
+                        }}
+                        src={getImageUrl(item)}
+                      />
+                      <div className="view-profile-btn">
+                        <Button
+                          variant="primary"
+                          size="sm"
+                          className="next-btn"
+                          type="submit"
+                          onClick={() => handleViewProfile(item)}
+                        >
+                          View Profile
+                        </Button>
+                      </div>
                     </div>
-                    <div>
+                    <div className="profile-middle-section">
+                      <div className="profile-id">
+                        {item && item.PersonalDetails.displayId
+                          ? capital(item.PersonalDetails.displayId)
+                          : ""}
+                      </div>
+                      {/* <div> */}
                       <div className="primary-detail">
                         <div className="content-key">SURNAME : </div>
                         <div className="content-value">
@@ -89,14 +101,14 @@ const Result = (props) => {
                             ? capital(item.PersonalDetails.lastName)
                             : "Not Provided"}
                         </div>
-                        <div className="content-key">GENDER</div>
+                        {/* <div className="content-key">GENDER</div>
                         <div className="content-value">
                           {item &&
                           item.PersonalDetails &&
                           item.PersonalDetails.gender
                             ? capital(item.PersonalDetails.gender)
                             : "Not Provided"}
-                        </div>
+                        </div> */}
                       </div>
                       <div className="primary-detail">
                         <div className="content-key">NATIVE DISTRICT:</div>
@@ -107,14 +119,14 @@ const Result = (props) => {
                             ? capital(item.FamilyBackground.nativeDistrict)
                             : "Not Provided"}
                         </div>
-                        <div className="content-key">HEIGHT :</div>
+                        {/* <div className="content-key">HEIGHT :</div>
                         <div className="content-value">
                           {item &&
                           item.PersonalDetails &&
                           item.PersonalDetails.height
                             ? item.PersonalDetails.height + " FEET"
                             : "Not Provided"}
-                        </div>
+                        </div> */}
                       </div>
                       <div className="primary-detail">
                         <div className="content-key">INCOME:</div>
@@ -127,14 +139,14 @@ const Result = (props) => {
                               item.EducationDetails.incomeType
                             : "Not Provided"}
                         </div>
-                        <div className="content-key">BIRTH DATE :</div>
+                        {/* <div className="content-key">BIRTH DATE :</div>
                         <div className="content-value">
                           {item &&
                           item.PersonalDetails &&
                           item.PersonalDetails.dob
                             ? item.PersonalDetails.dob
                             : "Not Provided"}
-                        </div>
+                        </div> */}
                       </div>
                       <div className="primary-detail">
                         <div className="content-key">EDUCATION:</div>
@@ -145,6 +157,16 @@ const Result = (props) => {
                             ? capital(item.EducationDetails.education)
                             : "Not Provided"}
                         </div>
+                        {/* <div className="content-key">OCCUPATION :</div>
+                        <div className="content-value">
+                          {item &&
+                          item.EducationDetails &&
+                          item.EducationDetails.occupationDetail
+                            ? capital(item.EducationDetails.occupationDetail)
+                            : "Not Provided"}
+                        </div> */}
+                      </div>
+                      <div className="primary-detail">
                         <div className="content-key">OCCUPATION :</div>
                         <div className="content-value">
                           {item &&
@@ -154,24 +176,13 @@ const Result = (props) => {
                             : "Not Provided"}
                         </div>
                       </div>
+                      {/* </div> */}
                     </div>
                   </div>
-                  <div className="profile-right-section">
-                    <Button
-                      variant="primary"
-                      size="sm"
-                      className="next-btn"
-                      type="submit"
-                      onClick={() => handleViewProfile(item)}
-                    >
-                      View Profile
-                    </Button>
-                  </div>
                 </div>
-              </div>
-            </Container>
-          );
-        })
+              );
+            })}
+        </Container>
       )}
     </>
   );
