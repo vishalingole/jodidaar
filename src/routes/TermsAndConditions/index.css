@@ -1,0 +1,41 @@
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    box-sizing: border-box;
+}
+
+.form{
+    width: 84%;
+    margin: auto;
+    margin-top: 4%;
+    border: 1px solid hsla(0, 2%, 81%, 0.839);
+    border-radius: 20px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+
+}
+.rules-form{
+    padding-bottom: 10px;
+    padding-left: 20px;
+    margin: 10px;
+}
+.rules{
+    margin-top: 20px;
+    padding: 0;
+}
+.bnt{
+     text-align: center;
+}
+ .lang-btn{
+    margin-top: 8%;
+}
+@media (max-width:430px ){
+    .lang-btn{
+    margin-top: 21%;
+}}
+@media (min-width:500px ){
+    .lang-btn{
+    margin-top: 29%;
+}}
+@media (min-width:768px ){
+    .lang-btn{
+    margin-top: 10%;
+}}
