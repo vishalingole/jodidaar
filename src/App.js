@@ -20,6 +20,12 @@ import AddUser from "./routes/Admin/AddUser";
 import Operator from "./routes/Admin/Operator";
 import AddOperator from "./routes/Admin/Operator/AddOperator";
 import TermsAndConditions from "./routes/TermsAndConditions";
+import Groom from "./routes/Groom";
+import Bridge from "./routes/Bridge";
+import DivorceeGroom from "./routes/DivorceeGroom.js";
+import DivorceeBridge from "./routes/DivorceeBridge.js/index.js";
+import Window from "./routes/Window.js/index.js";
+import Windower from "./routes/Windower.js/index.js";
 
 function App() {
   const { i18n, t } = useTranslation();
@@ -48,6 +54,13 @@ function App() {
             <Route exact path="/admin/operator" element={<Operator />} />
             <Route exact path="/admin/operator/add" element={<AddOperator />} />
             <Route exact path="/contact" element={<TermsAndConditions />} />
+            <Route exact path="/groom" element={<Groom/>}/>
+            <Route exact path="/bridge" element={<Bridge/>}/>
+            <Route exact path="/divorcee-groom" element={<DivorceeGroom/>}/>
+            <Route exact path="/divorcee-bridge" element={<DivorceeBridge/>}/>
+            <Route exact path="/window" element={<Window/>}/>
+            <Route exact path="/windower" element={<Windower/>}/>
+            <Route exact path="/terms-conditions" element={<TermsAndConditions/>}/>
           </Routes>
           <Footer />
         </BrowserRouter>

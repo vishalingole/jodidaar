@@ -7,5 +7,7 @@
   "change-username": "Change your username:",
   "submit": "Submit",
   "go-to-page2": "Click <0>here</0> to go to page 2, {{username}}",
-  "advance-search": "प्रगत शोध"
+  "advance-search": "प्रगत शोध",
+  "How To Use" : "कसे वापरायचे",
+  "Terms & Conditions":"अटी व शर्ती"
 }

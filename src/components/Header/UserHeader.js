@@ -43,7 +43,7 @@ const UserHeader = () => {
       href: "/",
     },
     {
-      label: "How To Use",
+      label: t("How To Use"),
       href: "/about",
     },
     {
@@ -51,7 +51,7 @@ const UserHeader = () => {
       href: "/search",
     },
     {
-      label: "Terms & Conditions",
+      label: t("Terms & Conditions"),
       href: "/contact",
     },
   ]);
@@ -113,7 +113,13 @@ const UserHeader = () => {
           <ul className="list-of-menubar" >
             <li>How To Use</li>
             <li>Advance Search</li>
-            <li>Terms & Conditions</li>
+            <li onClick={() => navigate('/groom')}>Groom</li>
+            <li onClick={() => navigate('/bridge')}>Bridge</li>
+            <li onClick={() => navigate('/divorcee-groom')}>Divorcee Groom</li>
+            <li onClick={() => navigate('/divorcee-bridge')}>Divorcee Bridge</li>
+            <li onClick={() => navigate('/window')}>Window</li>
+            <li onClick={() => navigate('/windower')}>Windower</li>
+            <li onClick={() => navigate('/terms-conditions')} >Terms & Conditions</li>
             <li>My Profile</li>
             <li>Login</li>
           </ul>
