@@ -8,6 +8,10 @@ import IsMobile from "./IsMobile";
 import { useTranslation } from "react-i18next";
 import { RxHamburgerMenu } from "react-icons/rx";
 
+const getImageUrl = () => {
+  return process.env.PUBLIC_URL + "/dummy-woman.png";
+};
+
 const UserHeader = () => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -68,6 +72,15 @@ const UserHeader = () => {
     }
   };
 
+  const handleClick = (searchType) => {
+    toggleMobileMenu();
+    navigate("/profile-listing", {
+      state: {
+        searchType: searchType,
+      },
+    });
+  };
+
   const getMobileMenu = () => {
     return (
       <>
@@ -110,18 +123,77 @@ const UserHeader = () => {
           ref={mobileMenuRef}
           style={{ display: isMobileMenuOpen ? "flex" : "none" }}
         >
-          <ul className="list-of-menubar" >
+          <ul className="list-of-menubar">
+            <li>
+              <img
+                className="user-profile-image"
+                style={{}}
+                src={getImageUrl()}
+                // onClick={() => handleImageClick(item)}
+              />
+              <div className="user-name">INGOLE</div>
+            </li>
             <li>How To Use</li>
-            <li>Advance Search</li>
-            <li onClick={() => navigate('/groom')}>Groom</li>
-            <li onClick={() => navigate('/bridge')}>Bridge</li>
-            <li onClick={() => navigate('/divorcee-groom')}>Divorcee Groom</li>
-            <li onClick={() => navigate('/divorcee-bridge')}>Divorcee Bridge</li>
-            <li onClick={() => navigate('/window')}>Window</li>
-            <li onClick={() => navigate('/windower')}>Windower</li>
-            <li onClick={() => navigate('/terms-conditions')} >Terms & Conditions</li>
-            <li>My Profile</li>
-            <li>Login</li>
+            <li onClick={() => navigate("/search")}>Advance Search</li>
+            <li onClick={() => handleClick("groom")}>Groom</li>
+            <li
+              onClick={() =>
+                navigate("/profile-listing", {
+                  state: {
+                    searchType: "bridge",
+                  },
+                })
+              }
+            >
+              Bridge
+            </li>
+            <li
+              onClick={() =>
+                navigate("/profile-listing", {
+                  state: {
+                    searchType: "divorceeGroom",
+                  },
+                })
+              }
+            >
+              Divorcee Groom
+            </li>
+            <li
+              onClick={() =>
+                navigate("/profile-listing", {
+                  state: {
+                    searchType: "divorceeBridge",
+                  },
+                })
+              }
+            >
+              Divorcee Bridge
+            </li>
+            <li
+              onClick={() =>
+                navigate("/profile-listing", {
+                  state: {
+                    searchType: "window",
+                  },
+                })
+              }
+            >
+              Window
+            </li>
+            <li
+              onClick={() =>
+                navigate("/profile-listing", {
+                  state: {
+                    searchType: "windower",
+                  },
+                })
+              }
+            >
+              Windower
+            </li>
+            <li onClick={() => navigate("/terms-conditions")}>
+              Terms & Conditions
+            </li>
           </ul>
         </div>
       </>

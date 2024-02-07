@@ -31,14 +31,21 @@ const ImageGrid = (props) => {
   };
 
   return (
-    <div style={{}} className="image-grid">
+    <div className="image-grid">
       {result.map((item) => (
-        <img
-          key={item.id} // Ensure unique keys for images
-          className="image-grid-content"
-          src={getImageUrl(item)}
-          alt={item.alt || ""} // Provide image alt text
-        />
+        <>
+          <div className="image-grid-text">
+            {item && item.PersonalDetails && item.PersonalDetails.lastName
+              ? item.PersonalDetails.lastName
+              : "Not Provided"}
+          </div>
+          <img
+            key={item.id}
+            className="image-grid-content"
+            src={getImageUrl(item)}
+            alt={item.alt || ""}
+          />
+        </>
       ))}
     </div>
   );

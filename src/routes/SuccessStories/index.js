@@ -82,4 +82,8 @@ const SuccessStories = () => {
   );
 };
 
-export default SuccessStories;
+const customCompartor = (prevProps, nextProps) => {
+  return JSON.stringify(prevProps) === JSON.stringify(nextProps);
+};
+
+export default React.memo(SuccessStories, customCompartor);

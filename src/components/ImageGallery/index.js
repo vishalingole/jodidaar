@@ -1,72 +1,50 @@
 import "./index.css";
 import React from "react";
 
-const ImageGallery = () => {
+const capital = (val) => {
+  return val.toUpperCase();
+};
+
+const ImageGallery = (props) => {
+  const { result } = props;
+  console.log(props);
+
+  const getImageUrl = (item) => {
+    if (item.file) {
+      return `data:image/jpeg;base64,` + item.file;
+    } else if (item.gender == "Male")
+      return process.env.PUBLIC_URL + "/dummy-man.png";
+    else return process.env.PUBLIC_URL + "/dummy-woman.png";
+  };
+
+  const getImageItem = () => {
+    return result.map((item) => {
+      return (
+        <>
+          <div className="grid-item">
+            <img
+              className="user-image"
+              key={item.id}
+              src={getImageUrl(item)}
+              alt={item.alt || ""}
+            />
+            <div className="card-overlay">
+              <div className="user-surname">
+                {item && item.PersonalDetails && item.PersonalDetails.lastName
+                  ? capital(item.PersonalDetails.lastName)
+                  : "Not Provided"}
+              </div>
+              <div className="user-years">22 Years</div>
+            </div>
+          </div>
+        </>
+      );
+    });
+  };
+
   return (
     <>
-      <div className="profile-image-grid">
-        
-        <div className="grid-item">
-          {" "}
-          <img
-            src="https://images.unsplash.com/photo-1682687220742-aba13b6e50ba?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8"
-            alt=""
-          />
-          <div className="card-overlay">
-            {" "}
-            <div>Title_1 </div>{" "}
-            <div>Lorem ipsum dolor sit amet consectetur.</div>{" "}
-          </div>
-        </div>
-        <div className="grid-item">
-          {" "}
-          <img
-            src="https://images.unsplash.com/photo-1682687220742-aba13b6e50ba?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8"
-            alt=""
-          />
-          <div className="card-overlay">
-            {" "}
-            <div>Title_1 </div>{" "}
-            <div>Lorem ipsum dolor sit amet consectetur.</div>{" "}
-          </div>
-        </div>
-        <div className="grid-item">
-          {" "}
-          <img
-            src="https://images.unsplash.com/photo-1682687220742-aba13b6e50ba?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8"
-            alt=""
-          />
-          <div className="card-overlay">
-            {" "}
-            <div>Title_1 </div>{" "}
-            <div>Lorem ipsum dolor sit amet consectetur.</div>{" "}
-          </div>
-        </div>
-        <div className="grid-item">
-          {" "}
-          <img
-            src="https://images.unsplash.com/photo-1682687220742-aba13b6e50ba?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8"
-            alt=""
-          />
-          <div className="card-overlay">
-            {" "}
-            <div>Title_1 </div>{" "}
-            <div>Lorem ipsum dolor sit amet consectetur.</div>{" "}
-          </div>
-        </div>
-        <div className="grid-item">
-          {" "}
-          <img
-            src="https://images.unsplash.com/photo-1682687220742-aba13b6e50ba?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8"
-            alt=""
-          />
-          <div className="card-overlay">
-            {" "}
-            <div>Title_1 </div>{" "}
-            <div>Lorem ipsum dolor sit amet consectetur.</div>{" "}
-          </div>
-        </div>
-      </div>
+      <div className="profile-image-grid">{getImageItem()}</div>
     </>
   );
 };

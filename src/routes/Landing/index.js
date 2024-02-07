@@ -40,18 +40,10 @@ const Landing = () => {
   return (
     <>
       <div className="top-section">
-        {/* <div className="jodidaar-logo">
-          <img src="/favicon.ico" alt="Image" />
-        </div> */}
         <Container className="top-section-content">
           <div className="top-section-left-content">
             <div>
               <h1>
-                {/* Find Your
-                <br />
-                <span style={{ color: "#f54c1e" }}>Perfect Match</span> <br /> */}
-                {/* As per Your Personal Intrest Match beyond the basics. */}
-                {/* <br /> */}
                 Find
                 <br />
                 <span style={{ color: "#f54c1e" }}> Perfect Life Partner </span>

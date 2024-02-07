@@ -16,9 +16,17 @@
   flex-wrap: wrap;
 }
 
+.image-grid-text {
+  position: absolute;
+  bottom: -2%;
+  top: 15%;
+  color: white;
+  font-weight: bold;
+}
+
 @media (max-width: 768px) {
   .image-grid-content {
-    height: 45%;
+    height: 150px;
     width: 45%;
   }
 }
