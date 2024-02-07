@@ -5,6 +5,7 @@ const ImageGallery = () => {
   return (
     <>
       <div className="profile-image-grid">
+        
         <div className="grid-item">
           {" "}
           <img

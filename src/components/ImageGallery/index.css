@@ -3,6 +3,7 @@ body{
     padding: 0;
   }
   
+  
   .profile-image-grid{
     display: grid;
     grid-template-columns: 160px 160px;
