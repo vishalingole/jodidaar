@@ -25,6 +25,18 @@ const UserHeader = () => {
   const isMobile = IsMobile();
   const mobileMenuRef = useRef(null);
   const { i18n, t } = useTranslation();
+
+  let currentRoute = "";
+  console.log(location.pathname);
+  if (location) {
+    if (location.pathname == "/") currentRoute = "Home";
+    else if (location.pathname == "/search") currentRoute = "Advance Search";
+    else if (location.pathname == "/contact") currentRoute = "Contact Us";
+    else if (location.pathname == "/about") currentRoute = "About Us";
+    else if (location.pathname.includes("/myprofile"))
+      currentRoute = "myprofile";
+  }
+
   const handleClickOutside = (event) => {
     if (
       mobileMenuRef.current &&
@@ -135,7 +147,10 @@ const UserHeader = () => {
               <div className="user-name">INGOLE</div>
             </li>
             <li>How To Use</li>
-            <li onClick={() => navigate("/search")}>
+            <li
+              onClick={() => navigate("/search")}
+              className={currentRoute == "Advance Search" ? "active-link" : ""}
+            >
               <FaSearch /> Advance Search
             </li>
             <li onClick={() => handleClick("groom")}>Groom</li>
@@ -207,16 +222,16 @@ const UserHeader = () => {
     // TODO: Implement login logic
   };
 
-  let currentRoute = "";
-  console.log(location.pathname);
-  if (location) {
-    if (location.pathname == "/") currentRoute = "Home";
-    else if (location.pathname == "/search") currentRoute = "Advance Search";
-    else if (location.pathname == "/contact") currentRoute = "Contact Us";
-    else if (location.pathname == "/about") currentRoute = "About Us";
-    else if (location.pathname.includes("/myprofile"))
-      currentRoute = "myprofile";
-  }
+  // let currentRoute = "";
+  // console.log(location.pathname);
+  // if (location) {
+  //   if (location.pathname == "/") currentRoute = "Home";
+  //   else if (location.pathname == "/search") currentRoute = "Advance Search";
+  //   else if (location.pathname == "/contact") currentRoute = "Contact Us";
+  //   else if (location.pathname == "/about") currentRoute = "About Us";
+  //   else if (location.pathname.includes("/myprofile"))
+  //     currentRoute = "myprofile";
+  // }
 
   return (
     <>
