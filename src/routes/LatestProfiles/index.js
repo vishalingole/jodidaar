@@ -128,8 +128,7 @@ const LatestProfiles = () => {
                 style={{
                   background: "#031333",
                   color: "white",
-                  padding: "10px",
-                  borderRadius: "10px",
+                  padding: "6px 10px 6px 10px",
                   fontSize: "12px",
                 }}
               >
