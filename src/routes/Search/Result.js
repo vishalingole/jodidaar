@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Button, Container } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { getProfileImage } from "../../utils/webRequest";
-import ImageGrid from "../../components/ImageGrid";
 
 const Result = (props) => {
   const navigate = useNavigate();
@@ -57,7 +56,6 @@ const Result = (props) => {
 
   return (
     <>
-      {<ImageGrid result={data && data.items ? data.items : []} />}
       {data && data.totalItems && data.totalItems == 0 ? (
         <div>No Result Found.</div>
       ) : (
@@ -66,7 +64,7 @@ const Result = (props) => {
             data.items.map((item, index) => {
               console.log(item);
               return (
-                <div className="search-result-widget">
+                <div key={index} className="search-result-widget">
                   <div className="search-result">
                     {/* {JSON.stringify(item)} */}
                     <div className="profile-section-left">

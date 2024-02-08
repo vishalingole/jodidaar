@@ -217,6 +217,16 @@ nav .links {
 .user-name {
   margin-top: 10px;
 }
+
+.list-of-menubar li {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.list-of-menubar li svg {
+  margin-right: 10px;
+}
 @media (max-width: 768px) {
   /* #mobile-menu-btn {
     display: block;

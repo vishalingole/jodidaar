@@ -7,6 +7,7 @@ import { isUserLoggedIn, getUserId } from "../../utils/user";
 import IsMobile from "./IsMobile";
 import { useTranslation } from "react-i18next";
 import { RxHamburgerMenu } from "react-icons/rx";
+import { FaSearch } from "react-icons/fa";
 
 const getImageUrl = () => {
   return process.env.PUBLIC_URL + "/dummy-woman.png";
@@ -134,7 +135,9 @@ const UserHeader = () => {
               <div className="user-name">INGOLE</div>
             </li>
             <li>How To Use</li>
-            <li onClick={() => navigate("/search")}>Advance Search</li>
+            <li onClick={() => navigate("/search")}>
+              <FaSearch /> Advance Search
+            </li>
             <li onClick={() => handleClick("groom")}>Groom</li>
             <li
               onClick={() =>
