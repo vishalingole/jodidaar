@@ -6,6 +6,8 @@ import { useNavigate } from "react-router-dom";
 import Slider from "./Slider";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 import IsMobile from "../../components/Header/IsMobile";
+import { RxBookmarkFilled } from "react-icons/rx";
+import { FaRegBookmark } from "react-icons/fa";
 
 const getImageUrl = (item) => {
   if (item.file) {
@@ -135,7 +137,11 @@ const LatestProfiles = () => {
               >
                 Request Details
               </a>
+              
             </div>
+             {/* below icons are temporary styled   */}
+            <FaRegBookmark style={{position:"relative", left:"80%", bottom:"50px", fontSize:"45px", height:"40px"}}/>
+            <RxBookmarkFilled style={{position:"relative", left:"80%", bottom:"50px", fontSize:"45px", height:"40px"}}/>
           </div>
         );
       })

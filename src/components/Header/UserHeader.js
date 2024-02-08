@@ -8,6 +8,8 @@ import IsMobile from "./IsMobile";
 import { useTranslation } from "react-i18next";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { FaSearch } from "react-icons/fa";
+import { FaFemale } from "react-icons/fa";
+import { IoIosMan } from "react-icons/io";
 
 const getImageUrl = () => {
   return process.env.PUBLIC_URL + "/dummy-woman.png";
@@ -138,7 +140,7 @@ const UserHeader = () => {
             <li onClick={() => navigate("/search")}>
               <FaSearch /> Advance Search
             </li>
-            <li onClick={() => handleClick("groom")}>Groom</li>
+            <li onClick={() => handleClick("groom")}> <IoIosMan /> Groom</li>
             <li
               onClick={() =>
                 navigate("/profile-listing", {
@@ -147,7 +149,7 @@ const UserHeader = () => {
                   },
                 })
               }
-            >
+            > <FaFemale />
               Bridge
             </li>
             <li
@@ -158,7 +160,7 @@ const UserHeader = () => {
                   },
                 })
               }
-            >
+            > <IoIosMan />
               Divorcee Groom
             </li>
             <li
@@ -169,7 +171,7 @@ const UserHeader = () => {
                   },
                 })
               }
-            >
+            > <FaFemale />
               Divorcee Bridge
             </li>
             <li
@@ -180,7 +182,7 @@ const UserHeader = () => {
                   },
                 })
               }
-            >
+            > <FaFemale />
               Window
             </li>
             <li
@@ -191,7 +193,7 @@ const UserHeader = () => {
                   },
                 })
               }
-            >
+            > <IoIosMan />
               Windower
             </li>
             <li onClick={() => navigate("/terms-conditions")}>

@@ -1,9 +1,5 @@
 .profile-image-grid {
   display: grid;
-  /* grid-template-columns: auto auto; */
-  /* gap: 10px; */
-  /* margin-top: 80px;
-  padding: 20px; */
   grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
   grid-column-gap: 10px;
   grid-row-gap: 10px;
