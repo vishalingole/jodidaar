@@ -216,12 +216,17 @@ nav .links {
 }
 .user-name {
   margin-top: 10px;
+  font-weight: bold;
 }
 
 .list-of-menubar li {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.list-of-menubar li:first-child {
+  flex-direction: column;
 }
 
 .list-of-menubar li svg {

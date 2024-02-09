@@ -8,8 +8,6 @@ import IsMobile from "./IsMobile";
 import { useTranslation } from "react-i18next";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { FaSearch } from "react-icons/fa";
-import { FaFemale } from "react-icons/fa";
-import { IoIosMan } from "react-icons/io";
 
 const getImageUrl = () => {
   return process.env.PUBLIC_URL + "/dummy-woman.png";
@@ -27,6 +25,22 @@ const UserHeader = () => {
   const isMobile = IsMobile();
   const mobileMenuRef = useRef(null);
   const { i18n, t } = useTranslation();
+
+  let currentRoute = "";
+  console.log(location.pathname);
+  if (location) {
+    if (location.pathname == "/") currentRoute = "Home";
+    else if (location.pathname == "/search") currentRoute = "Advance Search";
+    else if (location.pathname == "/contact") currentRoute = "Contact Us";
+    else if (location.pathname == "/about") currentRoute = "About Us";
+    else if (location.pathname.includes("/myprofile"))
+      currentRoute = "myprofile";
+  }
+
+  const user = localStorage.getItem("user");
+  const userObj = user ? JSON.parse(user) : {};
+  const userId = userObj && userObj.id ? userObj.id : "";
+
   const handleClickOutside = (event) => {
     if (
       mobileMenuRef.current &&
@@ -64,9 +78,6 @@ const UserHeader = () => {
   ]);
 
   const handleLogout = () => {
-    const user = localStorage.getItem("user");
-    const userObj = user ? JSON.parse(user) : {};
-    const userId = userObj && userObj.id ? userObj.id : "";
     if (userId) {
       localStorage.removeItem("user");
       setTimeout(() => {
@@ -106,7 +117,7 @@ const UserHeader = () => {
             ) : (
               <>
                 <Button
-                  className="login-btn"
+                  className={!isMobile ? "login-btn" : "login-btn-mobile"}
                   variant="primary"
                   onClick={handleLogout}
                 >
@@ -131,13 +142,20 @@ const UserHeader = () => {
               <img
                 className="user-profile-image"
                 style={{}}
-                src={getImageUrl()}
+                src={getImageUrl(userObj)}
                 // onClick={() => handleImageClick(item)}
               />
-              <div className="user-name">INGOLE</div>
+              <div className="user-name">
+                {userObj && userObj.user && userObj.user.lastName
+                  ? capital(userObj.user.lastName)
+                  : ""}
+              </div>
             </li>
             <li>How To Use</li>
-            <li onClick={() => navigate("/search")}>
+            <li
+              onClick={() => navigate("/search")}
+              className={currentRoute == "Advance Search" ? "active-link" : ""}
+            >
               <FaSearch /> Advance Search
             </li>
             <li onClick={() => handleClick("groom")}> <IoIosMan /> Groom</li>
@@ -200,6 +218,27 @@ const UserHeader = () => {
               Terms & Conditions
             </li>
           </ul>
+          <div
+            style={{
+              position: "absolute",
+              bottom: "0%",
+              padding: "20px",
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              borderTop: "1px solid #ccc",
+              width: "100%",
+              borderRadius: "0px 30px 0px 0px",
+            }}
+          >
+            <div>Finding this app useful?</div>
+            <div style={{ marginLeft: "10px" }}>
+              <FaRegThumbsUp />
+            </div>
+            <div style={{ marginLeft: "10px", marginTop: "5px" }}>
+              <FaRegThumbsDown />
+            </div>
+          </div>
         </div>
       </>
     );
@@ -209,16 +248,16 @@ const UserHeader = () => {
     // TODO: Implement login logic
   };
 
-  let currentRoute = "";
-  console.log(location.pathname);
-  if (location) {
-    if (location.pathname == "/") currentRoute = "Home";
-    else if (location.pathname == "/search") currentRoute = "Advance Search";
-    else if (location.pathname == "/contact") currentRoute = "Contact Us";
-    else if (location.pathname == "/about") currentRoute = "About Us";
-    else if (location.pathname.includes("/myprofile"))
-      currentRoute = "myprofile";
-  }
+  // let currentRoute = "";
+  // console.log(location.pathname);
+  // if (location) {
+  //   if (location.pathname == "/") currentRoute = "Home";
+  //   else if (location.pathname == "/search") currentRoute = "Advance Search";
+  //   else if (location.pathname == "/contact") currentRoute = "Contact Us";
+  //   else if (location.pathname == "/about") currentRoute = "About Us";
+  //   else if (location.pathname.includes("/myprofile"))
+  //     currentRoute = "myprofile";
+  // }
 
   return (
     <>
@@ -261,7 +300,7 @@ const UserHeader = () => {
             ) : (
               <>
                 <Button
-                  className="login-btn"
+                  className={!isMobile ? "login-btn" : "login-btn-mobile"}
                   variant="primary"
                   onClick={handleLogout}
                 >

@@ -1,8 +1,11 @@
 import React from "react";
-import { Container } from "react-bootstrap";
 import "./index.css";
+import ReadMore from "../../components/ReadMore";
 
 const SuccessStories = () => {
+  const staticText =
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Ut enim ad minim,";
+
   return (
     <>
       <div className="success-stories-section">
@@ -16,11 +19,7 @@ const SuccessStories = () => {
             <div className="success-stories-content">
               <div>
                 <h4>Vishal & Neha</h4>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim,
-                </p>
+                <ReadMore text={staticText} />
               </div>
             </div>
             <img
@@ -32,11 +31,7 @@ const SuccessStories = () => {
             <div className="success-stories-content">
               <div>
                 <h4>Vishal & Neha</h4>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim,
-                </p>
+                <ReadMore text={staticText} />
               </div>
             </div>
             <img
@@ -48,11 +43,7 @@ const SuccessStories = () => {
             <div className="success-stories-content">
               <div>
                 <h4>Vishal & Neha</h4>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim,
-                </p>
+                <ReadMore text={staticText} />
               </div>
             </div>
             <img
@@ -64,11 +55,7 @@ const SuccessStories = () => {
             <div className="success-stories-content">
               <div>
                 <h4>Vishal & Neha</h4>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim,
-                </p>
+                <ReadMore text={staticText} />
               </div>
             </div>
             <img
