@@ -47,6 +47,37 @@ const UserHeader = () => {
     else if (location.pathname == "/about") currentRoute = "About Us";
     else if (location.pathname.includes("/myprofile"))
       currentRoute = "myprofile";
+    else if (location.pathname == "/profile-listing") {
+      console.log(location.state);
+      let searchType =
+        location.state && location.state.searchType
+          ? location.state.searchType
+          : "";
+      switch (searchType) {
+        case "groom":
+          currentRoute = "groom-listing";
+          break;
+        case "bridge":
+          currentRoute = "bridge-listing";
+          break;
+        case "divorceeGroom":
+          currentRoute = "divorcee-groom-listing";
+          break;
+        case "divorceeBridge":
+          currentRoute = "divorcee-bridge-listing";
+          break;
+        case "window":
+          currentRoute = "window-listing";
+          break;
+        case "windower":
+          currentRoute = "windower-listing";
+          break;
+        default:
+          break;
+      }
+    } else if ((location.pathname = "/terms-conditions")) {
+      currentRoute = "terms-and-conditions";
+    }
   }
 
   const user = localStorage.getItem("user");
@@ -170,26 +201,55 @@ const UserHeader = () => {
             >
               <RiUserSearchLine /> Advance Search
             </li>
-            <li onClick={() => handleClick("groom")}>
+            <li
+              onClick={() => handleClick("groom")}
+              className={currentRoute == "groom-listing" ? "active-link" : ""}
+            >
               <BsGenderMale /> Groom
             </li>
-            <li onClick={() => handleClick("bridge")}>
+            <li
+              onClick={() => handleClick("bridge")}
+              className={currentRoute == "bridge-listing" ? "active-link" : ""}
+            >
               <BsGenderFemale /> Bridge
             </li>
-            <li onClick={() => handleClick("divorceeGroom")}>
+            <li
+              onClick={() => handleClick("divorceeGroom")}
+              className={
+                currentRoute == "divorcee-groom-listing" ? "active-link" : ""
+              }
+            >
               <BsGenderMale /> Divorcee Groom
             </li>
-            <li onClick={() => handleClick("divorceeBridge")}>
+            <li
+              onClick={() => handleClick("divorceeBridge")}
+              className={
+                currentRoute == "divorcee-bridge-listing" ? "active-link" : ""
+              }
+            >
               <BsGenderFemale />
               Divorcee Bridge
             </li>
-            <li onClick={() => handleClick("windower")}>
+            <li
+              onClick={() => handleClick("windower")}
+              className={
+                currentRoute == "windower-listing" ? "active-link" : ""
+              }
+            >
               <BsGenderMale /> Windower
             </li>
-            <li onClick={() => handleClick("Window")}>
+            <li
+              onClick={() => handleClick("window")}
+              className={currentRoute == "window-listing" ? "active-link" : ""}
+            >
               <BsGenderFemale /> Window
             </li>
-            <li onClick={() => navigate("/terms-conditions")}>
+            <li
+              onClick={() => navigate("/terms-conditions")}
+              className={
+                currentRoute == "terms-and-conditions" ? "active-link" : ""
+              }
+            >
               <GoLaw /> Terms & Conditions
             </li>
           </ul>
