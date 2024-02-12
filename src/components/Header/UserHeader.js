@@ -15,10 +15,11 @@ import { FaRegThumbsDown } from "react-icons/fa";
 import { FaThumbsDown } from "react-icons/fa";
 import { FaThumbsUp } from "react-icons/fa";
 import NavDropdown from "react-bootstrap/NavDropdown";
-
-const getImageUrl = () => {
-  return process.env.PUBLIC_URL + "/dummy-woman.png";
-};
+import { BsGenderFemale } from "react-icons/bs";
+import { BsGenderMale } from "react-icons/bs";
+import { GoLaw } from "react-icons/go";
+import { getImageUrl } from "../../utils/getImageUrl";
+import { RiUserSearchLine } from "react-icons/ri";
 
 const capital = (val) => {
   return val.toUpperCase();
@@ -75,10 +76,6 @@ const UserHeader = () => {
       href: "/",
     },
     {
-      label: t("How To Use"),
-      href: "/about",
-    },
-    {
       label: t("advance-search"),
       href: "/search",
     },
@@ -123,9 +120,9 @@ const UserHeader = () => {
             JOD<span style={{ color: "#F54C1E" }}>I</span>DAAR
           </div>
           <img
-            className="ganpati-img"
-            style={{ height: "40px", position: "absolute", left: "50%" }}
+            className="lord-ganesh-image"
             src="https://cdn.pixabay.com/photo/2023/09/09/16/03/ai-generated-8243406_640.jpg"
+            loading="lazy"
           />
           <div className="login-btn-container">
             {!isUserLoggedIn() ? (
@@ -167,23 +164,33 @@ const UserHeader = () => {
                   : ""}
               </div>
             </li>
-            <li>Choose Language</li>
             <li
               onClick={() => navigate("/search")}
               className={currentRoute == "Advance Search" ? "active-link" : ""}
             >
-              <FaSearch /> Advance Search
+              <RiUserSearchLine /> Advance Search
             </li>
-            <li onClick={() => handleClick("groom")}>Groom</li>
-            <li onClick={() => handleClick("bridge")}>Bridge</li>
-            <li onClick={() => handleClick("divorceeGroom")}>Divorcee Groom</li>
+            <li onClick={() => handleClick("groom")}>
+              <BsGenderMale /> Groom
+            </li>
+            <li onClick={() => handleClick("bridge")}>
+              <BsGenderFemale /> Bridge
+            </li>
+            <li onClick={() => handleClick("divorceeGroom")}>
+              <BsGenderMale /> Divorcee Groom
+            </li>
             <li onClick={() => handleClick("divorceeBridge")}>
+              <BsGenderFemale />
               Divorcee Bridge
             </li>
-            <li onClick={() => handleClick("windower")}>Windower</li>
-            <li onClick={() => handleClick("Window")}>Window</li>
+            <li onClick={() => handleClick("windower")}>
+              <BsGenderMale /> Windower
+            </li>
+            <li onClick={() => handleClick("Window")}>
+              <BsGenderFemale /> Window
+            </li>
             <li onClick={() => navigate("/terms-conditions")}>
-              Terms & Conditions
+              <GoLaw /> Terms & Conditions
             </li>
           </ul>
           <div
@@ -234,9 +241,21 @@ const UserHeader = () => {
         getMobileMenu()
       ) : (
         <header className="user-header">
-          <div>
+          {/* <div>
             <h5>JodiDaar</h5>
+          </div> */}
+          <div
+            className="logo"
+            style={{ fontWeight: 600 }}
+            onClick={() => navigate("/")}
+          >
+            JOD<span style={{ color: "#F54C1E" }}>I</span>DAAR
           </div>
+          <img
+            className="lord-ganesh-image-laptop"
+            src="https://cdn.pixabay.com/photo/2023/09/09/16/03/ai-generated-8243406_640.jpg"
+            loading="lazy"
+          />
           <div>
             <ul className="navigation-links">
               {linkOptions.map((option) => (

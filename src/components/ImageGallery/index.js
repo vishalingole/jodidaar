@@ -1,6 +1,7 @@
 import "./index.css";
 import React from "react";
 import { FaBookmark } from "react-icons/fa6";
+import { CiBookmark } from "react-icons/ci";
 
 const capital = (val) => {
   return val.toUpperCase();
@@ -30,14 +31,31 @@ const ImageGallery = (props) => {
               alt={item.alt || ""}
             />
             <div className="card-overlay">
-              <div className="user-surname">
-                {item && item.PersonalDetails && item.PersonalDetails.lastName
-                  ? capital(item.PersonalDetails.lastName)
-                  : "Not Provided"}
+              <div className="user-profile-details">
+                <div className="user-surname">
+                  {item && item.PersonalDetails && item.PersonalDetails.lastName
+                    ? capital(item.PersonalDetails.lastName)
+                    : "Not Provided"}
+                </div>
+                <div className="user-years">22 Yr</div>
               </div>
-              <div className="user-years">22 Years</div>
-              <span className="img-bookmark-icon" style={{position:"absolute", bottom:"3px", left:"75%"}} >
-                  <FaBookmark style={{ fontSize:"26px"}} />
+              <span
+                className="img-bookmark-icon"
+                style={{ position: "absolute", bottom: "3%", right: "5%" }}
+              >
+                {/* <FaBookmark style={{ fontSize: "26px" }} /> */}
+                <CiBookmark
+                  title="Save Profile"
+                  style={{
+                    height: "30px",
+                    width: "25px",
+                    // position: "absolute",
+                    // right: "3%",
+                    // bottom: "2%",
+                    cursor: "pointer",
+                    color: "white",
+                  }}
+                />
               </span>
             </div>
           </div>

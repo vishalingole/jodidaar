@@ -260,7 +260,7 @@
 
   .search-container {
     display: grid;
-    grid-template-columns: auto;
+    grid-template-columns: auto auto;
     /* grid-gap: 10px; */
     grid-row-gap: 5px;
     font-size: 14px;
@@ -278,16 +278,16 @@
     align-items: center;
     justify-content: center;
     margin-top: 20px;
-    flex-direction: column;
+    /* flex-direction: column; */
     gap: 10px;
-    width: 100%;
+    /* width: 100%; */
   }
 
   .search-buttons button {
     width: 100% !important;
   }
   .advance-search .container {
-    padding: 40px;
+    padding: 40px 0px 0px 0px;
   }
   .advance-search-heading {
     font-size: 20px;

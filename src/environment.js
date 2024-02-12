@@ -11,7 +11,7 @@ const MOCK_DATA = {
   requestList: false,
   stepOne: false,
   register: false,
-  login: false,
+  login: true,
   cityList: true,
   latestProfiles: true,
   searchResult: true,

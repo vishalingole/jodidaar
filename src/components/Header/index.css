@@ -9,8 +9,8 @@
   top: 0;
   left: 0;
   width: 100%;
-  padding-left: 100px;
-  padding-right: 100px;
+  padding-left: 80px;
+  padding-right: 80px;
   z-index: 1;
 }
 
@@ -239,6 +239,25 @@ nav .links {
 .dropdown-item:active {
   color: #f54c1e !important;
   background: white !important;
+}
+
+.lord-ganesh-image {
+  transform: translateX(-50%);
+  position: absolute;
+  left: 50%;
+  height: 40px;
+}
+
+.lord-ganesh-image-laptop {
+  transform: translateX(-50%);
+  position: absolute;
+  left: 18%;
+  height: 60px;
+}
+
+.dropdown-menu.show {
+  border: none;
+  border-radius: 0px;
 }
 
 @media (max-width: 768px) {

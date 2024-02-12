@@ -34,8 +34,26 @@
   flex-direction: column;
 }
 
-.user-surname,
-.user-years {
+.user-profile-details {
+  position: absolute;
+  left: 10%;
+  bottom: 2%;
+}
+
+.user-surname {
   font-size: 12px;
   font-weight: bold;
+  background-color: white;
+  opacity: 0.6;
+  border-radius: 10px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.user-years {
+  margin-top: 5px;
+  border-radius: 10px;
+  font-size: 12px;
+  background-color: white;
+  opacity: 0.6;
 }

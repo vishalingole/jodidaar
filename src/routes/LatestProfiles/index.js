@@ -8,14 +8,9 @@ import { AiOutlineCloseCircle } from "react-icons/ai";
 import IsMobile from "../../components/Header/IsMobile";
 import { RxBookmarkFilled } from "react-icons/rx";
 import { FaRegBookmark } from "react-icons/fa";
+import { CiBookmark } from "react-icons/ci";
 
-const getImageUrl = (item) => {
-  if (item.file) {
-    return `data:image/jpeg;base64,` + item.file;
-  } else if (item.gender == "Male")
-    return process.env.PUBLIC_URL + "/dummy-man.png";
-  else return process.env.PUBLIC_URL + "/dummy-woman.png";
-};
+import { getImageUrl } from "../../utils/getImageUrl";
 
 const capital = (val) => {
   return val.toUpperCase();
@@ -110,7 +105,7 @@ const LatestProfiles = () => {
                   ? capital(item.PersonalDetails.lastName)
                   : ""}
               </h5>
-              <p className="card-text"  style={{height: "70px"}}>
+              <p className="card-text" style={{ height: "70px" }}>
                 I am a {item.EducationDetails.occupationDetail}. Earning an
                 income of Rs.
                 {item.EducationDetails.income
@@ -136,11 +131,31 @@ const LatestProfiles = () => {
               >
                 Request Details
               </a>
-              
+              <CiBookmark
+                title="Save Profile"
+                style={{
+                  height: "30px",
+                  width: "25px",
+                  position: "absolute",
+                  right: "3%",
+                  bottom: "2%",
+                  cursor: "pointer",
+                }}
+              />
+
+              {/* <RxBookmarkFilled
+                title="Remove Profile"
+                background="#031333"
+                style={{
+                  height: "30px",
+                  width: "25px",
+                  position: "absolute",
+                  right: "3%",
+                  bottom: "2%",
+                  cursor: "pointer",
+                }}
+              /> */}
             </div>
-             {/* below icons are temporary styled   */}
-            <FaRegBookmark style={{position:"relative", left:"80%", bottom:"50px", fontSize:"45px", height:"40px"}}/>
-            <RxBookmarkFilled style={{position:"relative", left:"80%", bottom:"50px", fontSize:"45px", height:"40px"}}/>
           </div>
         );
       })
