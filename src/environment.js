@@ -12,9 +12,9 @@ const MOCK_DATA = {
   stepOne: false,
   register: false,
   login: false,
-  cityList: false,
-  latestProfiles: false,
-  searchResult: false,
+  cityList: true,
+  latestProfiles: true,
+  searchResult: true,
 };
 
 export { MOCK_DATA, API_BASE_URL, API_CONTEXT, BASENAME, CA_WEBAGENT_PROTOCAL };

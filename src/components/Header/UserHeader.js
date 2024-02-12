@@ -12,6 +12,7 @@ import { FaRegThumbsUp } from "react-icons/fa";
 import { FaRegThumbsDown } from "react-icons/fa";
 import { FaThumbsDown } from "react-icons/fa";
 import { FaThumbsUp } from "react-icons/fa";
+import NavDropdown from "react-bootstrap/NavDropdown";
 
 const getImageUrl = (item) => {
   if (item.file) {
@@ -158,8 +159,8 @@ const UserHeader = () => {
                 // onClick={() => handleImageClick(item)}
               />
               <div className="user-name">
-                {userObj && userObj.user && userObj.user.lastName
-                  ? capital(userObj.user.lastName)
+                {userObj && userObj.userInfo && userObj.userInfo.lastName
+                  ? capital(userObj.userInfo.lastName)
                   : ""}
               </div>
             </li>
@@ -171,61 +172,13 @@ const UserHeader = () => {
               <FaSearch /> Advance Search
             </li>
             <li onClick={() => handleClick("groom")}>Groom</li>
-            <li
-              onClick={() =>
-                navigate("/profile-listing", {
-                  state: {
-                    searchType: "bridge",
-                  },
-                })
-              }
-            >
-              Bridge
-            </li>
-            <li
-              onClick={() =>
-                navigate("/profile-listing", {
-                  state: {
-                    searchType: "divorceeGroom",
-                  },
-                })
-              }
-            >
-              Divorcee Groom
-            </li>
-            <li
-              onClick={() =>
-                navigate("/profile-listing", {
-                  state: {
-                    searchType: "divorceeBridge",
-                  },
-                })
-              }
-            >
+            <li onClick={() => handleClick("bridge")}>Bridge</li>
+            <li onClick={() => handleClick("divorceeGroom")}>Divorcee Groom</li>
+            <li onClick={() => handleClick("divorceeBridge")}>
               Divorcee Bridge
             </li>
-            <li
-              onClick={() =>
-                navigate("/profile-listing", {
-                  state: {
-                    searchType: "window",
-                  },
-                })
-              }
-            >
-              Window
-            </li>
-            <li
-              onClick={() =>
-                navigate("/profile-listing", {
-                  state: {
-                    searchType: "windower",
-                  },
-                })
-              }
-            >
-              Windower
-            </li>
+            <li onClick={() => handleClick("windower")}>Windower</li>
+            <li onClick={() => handleClick("Window")}>Window</li>
             <li onClick={() => navigate("/terms-conditions")}>
               Terms & Conditions
             </li>
@@ -234,13 +187,14 @@ const UserHeader = () => {
             style={{
               position: "absolute",
               bottom: "0%",
-              padding: "20px",
+              padding: "10px 0px 0px 40px",
               display: "flex",
               flexDirection: "row",
               alignItems: "center",
               borderTop: "1px solid #ccc",
               width: "100%",
-              borderRadius: "0px 30px 0px 0px",
+              borderRadius: "30px 30px 50px 50px",
+              fontSize: "12px",
             }}
           >
             <div>Finding this app useful?</div>
@@ -294,6 +248,40 @@ const UserHeader = () => {
                   </a>
                 </li>
               ))}
+              <li>
+                <NavDropdown
+                  id="nav-dropdown-dark-example"
+                  title="Quick Search"
+                  style={{ marginLeft: "5px", marginRight: "5px" }}
+                  // menuVariant="dark"
+                >
+                  <NavDropdown.Item onClick={() => handleClick("groom")}>
+                    Groom
+                  </NavDropdown.Item>
+                  <NavDropdown.Item
+                    active
+                    onClick={() => handleClick("bridge")}
+                  >
+                    Bridge
+                  </NavDropdown.Item>
+                  <NavDropdown.Item
+                    onClick={() => handleClick("divorceeGroom")}
+                  >
+                    Divorcee Groom
+                  </NavDropdown.Item>
+                  <NavDropdown.Item
+                    onClick={() => handleClick("divorceeBridge")}
+                  >
+                    divorcee Bridge
+                  </NavDropdown.Item>
+                  <NavDropdown.Item onClick={() => handleClick("windower")}>
+                    Windower
+                  </NavDropdown.Item>
+                  <NavDropdown.Item onClick={() => handleClick("window")}>
+                    Window
+                  </NavDropdown.Item>
+                </NavDropdown>
+              </li>
               {isUserLoggedIn() && (
                 <li>
                   <a
