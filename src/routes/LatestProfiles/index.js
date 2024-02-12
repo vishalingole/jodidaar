@@ -110,7 +110,7 @@ const LatestProfiles = () => {
                   ? capital(item.PersonalDetails.lastName)
                   : ""}
               </h5>
-              <p className="card-text">
+              <p className="card-text"  style={{height: "70px"}}>
                 I am a {item.EducationDetails.occupationDetail}. Earning an
                 income of Rs.
                 {item.EducationDetails.income

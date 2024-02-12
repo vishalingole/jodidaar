@@ -1,5 +1,6 @@
 import "./index.css";
 import React from "react";
+import { FaBookmark } from "react-icons/fa6";
 
 const capital = (val) => {
   return val.toUpperCase();
@@ -35,6 +36,9 @@ const ImageGallery = (props) => {
                   : "Not Provided"}
               </div>
               <div className="user-years">22 Years</div>
+              <span className="img-bookmark-icon" style={{position:"absolute", bottom:"3px", left:"75%"}} >
+                  <FaBookmark style={{ fontSize:"26px"}} />
+              </span>
             </div>
           </div>
         </>

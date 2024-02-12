@@ -8,6 +8,10 @@ import IsMobile from "./IsMobile";
 import { useTranslation } from "react-i18next";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { FaSearch } from "react-icons/fa";
+import { FaFemale } from "react-icons/fa";
+import { IoIosMan } from "react-icons/io";
+import { FaRegThumbsUp } from "react-icons/fa";
+import { FaRegThumbsDown } from "react-icons/fa";
 
 const getImageUrl = () => {
   return process.env.PUBLIC_URL + "/dummy-woman.png";
@@ -111,9 +115,10 @@ const UserHeader = () => {
           >
             JOD<span style={{ color: "#F54C1E" }}>I</span>DAAR
           </div>
+          <img className="ganpati-img" style={{ height:"40px", position:"absolute", left:"50%"}}  src="https://cdn.pixabay.com/photo/2023/09/09/16/03/ai-generated-8243406_640.jpg"/>
           <div className="login-btn-container">
             {!isUserLoggedIn() ? (
-              <Login />
+              <Login /> 
             ) : (
               <>
                 <Button
@@ -146,12 +151,12 @@ const UserHeader = () => {
                 // onClick={() => handleImageClick(item)}
               />
               <div className="user-name">
-                {userObj && userObj.user && userObj.user.lastName
+                {/* {userObj && userObj.user && userObj.user.lastName
                   ? capital(userObj.user.lastName)
-                  : ""}
+                  : ""} */}
               </div>
             </li>
-            <li>How To Use</li>
+            <li>Choose Language</li>
             <li
               onClick={() => navigate("/search")}
               className={currentRoute == "Advance Search" ? "active-link" : ""}
