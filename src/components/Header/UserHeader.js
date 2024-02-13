@@ -20,6 +20,8 @@ import { BsGenderMale } from "react-icons/bs";
 import { GoLaw } from "react-icons/go";
 import { getImageUrl } from "../../utils/getImageUrl";
 import { RiUserSearchLine } from "react-icons/ri";
+import { TfiEmail } from "react-icons/tfi";
+import { CiBookmark } from "react-icons/ci";
 
 const capital = (val) => {
   return val.toUpperCase();
@@ -243,6 +245,15 @@ const UserHeader = () => {
               className={currentRoute == "window-listing" ? "active-link" : ""}
             >
               <BsGenderFemale /> Window
+            </li>
+            <li>
+              <TfiEmail /> Recommended Profiles
+            </li>
+            <li>
+              <CiBookmark /> Saved Profiles
+            </li>
+            <li>
+              <TfiEmail /> Write to us
             </li>
             <li
               onClick={() => navigate("/terms-conditions")}

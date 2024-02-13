@@ -8,15 +8,15 @@ import SuccessStories from "../SuccessStories";
 import LatestProfiles from "../LatestProfiles";
 import UpToDate from "../UpToDate";
 import SelectDropdown from "../../components/SelectDropdown";
-import { lookingForColumns } from "../Search/column";
-import { useNavigate } from "react-router-dom";
+import { lookingForColumns, languageColumns } from "../Search/column";
+import { useLocation, useNavigate } from "react-router-dom";
 import { getDisticts } from "../../utils/webRequest";
 
 const Landing = () => {
   const [formData, setFormData] = useState({});
   const [districtList, setDistrictList] = useState([]);
   const navigate = useNavigate();
-
+  const location = useLocation();
   useEffect(() => {
     getDistictsList();
   }, []);
@@ -37,10 +37,28 @@ const Landing = () => {
     navigate("/search", { state: { ...formData } });
   };
 
+  const handleLanguageChange = (e) => {
+    let url = window.location.href;
+    let lng = e.target.value;
+    if (e.target.value) {
+      if (window.location.search.indexOf("?lng=") == -1) url += `?lng=${lng}`;
+      else url = url.replace(/(\?lng=).*/, `?lng=${lng}`);
+      window.location.href = url;
+    }
+  };
+
   return (
     <>
       <div className="top-section">
         <Container className="top-section-content">
+          <div className="language-dropdown">
+            <SelectDropdown
+              data={languageColumns}
+              name="language"
+              onChange={handleLanguageChange}
+              value={formData && formData.lookingFor ? formData.lookingFor : ""}
+            />
+          </div>
           <div className="top-section-left-content">
             <div>
               <h1>

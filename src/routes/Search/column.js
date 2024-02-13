@@ -263,6 +263,12 @@ export const heightRangeColumn = [
   },
 ];
 
+export const languageColumns = [
+  { lable: "Language", value: "" },
+  { lable: "Marathi", value: "ma" },
+  { lable: "English", value: "en" },
+];
+
 export const lookingForColumns = [
   { lable: "Looking For", value: "" },
   {

@@ -9,13 +9,16 @@
   background: #e6e6e3;
   border-radius: 22px;
   border: none;
-  padding: 20px;
+  padding: 10px;
   text-align: center;
-  flex-basis: 32%;
+  flex-basis: 16%;
   margin: 3px;
 }
 .service-icon {
-  padding: 20px;
+  padding: 10px;
+}
+.service-title {
+  font-size: 12px;
 }
 
 @media (max-width: 800px) {
