@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import { login, verifyOTP } from "../../utils/webRequest";
@@ -6,24 +6,26 @@ import "./index.css";
 import { useNavigate } from "react-router-dom";
 import { error } from "jquery";
 import IsMobile from "../Header/IsMobile";
+import OtpInput from "react-otp-input";
 
 const Login = () => {
   const navigate = useNavigate();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [formData, setFormData] = useState();
-  const [otp, setOtp] = useState(false);
+  const [otp, setOtp] = useState(true);
   const [error, setError] = useState("");
   const [userId, setUserId] = useState(null);
   const isMobile = IsMobile();
+  const [otpValue, setOtpValue] = useState("");
 
   const handleOpen = () => {
     setIsModalOpen(true);
   };
 
-  const handleClose = () => {
+  const handleClose = useCallback(() => {
     setIsModalOpen(false);
-  };
+  }, [isModalOpen]);
 
   const handleLogin = () => {
     login(formData).then((response) => {
@@ -38,7 +40,7 @@ const Login = () => {
   };
 
   const handleOtp = () => {
-    verifyOTP(formData).then((data) => {
+    verifyOTP({ ...formData, otp: otpValue }).then((data) => {
       if (data.status == "success") {
         const { accessToken, refreshToken } = data;
         const cloneObj = Object.assign({}, data);
@@ -68,6 +70,10 @@ const Login = () => {
     });
   };
 
+  const handleOtpChange = useCallback((value) => setOtpValue(value), [
+    otpValue,
+  ]);
+
   return (
     <>
       {/* <a style={{ color: "white" }} onClick={handleOpen}>
@@ -92,29 +98,40 @@ const Login = () => {
             </div>
             <div className="login-form">
               {!otp ? (
-                <input
-                  type="text"
-                  name="mobile"
-                  className="form-control"
-                  placeholder="Mobile"
-                  onChange={handleInputChange}
-                  value={formData && formData.mobile ? formData.mobile : ""}
-                />
+                <>
+                  <input
+                    type="text"
+                    name="mobile"
+                    className="form-control"
+                    placeholder="Mobile"
+                    onChange={handleInputChange}
+                    value={formData && formData.mobile ? formData.mobile : ""}
+                  />
+                </>
               ) : (
-                <input
-                  type="text"
-                  name="otp"
-                  className="form-control"
-                  placeholder="OTP"
-                  onChange={handleInputChange}
-                  value={formData && formData.otp ? formData.otp : ""}
-                />
+                <>
+                  <OtpInput
+                    value={otpValue}
+                    onChange={handleOtpChange}
+                    numInputs={4}
+                    renderSeparator={<span> - </span>}
+                    renderInput={(props) => <input {...props} />}
+                    placeholder={"0000"}
+                    inputStyle={{ width: "3em", margin: "5px" }}
+                    containerStyle={{
+                      justifyContent: "center",
+                      marginTop: "20px",
+                    }}
+                  />
+                </>
               )}
               {error && <div className="otp-error-message">{error}</div>}
               {otp && (
-                <div className="otp-message">
-                  Please enter OTP sent on mobile or registered email id.
-                </div>
+                <>
+                  <div className="otp-message">
+                    Please enter OTP sent on mobile or registered email id.
+                  </div>
+                </>
               )}
             </div>
             <div className="login-button-container">

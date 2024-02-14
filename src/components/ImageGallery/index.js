@@ -2,6 +2,8 @@ import "./index.css";
 import React from "react";
 import { FaBookmark } from "react-icons/fa6";
 import { CiBookmark } from "react-icons/ci";
+import { getImageUrl } from "../../utils/getImageUrl";
+import { bookmarkProfile } from "../../utils/webRequest";
 
 const capital = (val) => {
   return val.toUpperCase();
@@ -9,14 +11,14 @@ const capital = (val) => {
 
 const ImageGallery = (props) => {
   const { result } = props;
-  console.log(props);
 
-  const getImageUrl = (item) => {
-    if (item.file) {
-      return `data:image/jpeg;base64,` + item.file;
-    } else if (item.gender == "Male")
-      return process.env.PUBLIC_URL + "/dummy-man.png";
-    else return process.env.PUBLIC_URL + "/dummy-woman.png";
+  const handleBookmark = (item) => {
+    console.log(item);
+    let payload = {
+      bookmarkBy: item.uuid,
+      bookmarkTo: "",
+    };
+    // bookmarkProfile(payload).then((data) => console.log(data));
   };
 
   const getImageItem = () => {
@@ -55,6 +57,7 @@ const ImageGallery = (props) => {
                     cursor: "pointer",
                     color: "white",
                   }}
+                  onClick={() => handleBookmark(item)}
                 />
               </span>
             </div>

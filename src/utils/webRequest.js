@@ -13,6 +13,20 @@ function buildQueryForFilters(filters) {
   // return q;
 }
 
+function cleanObj(obj) {
+  console.log("obj", obj);
+  for (let propName in obj) {
+    if (
+      obj[propName] === null ||
+      obj[propName] === undefined ||
+      obj[propName] === ""
+    ) {
+      delete obj[propName];
+    }
+  }
+  return obj;
+}
+
 function getResponse(res) {
   let response = Object.assign({}, res);
   if (res.items && res.items[0]) {
@@ -50,7 +64,11 @@ export const getSerchResult = (filters) => {
   if (MOCK_DATA.searchResult) return Promise.resolve(searchResultMock);
 
   return axios
-    .get(`http://localhost:5000/api/search?${buildQueryForFilters(filters)}`)
+    .get(
+      `http://localhost:5000/api/search?${buildQueryForFilters(
+        cleanObj(filters)
+      )}`
+    )
     .then((data) => data);
 };
 
@@ -203,4 +221,16 @@ export const getOperator = () => {
 
 export const getAdminSearchResult = (filters) => {
   return getRequest("admin/get-profile", filters);
+};
+
+export const bookmarkProfile = (filters) => {
+  console.log(filters);
+  return;
+  return axios({
+    method: "post",
+    url: "http://localhost:5000/api/bookmarkProfile",
+    data: filters,
+  }).catch((error) => {
+    console.log(error);
+  });
 };

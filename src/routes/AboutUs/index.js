@@ -4,6 +4,7 @@ import "./index.css";
 import Button from "react-bootstrap/Button";
 
 const AboutUs = () => {
+  console.log("+++", "About us");
   return (
     <>
       <Container>
@@ -33,4 +34,4 @@ const AboutUs = () => {
   );
 };
 
-export default AboutUs;
+export default React.memo(AboutUs);

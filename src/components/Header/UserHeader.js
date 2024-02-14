@@ -59,14 +59,14 @@ const UserHeader = () => {
         case "groom":
           currentRoute = "groom-listing";
           break;
-        case "bridge":
-          currentRoute = "bridge-listing";
+        case "bride":
+          currentRoute = "bride-listing";
           break;
         case "divorceeGroom":
           currentRoute = "divorcee-groom-listing";
           break;
-        case "divorceeBridge":
-          currentRoute = "divorcee-bridge-listing";
+        case "divorceeBride":
+          currentRoute = "divorcee-bride-listing";
           break;
         case "window":
           currentRoute = "window-listing";
@@ -210,10 +210,10 @@ const UserHeader = () => {
               <BsGenderMale /> Groom
             </li>
             <li
-              onClick={() => handleClick("bridge")}
-              className={currentRoute == "bridge-listing" ? "active-link" : ""}
+              onClick={() => handleClick("bride")}
+              className={currentRoute == "bride-listing" ? "active-link" : ""}
             >
-              <BsGenderFemale /> Bridge
+              <BsGenderFemale /> Bride
             </li>
             <li
               onClick={() => handleClick("divorceeGroom")}
@@ -224,13 +224,13 @@ const UserHeader = () => {
               <BsGenderMale /> Divorcee Groom
             </li>
             <li
-              onClick={() => handleClick("divorceeBridge")}
+              onClick={() => handleClick("divorceeBride")}
               className={
-                currentRoute == "divorcee-bridge-listing" ? "active-link" : ""
+                currentRoute == "divorcee-bride-listing" ? "active-link" : ""
               }
             >
               <BsGenderFemale />
-              Divorcee Bridge
+              Divorcee Bride
             </li>
             <li
               onClick={() => handleClick("windower")}
@@ -351,11 +351,8 @@ const UserHeader = () => {
                   <NavDropdown.Item onClick={() => handleClick("groom")}>
                     Groom
                   </NavDropdown.Item>
-                  <NavDropdown.Item
-                    active
-                    onClick={() => handleClick("bridge")}
-                  >
-                    Bridge
+                  <NavDropdown.Item active onClick={() => handleClick("bride")}>
+                    Bride
                   </NavDropdown.Item>
                   <NavDropdown.Item
                     onClick={() => handleClick("divorceeGroom")}
@@ -363,9 +360,9 @@ const UserHeader = () => {
                     Divorcee Groom
                   </NavDropdown.Item>
                   <NavDropdown.Item
-                    onClick={() => handleClick("divorceeBridge")}
+                    onClick={() => handleClick("divorceeBride")}
                   >
-                    divorcee Bridge
+                    divorcee Bride
                   </NavDropdown.Item>
                   <NavDropdown.Item onClick={() => handleClick("windower")}>
                     Windower

@@ -17,6 +17,7 @@ const capital = (val) => {
 };
 
 const LatestProfiles = () => {
+  console.log("latest profile");
   const [data, setData] = useState([]);
   const [isPreviewOpen, setIsPreviewOpen] = useState(false);
   const [imageUrl, setImageUrl] = useState("");
@@ -46,7 +47,7 @@ const LatestProfiles = () => {
 
       // Write brand website name on canvas
       ctx.font = "20px Arial BOLD"; // Adjust font as needed
-      ctx.fillStyle = "black"; //"rgba(255, 255, 255, 0.8)"; // Semi-transparent white
+      ctx.fillStyle = "white"; //"rgba(255, 255, 255, 0.8)"; // Semi-transparent white
       ctx.textAlign = "center";
       ctx.fillText("JODIDAAR.com", canvas.width / 2, canvas.height - 30); // Adjust position as needed
       console.log("canvas", canvas);
@@ -192,4 +193,4 @@ const LatestProfiles = () => {
   );
 };
 
-export default LatestProfiles;
+export default React.memo(LatestProfiles);

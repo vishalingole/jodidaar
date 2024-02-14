@@ -26,4 +26,4 @@ const UpToDate = () => {
   );
 };
 
-export default UpToDate;
+export default React.memo(UpToDate);
