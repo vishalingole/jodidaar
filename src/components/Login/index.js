@@ -13,7 +13,7 @@ const Login = () => {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [formData, setFormData] = useState();
-  const [otp, setOtp] = useState(true);
+  const [otp, setOtp] = useState(false);
   const [error, setError] = useState("");
   const [userId, setUserId] = useState(null);
   const isMobile = IsMobile();
