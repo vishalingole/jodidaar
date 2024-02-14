@@ -4,21 +4,29 @@ import { FaBookmark } from "react-icons/fa6";
 import { CiBookmark } from "react-icons/ci";
 import { getImageUrl } from "../../utils/getImageUrl";
 import { bookmarkProfile } from "../../utils/webRequest";
+import { getUserId } from "../../utils/user";
+import moment from "moment";
 
 const capital = (val) => {
   return val.toUpperCase();
 };
 
+const getAge = (item) => {
+  var years = moment().diff("1981-01-01", "years", false);
+  console.log(years);
+};
+
 const ImageGallery = (props) => {
   const { result } = props;
+  const userId = getUserId();
 
   const handleBookmark = (item) => {
     console.log(item);
     let payload = {
       bookmarkBy: item.uuid,
-      bookmarkTo: "",
+      bookmarkTo: userId,
     };
-    // bookmarkProfile(payload).then((data) => console.log(data));
+    bookmarkProfile(payload);
   };
 
   const getImageItem = () => {
@@ -39,7 +47,12 @@ const ImageGallery = (props) => {
                     ? capital(item.PersonalDetails.lastName)
                     : "Not Provided"}
                 </div>
-                <div className="user-years">22 Yr</div>
+                <div className="user-years">
+                  {item && item.PersonalDetails && item.PersonalDetails.dob
+                    ? item.PersonalDetails.dob
+                    : "Not Provided"}{" "}
+                  Yr
+                </div>
               </div>
               <span
                 className="img-bookmark-icon"

@@ -7,12 +7,12 @@
 
 .services-card .card {
   background: #e6e6e3;
-  border-radius: 22x;
+  border-radius: 22px;
   border: none;
   padding: 20px;
   text-align: center;
   flex-basis: 32%;
-  margin: 3px;
+  margin: 5px;
 }
 .service-icon {
   padding: 20px;

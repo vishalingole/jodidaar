@@ -224,7 +224,7 @@ export const getAdminSearchResult = (filters) => {
 };
 
 export const bookmarkProfile = (filters) => {
-  console.log(filters);
+  console.log("+++", filters);
   return;
   return axios({
     method: "post",
