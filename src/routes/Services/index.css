@@ -1,24 +1,35 @@
 .services-card {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   /* flex-direction: row; */
 }
 
 .services-card .card {
   background: #e6e6e3;
-  border-radius: 22px;
+  border-radius: 22x;
   border: none;
-  padding: 10px;
+  padding: 20px;
   text-align: center;
-  flex-basis: 16%;
+  flex-basis: 32%;
   margin: 3px;
 }
 .service-icon {
-  padding: 10px;
+  padding: 20px;
 }
+
 .service-title {
-  font-size: 12px;
+  font-size: 14px;
+}
+
+.service-description {
+  font-size: 14px;
+  color: #818181;
+}
+
+.services-card .card-body {
+  padding: 0px;
+  padding-bottom: 20px;
 }
 
 @media (max-width: 800px) {

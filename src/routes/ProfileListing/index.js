@@ -3,7 +3,6 @@ import { useLocation } from "react-router-dom";
 import ImageGallery from "../../components/ImageGallery";
 import "./index.css";
 import { getSerchResult } from "../../utils/webRequest";
-import { Container } from "react-bootstrap";
 
 const ProfileListing = () => {
   const location = useLocation();

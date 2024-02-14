@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import "./index.css";
 import Services from "../Services";
 import Register from "../Register";
@@ -21,13 +21,16 @@ const Landing = () => {
     getDistictsList();
   }, []);
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-  };
+  const handleInputChange = useCallback(
+    (e) => {
+      const { name, value } = e.target;
+      setFormData({
+        ...formData,
+        [name]: value,
+      });
+    },
+    [formData]
+  );
 
   const getDistictsList = () => {
     getDisticts().then((response) => setDistrictList(response.data));
@@ -38,6 +41,7 @@ const Landing = () => {
   };
 
   const handleLanguageChange = (e) => {
+    console.log("+++");
     let url = window.location.href;
     let lng = e.target.value;
     if (e.target.value) {
@@ -75,7 +79,7 @@ const Landing = () => {
           </div>
           <div className="top-section-right-content">
             <div className="quick-search">
-              I Am Looking For
+              Looking For
               <div>
                 <SelectDropdown
                   data={lookingForColumns}

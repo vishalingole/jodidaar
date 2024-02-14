@@ -2,41 +2,19 @@ import React, { useState } from "react";
 import { Button, Container } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { getProfileImage } from "../../utils/webRequest";
+import { getImageUrl } from "../../utils/getImageUrl";
+
+const capital = (val) => {
+  return val.toUpperCase();
+};
+const formatIncome = (price) => {
+  return new Intl.NumberFormat().format(price);
+};
 
 const Result = (props) => {
   const navigate = useNavigate();
   const { searchResult = [] } = props;
   const { data } = searchResult;
-  const [imagePath, setImagePath] = useState("");
-
-  const getImageUrl = (item) => {
-    if (item.file) {
-      return `data:image/jpeg;base64,` + item.file;
-    } else if (item.gender == "Male")
-      return process.env.PUBLIC_URL + "/dummy-man.png";
-    else return process.env.PUBLIC_URL + "/dummy-woman.png";
-  };
-
-  const getImage = async (item) => {
-    const path = await getProfileImage({ id: 1 }).then((response) => {
-      // console.log(response.data);
-      // setImagePath(response.data);
-      return response.data;
-    });
-    let x = `data:image/jpeg;base64,${btoa(
-      String.fromCharCode(...new Uint8Array(path))
-    )}`;
-    console.log("x", x);
-    return x;
-  };
-
-  const capital = (val) => {
-    return val.toUpperCase();
-  };
-
-  const formatIncome = (price) => {
-    return new Intl.NumberFormat().format(price);
-  };
 
   const handleViewProfile = (item) => {
     const user = localStorage.getItem("user");
@@ -48,10 +26,6 @@ const Result = (props) => {
       alert("Please register yourself.");
       return false;
     }
-  };
-
-  const imageGrid = () => {
-    return <>Image Grid</>;
   };
 
   return (
@@ -66,7 +40,6 @@ const Result = (props) => {
               return (
                 <div key={index} className="search-result-widget">
                   <div className="search-result">
-                    {/* {JSON.stringify(item)} */}
                     <div className="profile-section-left">
                       <img
                         style={{
@@ -123,14 +96,6 @@ const Result = (props) => {
                             ? capital(item.FamilyBackground.nativeDistrict)
                             : "Not Provided"}
                         </div>
-                        {/* <div className="content-key">HEIGHT :</div>
-                        <div className="content-value">
-                          {item &&
-                          item.PersonalDetails &&
-                          item.PersonalDetails.height
-                            ? item.PersonalDetails.height + " FEET"
-                            : "Not Provided"}
-                        </div> */}
                       </div>
                       <div className="primary-detail">
                         <div className="content-key">INCOME:</div>
@@ -143,14 +108,6 @@ const Result = (props) => {
                               item.EducationDetails.incomeType
                             : "Not Provided"}
                         </div>
-                        {/* <div className="content-key">BIRTH DATE :</div>
-                        <div className="content-value">
-                          {item &&
-                          item.PersonalDetails &&
-                          item.PersonalDetails.dob
-                            ? item.PersonalDetails.dob
-                            : "Not Provided"}
-                        </div> */}
                       </div>
                       <div className="primary-detail">
                         <div className="content-key">EDUCATION:</div>
@@ -161,14 +118,6 @@ const Result = (props) => {
                             ? capital(item.EducationDetails.education)
                             : "Not Provided"}
                         </div>
-                        {/* <div className="content-key">OCCUPATION :</div>
-                        <div className="content-value">
-                          {item &&
-                          item.EducationDetails &&
-                          item.EducationDetails.occupationDetail
-                            ? capital(item.EducationDetails.occupationDetail)
-                            : "Not Provided"}
-                        </div> */}
                       </div>
                       <div className="primary-detail">
                         <div className="content-key">OCCUPATION :</div>
@@ -180,7 +129,6 @@ const Result = (props) => {
                             : "Not Provided"}
                         </div>
                       </div>
-                      {/* </div> */}
                     </div>
                   </div>
                 </div>
@@ -192,4 +140,4 @@ const Result = (props) => {
   );
 };
 
-export default Result;
+export default React.memo(Result);
