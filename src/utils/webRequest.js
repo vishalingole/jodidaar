@@ -223,12 +223,15 @@ export const getAdminSearchResult = (filters) => {
   return getRequest("admin/get-profile", filters);
 };
 
+export const getBookmarList = (filters) => {
+  return getRequest("bookmark/bookmark-list", filters);
+};
+
 export const bookmarkProfile = (filters) => {
   console.log("+++", filters);
-  return;
   return axios({
     method: "post",
-    url: "http://localhost:5000/api/bookmarkProfile",
+    url: "http://localhost:5000/api/bookmark/create",
     data: filters,
   }).catch((error) => {
     console.log(error);

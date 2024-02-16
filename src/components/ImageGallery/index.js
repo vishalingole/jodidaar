@@ -1,9 +1,9 @@
 import "./index.css";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FaBookmark } from "react-icons/fa6";
 import { CiBookmark } from "react-icons/ci";
 import { getImageUrl } from "../../utils/getImageUrl";
-import { bookmarkProfile } from "../../utils/webRequest";
+import { bookmarkProfile, getBookmarList } from "../../utils/webRequest";
 import { getUserId } from "../../utils/user";
 import moment from "moment";
 
@@ -18,13 +18,26 @@ const getAge = (item) => {
 
 const ImageGallery = (props) => {
   const { result } = props;
+  const [bookmarList, setBookmarkList] = useState([]);
+
   const userId = getUserId();
+
+  useEffect(() => {
+    getBookmarList({ loggedInUserId: userId }).then((response) => {
+      setBookmarkList(response.data.items);
+    });
+  }, []);
+
+  const isProfileBookmarked = (uuid) => {
+    const isItemPresent = bookmarList.includes(uuid);
+    return isItemPresent;
+  };
 
   const handleBookmark = (item) => {
     console.log(item);
     let payload = {
-      bookmarkBy: item.uuid,
-      bookmarkTo: userId,
+      bookmarkTo: item.uuid,
+      bookmarkBy: userId,
     };
     bookmarkProfile(payload);
   };
@@ -50,7 +63,7 @@ const ImageGallery = (props) => {
                 <div className="user-years">
                   {item && item.PersonalDetails && item.PersonalDetails.dob
                     ? item.PersonalDetails.dob
-                    : "Not Provided"}{" "}
+                    : "Not Provided"}
                   Yr
                 </div>
               </div>
@@ -59,19 +72,34 @@ const ImageGallery = (props) => {
                 style={{ position: "absolute", bottom: "3%", right: "5%" }}
               >
                 {/* <FaBookmark style={{ fontSize: "26px" }} /> */}
-                <CiBookmark
-                  title="Save Profile"
-                  style={{
-                    height: "30px",
-                    width: "25px",
-                    // position: "absolute",
-                    // right: "3%",
-                    // bottom: "2%",
-                    cursor: "pointer",
-                    color: "white",
-                  }}
-                  onClick={() => handleBookmark(item)}
-                />
+                {!isProfileBookmarked(item.uuid) ? (
+                  <CiBookmark
+                    title="Save Profile"
+                    style={{
+                      height: "30px",
+                      width: "25px",
+                      // position: "absolute",
+                      // right: "3%",
+                      // bottom: "2%",
+                      cursor: "pointer",
+                      color: "white",
+                    }}
+                    onClick={() => handleBookmark(item)}
+                  />
+                ) : (
+                  <FaBookmark
+                    title="Remove Profile"
+                    style={{
+                      height: "20px",
+                      width: "20px",
+                      // position: "absolute",
+                      // right: "3%",
+                      // bottom: "2%",
+                      cursor: "pointer",
+                      color: "white",
+                    }}
+                  />
+                )}
               </span>
             </div>
           </div>
