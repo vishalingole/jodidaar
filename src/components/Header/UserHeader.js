@@ -75,11 +75,15 @@ const UserHeader = () => {
           currentRoute = "windower-listing";
           break;
         default:
-          break;
+          break; 
       }
-    } else if ((location.pathname = "/terms-conditions")) {
+    } else if ((location.pathname == "/terms-conditions")) {
       currentRoute = "terms-and-conditions";
     }
+     else if ((location.pathname == "/bookmarks")){
+      currentRoute = "bookmarks";
+     }
+    
   }
 
   const user = localStorage.getItem("user");
@@ -249,7 +253,12 @@ const UserHeader = () => {
             <li>
               <TfiEmail /> Recommended Profiles
             </li>
-            <li>
+            <li
+              onClick={() => navigate("/bookmarks") }
+              className={
+                currentRoute == "bookmarks" ? "active-link" : ""
+              }
+            >
               <CiBookmark /> Saved Profiles
             </li>
             <li>
