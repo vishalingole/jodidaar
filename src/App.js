@@ -21,6 +21,7 @@ import Operator from "./routes/Admin/Operator";
 import AddOperator from "./routes/Admin/Operator/AddOperator";
 import TermsAndConditions from "./routes/TermsAndConditions";
 import ProfileListing from "./routes/ProfileListing";
+import Bookmarks from "./routes/Bookmarks";
 
 function App() {
   const { i18n, t } = useTranslation();
@@ -49,6 +50,7 @@ function App() {
             <Route exact path="/admin/operator" element={<Operator />} />
             <Route exact path="/admin/operator/add" element={<AddOperator />} />
             <Route exact path="/profile-listing" element={<ProfileListing />} />
+            <Route exact path="/bookmarks" element={<Bookmarks />} />
             <Route
               exact
               path="/terms-conditions"
