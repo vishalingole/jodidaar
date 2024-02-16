@@ -3,6 +3,7 @@ import "./index.css";
 import Services from "../Services";
 import Register from "../Register";
 import AboutUs from "../AboutUs";
+import HowToUse from "../HowToUse";
 import { Button, Container } from "react-bootstrap";
 import SuccessStories from "../SuccessStories";
 import LatestProfiles from "../LatestProfiles";
@@ -125,6 +126,7 @@ const Landing = () => {
         <Services />
       </div>
       <AboutUs />
+      <HowToUse/> <br />
       <SuccessStories />
       <LatestProfiles />
       <UpToDate />
