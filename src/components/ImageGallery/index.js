@@ -17,30 +17,30 @@ const getAge = (item) => {
 };
 
 const ImageGallery = (props) => {
-  const { result } = props;
+  const { result, handleBookmark } = props;
   const [bookmarList, setBookmarkList] = useState([]);
 
   const userId = getUserId();
 
   useEffect(() => {
-    getBookmarList({ loggedInUserId: userId }).then((response) => {
+    getBookmarList({ userId: userId }).then((response) => {
       setBookmarkList(response.data.items);
     });
-  }, []);
+  }, [props]);
 
   const isProfileBookmarked = (uuid) => {
     const isItemPresent = bookmarList.includes(uuid);
     return isItemPresent;
   };
 
-  const handleBookmark = (item) => {
-    console.log(item);
-    let payload = {
-      bookmarkTo: item.uuid,
-      bookmarkBy: userId,
-    };
-    bookmarkProfile(payload);
-  };
+  // const handleBookmark = (item) => {
+  //   console.log(item);
+  //   let payload = {
+  //     bookmarkTo: item.uuid,
+  //     bookmarkBy: userId,
+  //   };
+  //   bookmarkProfile(payload);
+  // };
 
   const getImageItem = () => {
     return result.map((item) => {
@@ -84,7 +84,7 @@ const ImageGallery = (props) => {
                       cursor: "pointer",
                       color: "white",
                     }}
-                    onClick={() => handleBookmark(item)}
+                    onClick={() => handleBookmark(item, "add")}
                   />
                 ) : (
                   <FaBookmark
@@ -98,6 +98,7 @@ const ImageGallery = (props) => {
                       cursor: "pointer",
                       color: "white",
                     }}
+                    onClick={() => handleBookmark(item, "remove")}
                   />
                 )}
               </span>

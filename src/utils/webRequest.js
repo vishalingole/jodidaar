@@ -237,3 +237,14 @@ export const bookmarkProfile = (filters) => {
     console.log(error);
   });
 };
+
+export const removeBookmark = (filters) => {
+  console.log("+++", filters);
+  return axios({
+    method: "post",
+    url: "http://localhost:5000/api/bookmark/remove",
+    data: filters,
+  }).catch((error) => {
+    console.log(error);
+  });
+};
