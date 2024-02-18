@@ -1,5 +1,6 @@
 import { cityListMock } from "../Mock/cityList";
 import { latestProfilesMock } from "../Mock/latestProfiles";
+import { myProfilesMock } from "../Mock/myProfile";
 import { searchResultMock } from "../Mock/searchResult";
 import { MOCK_DATA } from "../environment";
 import { getRequest } from "./request";
@@ -153,8 +154,8 @@ export const login = (filters) => {
 };
 
 export const getProfileDetail = (filters) => {
-  if (MOCK_DATA.requestList) {
-    return "abc";
+  if (MOCK_DATA.myProfile) {
+    return Promise.resolve(myProfilesMock);
   }
   // axios
   //   .get("http://localhost:5000/api/user/profile-detail")

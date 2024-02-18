@@ -12,8 +12,9 @@ const capital = (val) => {
 };
 
 const getAge = (item) => {
-  var years = moment().diff("1981-01-01", "years", false);
+  var years = moment().diff(item, "years", false);
   console.log(years);
+  return years;
 };
 
 const ImageGallery = (props) => {
@@ -43,10 +44,10 @@ const ImageGallery = (props) => {
   // };
 
   const getImageItem = () => {
-    return result.map((item) => {
+    return result.map((item, index) => {
       return (
         <>
-          <div className="grid-item">
+          <div className="grid-item" key={index}>
             <img
               className="user-image"
               key={item.id}
@@ -62,9 +63,8 @@ const ImageGallery = (props) => {
                 </div>
                 <div className="user-years">
                   {item && item.PersonalDetails && item.PersonalDetails.dob
-                    ? item.PersonalDetails.dob
+                    ? getAge(item.PersonalDetails.dob) + " Yr"
                     : "Not Provided"}
-                  Yr
                 </div>
               </div>
               <span

@@ -8,10 +8,12 @@ import {
   removeBookmark,
 } from "../../utils/webRequest";
 import { getUserId } from "../../utils/user";
+import Spinner from "react-bootstrap/Spinner";
 
 const ProfileListing = () => {
   const location = useLocation();
   const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(false);
   const userId = getUserId();
   useEffect(() => {
     async function getData() {
@@ -30,19 +32,20 @@ const ProfileListing = () => {
 
   const handleBookmark = (item, type) => {
     console.log(item);
+    setLoading(true);
     let payload = {
       bookmarkTo: item.uuid,
       bookmarkBy: userId,
     };
     if (type == "add")
       bookmarkProfile(payload).then((response) => {
-        console.log(response);
+        setLoading(false);
         let { statusCode } = response.data;
         if (statusCode == 200) getList();
       });
     else
       removeBookmark(payload).then((response) => {
-        console.log(response);
+        setLoading(false);
         let { statusCode } = response.data;
         if (statusCode == 200) getList();
       });
@@ -51,6 +54,11 @@ const ProfileListing = () => {
   return (
     <>
       <div className="profile-listing-container">
+        {loading && (
+          <div className="spinner-overlay">
+            <Spinner animation="grow" variant="light" />
+          </div>
+        )}
         <ImageGallery
           result={data && data.items ? data.items : []}
           handleBookmark={handleBookmark}

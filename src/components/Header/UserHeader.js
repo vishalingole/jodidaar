@@ -75,15 +75,13 @@ const UserHeader = () => {
           currentRoute = "windower-listing";
           break;
         default:
-          break; 
+          break;
       }
-    } else if ((location.pathname == "/terms-conditions")) {
+    } else if (location.pathname == "/terms-conditions") {
       currentRoute = "terms-and-conditions";
-    }
-     else if ((location.pathname == "/bookmarks")){
+    } else if (location.pathname == "/bookmarks") {
       currentRoute = "bookmarks";
-     }
-    
+    }
   }
 
   const user = localStorage.getItem("user");
@@ -202,7 +200,10 @@ const UserHeader = () => {
               </div>
             </li>
             <li
-              onClick={() => navigate("/search")}
+              onClick={() => {
+                toggleMobileMenu();
+                navigate("/search");
+              }}
               className={currentRoute == "Advance Search" ? "active-link" : ""}
             >
               <RiUserSearchLine /> Advance Search
@@ -254,10 +255,11 @@ const UserHeader = () => {
               <TfiEmail /> Recommended Profiles
             </li>
             <li
-              onClick={() => navigate("/bookmarks") }
-              className={
-                currentRoute == "bookmarks" ? "active-link" : ""
-              }
+              onClick={async () => {
+                await toggleMobileMenu();
+                navigate("/bookmarks");
+              }}
+              className={currentRoute == "bookmarks" ? "active-link" : ""}
             >
               <CiBookmark /> Saved Profiles
             </li>
