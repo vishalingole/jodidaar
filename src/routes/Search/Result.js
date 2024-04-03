@@ -12,6 +12,7 @@ const formatIncome = (price) => {
 };
 
 const Result = (props) => {
+  console.log("props", props);
   const navigate = useNavigate();
   const { searchResult = [] } = props;
   const { data } = searchResult;
@@ -54,7 +55,7 @@ const Result = (props) => {
                         <Button
                           variant="primary"
                           size="sm"
-                          className="next-btn"
+                          className="view-profile"
                           type="submit"
                           onClick={() => handleViewProfile(item)}
                         >

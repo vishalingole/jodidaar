@@ -27,6 +27,15 @@ const capital = (val) => {
   return val.toUpperCase();
 };
 
+const profileList = [
+  "widow-listing",
+  "groom-listing",
+  "bride-listing",
+  "divorcee-groom-listing",
+  "divorcee-bride-listing",
+  "widower-listing",
+];
+
 const UserHeader = () => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -68,11 +77,11 @@ const UserHeader = () => {
         case "divorceeBride":
           currentRoute = "divorcee-bride-listing";
           break;
-        case "window":
-          currentRoute = "window-listing";
+        case "widow":
+          currentRoute = "widow-listing";
           break;
-        case "windower":
-          currentRoute = "windower-listing";
+        case "widower":
+          currentRoute = "widower-listing";
           break;
         default:
           break;
@@ -238,18 +247,16 @@ const UserHeader = () => {
               Divorcee Bride
             </li>
             <li
-              onClick={() => handleClick("windower")}
-              className={
-                currentRoute == "windower-listing" ? "active-link" : ""
-              }
+              onClick={() => handleClick("widower")}
+              className={currentRoute == "widower-listing" ? "active-link" : ""}
             >
-              <BsGenderMale /> Windower
+              <BsGenderMale /> Widower
             </li>
             <li
-              onClick={() => handleClick("window")}
-              className={currentRoute == "window-listing" ? "active-link" : ""}
+              onClick={() => handleClick("widow")}
+              className={currentRoute == "widow-listing" ? "active-link" : ""}
             >
-              <BsGenderFemale /> Window
+              <BsGenderFemale /> Widow
             </li>
             <li>
               <TfiEmail /> Recommended Profiles
@@ -358,28 +365,61 @@ const UserHeader = () => {
                   title="Quick Search"
                   style={{ marginLeft: "5px", marginRight: "5px" }}
                   // menuVariant="dark"
+                  className={
+                    profileList.includes(currentRoute) ? "active-link" : ""
+                  }
                 >
-                  <NavDropdown.Item onClick={() => handleClick("groom")}>
+                  <NavDropdown.Item
+                    className={
+                      currentRoute == "groom-listing" ? "active-link" : ""
+                    }
+                    onClick={() => handleClick("groom")}
+                  >
                     Groom
                   </NavDropdown.Item>
-                  <NavDropdown.Item active onClick={() => handleClick("bride")}>
+                  <NavDropdown.Item
+                    className={
+                      currentRoute == "bride-listing" ? "active-link" : ""
+                    }
+                    onClick={() => handleClick("bride")}
+                  >
                     Bride
                   </NavDropdown.Item>
                   <NavDropdown.Item
+                    className={
+                      currentRoute == "divorcee-groom-listing"
+                        ? "active-link"
+                        : ""
+                    }
                     onClick={() => handleClick("divorceeGroom")}
                   >
                     Divorcee Groom
                   </NavDropdown.Item>
                   <NavDropdown.Item
+                    className={
+                      currentRoute == "divorcee-bride-listing"
+                        ? "active-link"
+                        : ""
+                    }
                     onClick={() => handleClick("divorceeBride")}
                   >
                     divorcee Bride
                   </NavDropdown.Item>
-                  <NavDropdown.Item onClick={() => handleClick("windower")}>
-                    Windower
+                  <NavDropdown.Item
+                    className={
+                      currentRoute == "widower-listing" ? "active-link" : ""
+                    }
+                    onClick={() => handleClick("widower")}
+                  >
+                    Widower
                   </NavDropdown.Item>
-                  <NavDropdown.Item onClick={() => handleClick("window")}>
-                    Window
+                  <NavDropdown.Item
+                    className={
+                      currentRoute == "widow-listing" ? "active-link" : ""
+                    }
+                    onClick={() => handleClick("widow")}
+                  >
+                    Widow
                   </NavDropdown.Item>
                 </NavDropdown>
               </li>

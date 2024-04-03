@@ -57,12 +57,13 @@ const Register = ({ name = "Register" }) => {
       </Button>
       {isModalOpen && (
         <Modal show={isModalOpen} onHide={handleClose} backdrop={false}>
-          <Modal.Header closeButton={false}>
-            {/* <Modal.Title>Registration</Modal.Title> */}
-            <div>Registration</div>
-            <CloseIcon onClick={handleClose} />
-          </Modal.Header>
           <Modal.Body>
+            <div style={{ padding: "10px", textAlign: "center" }}>
+              <h5>Registration</h5>
+              <div style={{ position: "absolute", top: "3%", right: "3%" }}>
+                <CloseIcon onClick={handleClose} />
+              </div>
+            </div>
             {!isMobileDevice && (
               <Stepper
                 activeStep={step - 1}

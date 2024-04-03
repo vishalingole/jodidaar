@@ -78,9 +78,24 @@ body {
 }
 
 .modal-content {
-  border-radius: 0px;
+  /* border-radius: 0px; */
+  /* box-shadow: 2px 3px 2px #999; */
+  /* opacity: 0.9; */
+  /* suggest offwhite rgb color */
+
+  /* background-color: rgba(255, 255, 255, 0.6); */
+  /* color: white; */
 }
 
 .next-btn {
-  float: right;
+  border-radius: 0px;
+  width: 200px;
+  background-color: #f54c1e;
+  border: none;
+}
+
+.clear-btn {
+  border-radius: 0px;
+  width: 200px;
+  border: none;
 }

@@ -420,7 +420,7 @@ const PersonalDetails = (props) => {
                   onChange={(date) => field.onChange(date)}
                   isClearable="true"
                   dateFormat="MM/dd/yyyy"
-                  placeholderText="Date Of Birth (mm/dd/yyyy)"
+                  placeholderText="Date Of Birth (mm/dd/yyyy) "
                   minDate={moment().subtract(50, "years")._d}
                   maxDate={moment().subtract(18, "years")._d}
                 />
@@ -481,18 +481,18 @@ const PersonalDetails = (props) => {
           <Button
             variant="primary"
             size="sm"
-            className="next-btn"
-            type="submit"
+            className="clear-btn"
+            onClick={handleClear}
           >
-            Next
+            Clear
           </Button>
           <Button
             variant="primary"
             size="sm"
             className="next-btn"
-            onClick={handleClear}
+            type="submit"
           >
-            Clear
+            Next
           </Button>
         </div>
       </form>

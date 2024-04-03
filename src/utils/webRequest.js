@@ -73,6 +73,30 @@ export const getSerchResult = (filters) => {
     .then((data) => data);
 };
 
+export const getSearchByType = (filters) => {
+  if (MOCK_DATA.searchResult) return Promise.resolve(searchResultMock);
+
+  return axios
+    .get(
+      `http://localhost:5000/api/search/getSearchBy?${buildQueryForFilters(
+        cleanObj(filters)
+      )}`
+    )
+    .then((data) => data);
+};
+
+export const getAdvanceSearchResult = (filters) => {
+  if (MOCK_DATA.searchResult) return Promise.resolve(searchResultMock);
+
+  return axios
+    .get(
+      `http://localhost:5000/api/advance-search?${buildQueryForFilters(
+        cleanObj(filters)
+      )}`
+    )
+    .then((data) => data);
+};
+
 export const registerUser = (filters) => {
   if (MOCK_DATA.register) {
     return { accessToken: "test", refreshToken: "sss" };
@@ -157,10 +181,10 @@ export const getProfileDetail = (filters) => {
   if (MOCK_DATA.myProfile) {
     return Promise.resolve(myProfilesMock);
   }
-  // axios
-  //   .get("http://localhost:5000/api/user/profile-detail")
-  //   .then((data) => console.log(data.data))
-  //   .catch((error) => console.log(error));
+  axios
+    .get("http://localhost:5000/api/user/profile-detail")
+    .then((data) => console.log(data.data))
+    .catch((error) => console.log(error));
 
   return getRequest("user/profile-detail", filters);
 };

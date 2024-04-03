@@ -6,7 +6,7 @@ import { Button, Container } from "react-bootstrap";
 import SelectDropdown from "../../components/SelectDropdown";
 import {
   getProfileImage,
-  getSerchResult,
+  getAdvanceSearchResult,
   getDisticts,
 } from "../../utils/webRequest";
 import {
@@ -14,35 +14,28 @@ import {
   occupationTypeColumn,
   heightRangeColumn,
   lookingForColumns,
+  incomeRangeColumns,
 } from "./column";
 import { useLocation } from "react-router-dom";
-
+import { useDistricts } from "../../hooks/useDistricts";
 const Search = (props) => {
   const location = useLocation();
-  const [districtList, setDistrictList] = useState([]);
   let initialState = {};
   const [formData, setFormData] = useState(initialState);
   const [result, setResult] = useState([]);
   const [showResult, setShowResult] = useState(false);
   const [image, setImage] = useState("");
+  const districtList = useDistricts();
 
   useEffect(() => {
-    getDistictsList();
     if (location && location.state) {
       setFormData({ ...location.state });
-      getSerchResult({ ...location.state }).then((response) => {
+      getAdvanceSearchResult({ ...location.state }).then((response) => {
         setShowResult(true);
-        setResult(response);
+        setResult(response.data);
       });
     }
   }, []);
-
-  const getDistictsList = async () => {
-    await getDisticts().then((response) => {
-      console.log("+++", response.data);
-      setDistrictList(response.data);
-    });
-  };
 
   const handleInputChange = (e) => {
     console.log(e.target.name);
@@ -57,7 +50,7 @@ const Search = (props) => {
   const handleFormSubmit = (e) => {
     e.preventDefault();
     console.log("handleSubmit", formData);
-    getSerchResult(formData).then((response) => {
+    getAdvanceSearchResult(formData).then((response) => {
       setShowResult(true);
       setResult(response);
     });
@@ -218,10 +211,10 @@ const Search = (props) => {
             </div>
             <div className="search-container-child">
               <SelectDropdown
-                data={heightRangeColumn}
-                name="height"
+                data={incomeRangeColumns}
+                name="income"
                 onChange={handleInputChange}
-                value={formData && formData.height ? formData.height : ""}
+                value={formData && formData.income ? formData.income : ""}
               />
             </div>
             <div className="search-container-child option-selection">

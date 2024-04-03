@@ -165,10 +165,10 @@ const EducationDetails = (props) => {
           <Button
             variant="primary"
             size="sm"
-            className="next-btn"
-            type="submit"
+            className="clear-btn"
+            onClick={handleClear}
           >
-            Next
+            Clear
           </Button>
           <Button
             variant="primary"
@@ -182,9 +182,9 @@ const EducationDetails = (props) => {
             variant="primary"
             size="sm"
             className="next-btn"
-            onClick={handleClear}
+            type="submit"
           >
-            Clear
+            Next
           </Button>
         </div>
       </form>

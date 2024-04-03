@@ -288,12 +288,12 @@ export const lookingForColumns = [
     value: "divorceeBride",
   },
   {
-    lable: "Windower",
-    value: "windower",
+    lable: "Widower",
+    value: "widower",
   },
   {
-    lable: "Window",
-    value: "window",
+    lable: "Widow",
+    value: "widow",
   },
 ];
 
@@ -309,4 +309,20 @@ export const genderColumns = [
   { lable: "Gender", value: "" },
   { lable: "Male", value: "male" },
   { lable: "Female", value: "female" },
+];
+
+// create an array of objects with key as lable value as value for the dropdown. which shows the data of income annually in the dropdown with 5 lakhs range starting from one lakhs to 1 cr i.e income 1-5 then 5- 10 and last one shoudld ge greather than 1 cr
+export const incomeRangeColumns = [
+  { lable: "Select Annual Income", value: "" },
+  { lable: "1-10 Lakh", value: "1-10 Lakh" },
+  { lable: "10-20 Lakh", value: "10-20 Lakh" },
+  { lable: "20-30 Lakh", value: "20-30 Lakh" },
+  { lable: "30-40 Lakh", value: "30-40 Lakh" },
+  { lable: "40-50 Lakh", value: "40-50 Lakh" },
+  { lable: "50-60 Lakh", value: "50-60 Lakh" },
+  { lable: "60-70 Lakh", value: "60-70 Lakh" },
+  { lable: "70-80 Lakh", value: "70-80 Lakh" },
+  { lable: "80-90 Lakh", value: "80-90 Lakh" },
+  { lable: "90-100 Lakh", value: "90-100 Lakh" },
+  { lable: "Greater than 1 Cr", value: "1 Cr" },
 ];

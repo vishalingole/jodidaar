@@ -27,4 +27,4 @@ const SelectDropdown = (props) => {
   );
 };
 
-export default SelectDropdown;
+export default React.memo(SelectDropdown);

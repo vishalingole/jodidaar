@@ -3,26 +3,15 @@ import Input from "../../components/Input";
 import Button from "react-bootstrap/Button";
 import { horoscopeDetail, getDisticts } from "../../utils/webRequest";
 import SelectDropdown from "../../components/SelectDropdown";
+import { useDistricts } from "../../hooks/useDistricts";
+import { getUserId } from "../../utils/user";
 
 const HoroscopeDetails = (props) => {
   const { setStep } = props;
 
   const [formData, setFormData] = useState({});
-  const [districtList, setDistrictList] = useState([]);
 
-  let selectObj = { id: 0, lable: "Native District", value: "" };
-
-  useEffect(() => {
-    getDistictsList();
-  }, []);
-
-  const getDistictsList = () => {
-    getDisticts().then((response) => {
-      let cloneObj = Array.from(response.data);
-      cloneObj.unshift(selectObj);
-      setDistrictList(cloneObj);
-    });
-  };
+  const districtList = useDistricts();
 
   const handleInputChange = (e) => {
     console.log(e.target.value);
@@ -36,9 +25,7 @@ const HoroscopeDetails = (props) => {
   const handleFormSubmit = (e) => {
     e.preventDefault();
     console.log("handleSubmit", formData);
-    const user = localStorage.getItem("user");
-    const userObj = user ? JSON.parse(user) : {};
-    const userId = userObj && userObj.id ? userObj.id : "";
+    const userId = getUserId();
     if (userId) {
       horoscopeDetail({ id: userId, ...formData })
         .then((data) => {
@@ -50,7 +37,6 @@ const HoroscopeDetails = (props) => {
   };
 
   const handleClear = () => {
-    console.log("----");
     setFormData({});
   };
 
@@ -418,7 +404,7 @@ const HoroscopeDetails = (props) => {
           <Button
             variant="primary"
             size="sm"
-            className="next-btn"
+            className="clear-btn"
             onClick={handleClear}
           >
             Clear

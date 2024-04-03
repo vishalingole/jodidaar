@@ -1,32 +1,15 @@
 import React, { useEffect, useState } from "react";
-import Input from "../../components/Input";
 import Button from "react-bootstrap/Button";
 import { familyBackground } from "../../utils/webRequest";
-import { getDisticts } from "../../utils/webRequest";
 import { ErrorMessage } from "@hookform/error-message";
 import { useForm, Controller } from "react-hook-form";
 import SelectDropdown from "../../components/SelectDropdown";
+import { useDistricts } from "../../hooks/useDistricts";
+import { getUserId } from "../../utils/user";
 
 const FamilyBackground = (props) => {
   const { setStep } = props;
-
-  const [formData, setFormData] = useState({});
-  const [districtList, setDistrictList] = useState([]);
-
-  let selectObj = { id: 0, lable: "Native District", value: "" };
-
-  useEffect(() => {
-    getDistictsList();
-  }, []);
-
-  const getDistictsList = () => {
-    getDisticts().then((response) => {
-      let cloneObj = Array.from(response.data);
-      cloneObj.unshift(selectObj);
-      setDistrictList(cloneObj);
-    });
-  };
-
+  const districtList = useDistricts();
   const {
     reset,
     control,
@@ -37,29 +20,12 @@ const FamilyBackground = (props) => {
     criteriaMode: "all",
   });
 
-  const handleFormSubmit = (e) => {
-    e.preventDefault();
-    const user = localStorage.getItem("user");
-    const userObj = user ? JSON.parse(user) : {};
-    const userId = userObj && userObj.id ? userObj.id : "";
-    if (userId) {
-      familyBackground({ id: userId, ...formData })
-        .then((data) => {
-          setStep(4);
-        })
-        .catch((error) => console.log(error));
-    }
-    setStep(4);
-  };
-
   const handleClear = () => {
     reset();
   };
 
   const onSubmit = (data) => {
-    const user = localStorage.getItem("user");
-    const userObj = user ? JSON.parse(user) : {};
-    const userId = userObj && userObj.id ? userObj.id : "";
+    const userId = getUserId();
     if (userId) {
       familyBackground({ id: userId, ...data })
         .then((data) => {
@@ -244,11 +210,12 @@ const FamilyBackground = (props) => {
           <Button
             variant="primary"
             size="sm"
-            className="next-btn"
-            type="submit"
+            className="clear-btn"
+            onClick={handleClear}
           >
-            Next
+            Clear
           </Button>
+
           <Button
             variant="primary"
             size="sm"
@@ -261,9 +228,9 @@ const FamilyBackground = (props) => {
             variant="primary"
             size="sm"
             className="next-btn"
-            onClick={handleClear}
+            type="submit"
           >
-            Clear
+            Next
           </Button>
         </div>
       </form>

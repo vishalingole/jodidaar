@@ -215,7 +215,7 @@ const Address = (props) => {
           <Button
             variant="primary"
             size="sm"
-            className="next-btn"
+            className="clear-btn"
             onClick={handleClear}
           >
             Clear

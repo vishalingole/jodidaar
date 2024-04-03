@@ -36,7 +36,10 @@
 }
 
 .footer-buttons {
-  margin: 20px 5px;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-content: center;
 }
 
 .registration-form .form-select {

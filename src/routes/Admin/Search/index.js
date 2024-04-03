@@ -3,27 +3,27 @@ import "./index.css";
 import Input from "../../../components/Input";
 import { Button, Container } from "react-bootstrap";
 import SelectDropdown from "../../../components/SelectDropdown";
-import { getDisticts, getAdminSearchResult } from "../../../utils/webRequest";
+import { getAdminSearchResult } from "../../../utils/webRequest";
 import {
   educationAreaColumn,
   occupationTypeColumn,
   profileStatusColumn,
   lookingForColumns,
 } from "../../Search/column";
+import { useDistricts } from "../../../hooks/useDistricts";
 
 import { useLocation } from "react-router-dom";
 import Result from "./Result";
 
 const AdminSearch = () => {
   const location = useLocation();
-  const [districtList, setDistrictList] = useState([]);
   let initialState = {};
   const [formData, setFormData] = useState(initialState);
   const [result, setResult] = useState([]);
   const [showResult, setShowResult] = useState(false);
-
+  let districtList;
   useEffect(async () => {
-    await getDistictsList();
+    districtList = await useDistricts();
     // if (location && location.state) {
     setFormData({ ...location.state });
     // getSerchResult({ ...location.state }).then((response) => {
@@ -32,10 +32,6 @@ const AdminSearch = () => {
     // });
     // }
   }, []);
-
-  const getDistictsList = () => {
-    getDisticts().then((response) => setDistrictList(response.data));
-  };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;

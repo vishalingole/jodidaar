@@ -1,7 +1,10 @@
 import React, { useEffect, useState, useRef } from "react";
 import { Container } from "react-bootstrap";
 import "./index.css";
-import { getLatestProfiles } from "../../utils/webRequest";
+import {
+  getLatestProfiles,
+  requestProfileDetail,
+} from "../../utils/webRequest";
 import { useNavigate } from "react-router-dom";
 import Slider from "./Slider";
 import { AiOutlineCloseCircle } from "react-icons/ai";
@@ -11,18 +14,21 @@ import { FaRegBookmark } from "react-icons/fa";
 import { CiBookmark } from "react-icons/ci";
 
 import { getImageUrl } from "../../utils/getImageUrl";
+import { getUserId } from "../../utils/user";
+import CustomToast from "../../components/CustomToast";
 
 const capital = (val) => {
   return val.toUpperCase();
 };
 
 const LatestProfiles = () => {
-  console.log("latest profile");
   const [data, setData] = useState([]);
   const [isPreviewOpen, setIsPreviewOpen] = useState(false);
   const [imageUrl, setImageUrl] = useState("");
   const imageRef = useRef(null);
   let isMobile = IsMobile();
+  const [toastMessage, setToastMessage] = useState("");
+  const [showToast, setShowToast] = useState(false);
 
   const navigate = useNavigate();
 
@@ -35,7 +41,6 @@ const LatestProfiles = () => {
 
   useEffect(() => {
     if (isPreviewOpen) {
-      console.log("+++");
       const image = imageRef.current;
       const canvas = document.createElement("canvas");
       const ctx = canvas.getContext("2d");
@@ -51,7 +56,7 @@ const LatestProfiles = () => {
       ctx.textAlign = "center";
       ctx.fillText("JODIDAAR.com", canvas.width / 2, canvas.height - 30); // Adjust position as needed
       console.log("canvas", canvas);
-      // Display the modified canvas image
+      // Display the modified canvas imageprogilfsd
       image.src = canvas.toDataURL();
     }
   }, [isPreviewOpen]);
@@ -68,6 +73,37 @@ const LatestProfiles = () => {
 
   const handlePreviewClose = () => {
     setIsPreviewOpen(false);
+  };
+
+  const handleRequestDetail = (item) => {
+    console.log(item);
+    const userId = getUserId();
+    if (userId) {
+      requestProfileDetail({
+        requestedBy: userId,
+        requestedFor: item.uuid,
+      })
+        .then((response) => {
+          if (
+            response &&
+            response.data &&
+            response.data.responseType == "SUCCESS"
+          ) {
+            setShowToast(true);
+            setToastMessage(response.data.responseMessage);
+          } else {
+            setShowToast(true);
+            setToastMessage(response.data.responseMessage);
+          }
+        })
+        .catch((error) => {
+          setShowToast(true);
+          setToastMessage("Something went wrong. Please try again later.");
+        });
+    } else {
+      setShowToast(true);
+      setToastMessage("Please login to request profile details.");
+    }
   };
 
   const getCard = () => {
@@ -122,13 +158,14 @@ const LatestProfiles = () => {
             </div>
             <div className="latest-profiles card-footer text-muted">
               <a
-                href="#"
                 style={{
                   background: "#031333",
                   color: "white",
                   padding: "6px 10px 6px 10px",
                   fontSize: "12px",
+                  cursor: "pointer",
                 }}
+                onClick={() => handleRequestDetail(item)}
               >
                 Request Details
               </a>
@@ -188,6 +225,16 @@ const LatestProfiles = () => {
             <AiOutlineCloseCircle />
           </button>
         </div>
+      )}
+
+      {showToast && (
+        <>
+          <CustomToast
+            message={toastMessage}
+            showToast={showToast}
+            handleShowToast={setShowToast}
+          />
+        </>
       )}
     </>
   );

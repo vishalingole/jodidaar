@@ -1,26 +1,23 @@
 import React, { useCallback, useEffect, useState } from "react";
 import "./index.css";
-import Services from "../Services";
 import Register from "../Register";
-import AboutUs from "../AboutUs";
-import HowToUse from "../HowToUse";
-import { Button, Container } from "react-bootstrap";
-import SuccessStories from "../SuccessStories";
-import LatestProfiles from "../LatestProfiles";
-import UpToDate from "../UpToDate";
+import { Button, Container, Spinner } from "react-bootstrap";
 import SelectDropdown from "../../components/SelectDropdown";
 import { lookingForColumns, languageColumns } from "../Search/column";
 import { useLocation, useNavigate } from "react-router-dom";
-import { getDisticts } from "../../utils/webRequest";
+import { useDistricts } from "../../hooks/useDistricts";
+
+const Services = React.lazy(() => import("../Services"));
+const AboutUs = React.lazy(() => import("../AboutUs"));
+const HowToUse = React.lazy(() => import("../HowToUse"));
+const SuccessStories = React.lazy(() => import("../SuccessStories"));
+const LatestProfiles = React.lazy(() => import("../LatestProfiles"));
+const UpToDate = React.lazy(() => import("../UpToDate"));
 
 const Landing = () => {
   const [formData, setFormData] = useState({});
-  const [districtList, setDistrictList] = useState([]);
   const navigate = useNavigate();
-  const location = useLocation();
-  useEffect(() => {
-    getDistictsList();
-  }, []);
+  const districtList = useDistricts();
 
   const handleInputChange = useCallback(
     (e) => {
@@ -33,16 +30,11 @@ const Landing = () => {
     [formData]
   );
 
-  const getDistictsList = () => {
-    getDisticts().then((response) => setDistrictList(response.data));
-  };
-
   const handleQuickSearch = () => {
     navigate("/search", { state: { ...formData } });
   };
 
   const handleLanguageChange = (e) => {
-    console.log("+++");
     let url = window.location.href;
     let lng = e.target.value;
     if (e.target.value) {
@@ -122,14 +114,23 @@ const Landing = () => {
           </div>
         </Container>
       </div>
-      <div id="services">
-        <Services />
-      </div>
-      <AboutUs />
-      <HowToUse/> <br />
-      <SuccessStories />
-      <LatestProfiles />
-      <UpToDate />
+      {/* Lazy-loaded components */}
+      <React.Suspense
+        fallback={
+          <div>
+            <Spinner />
+          </div>
+        }
+      >
+        <div id="services">
+          <Services />
+        </div>
+        <AboutUs />
+        <HowToUse /> <br />
+        <SuccessStories />
+        <LatestProfiles />
+        <UpToDate />
+      </React.Suspense>
     </>
   );
 };

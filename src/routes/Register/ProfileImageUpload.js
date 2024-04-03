@@ -19,7 +19,8 @@ const ProfileImageUpload = () => {
 
     const formData = new FormData();
     formData.append("file", file);
-    formData.append("userId", 1);
+    const user = JSON.parse(localStorage.getItem("user"));
+    formData.append("userId", user.id);
 
     // const canvas = document.createElement("canvas");
     // const ctx = canvas.getContext("2d");

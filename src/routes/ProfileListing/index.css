@@ -1,4 +1,4 @@
-..-heading {
+.-heading {
   margin-top: 30%;
   margin-left: 10%;
 }
@@ -6,4 +6,9 @@
 .profile-listing-container {
   margin-top: 60px;
   padding: 20px;
+}
+
+.view-profile {
+  background-color: #f54c1e;
+  border: none;
 }
